@@ -37,7 +37,7 @@ class TestUpdateBlock(BlockIterator):
 
 
 def sprite(
-    node: NodeType, 
+    node: NodeType = None, 
     x: float = 0.0,
     y: float = 0.0,
     direction: float = 0.0,
@@ -46,9 +46,10 @@ def sprite(
 ) -> SpriteType:
     name = name or f"Sprite {len(memory.sprites) + 1}"
     variables = variables or []
+    node_list = [node] if node else []
 
     new_sprite = sprite_manager.create_sprite(
-        blocks = [TestUpdateBlock([node])],
+        blocks = [TestUpdateBlock(node_list)],
         variable_names = list(variables),
         name = name,
         coords = (x, y),
