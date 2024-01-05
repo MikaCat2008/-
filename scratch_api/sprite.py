@@ -42,7 +42,11 @@ class Sprite(SpriteType):
         is_updated = False
 
         for block in self.blocks:
-            if block.is_freeze() or block.event is None:
+            if block.is_freeze():
+                is_updated = True
+                
+                continue
+            elif block.event is None:
                 continue
 
             again = False
