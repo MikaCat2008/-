@@ -1,13 +1,13 @@
-from ..abstractions import String, NodeType
+from ..abstractions import String, Number
 from ..block import Block
 from ..nodes.NumberNode import NumberNode
 
 
 class ChangeValueByBlock(Block):
     name: String
-    value: NodeType
+    value: Number
 
-    def __init__(self, *args: tuple[String, NodeType]) -> None:
+    def __init__(self, *args: tuple[String, Number]) -> None:
         super().__init__(args)
 
         self.name = args[0]
@@ -15,7 +15,7 @@ class ChangeValueByBlock(Block):
 
     def execute(self) -> bool:
         name = str(self.name)
-        value = self.value.get_value()
+        value = float(self.value)
 
         self.sprite.set_value(
             name, 
