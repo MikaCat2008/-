@@ -1,5 +1,6 @@
 from pygame.surface import Surface
 
+from .. import sprite as sprite_module
 from ..abstractions import NodeType, SpriteType, Blocks
 from ..emit import emit
 from ..block import StructureBlock
@@ -8,6 +9,7 @@ from ..listener import Listener
 from ..block_iterator import BlockIterator
 from ..sprite_manager import SpriteManager
 
+sprite_module.STRUCTURE_BLOCK_DELAY = 0
 sprite_manager = SpriteManager()
 
 
@@ -37,7 +39,7 @@ class TestUpdateBlock(BlockIterator):
 
 
 def sprite(
-    blocks: Blocks = None, 
+    *blocks: tuple[Blocks, ...], 
     x: float = 0.0,
     y: float = 0.0,
     direction: float = 0.0,
@@ -49,7 +51,7 @@ def sprite(
     blocks = blocks or []
 
     new_sprite = sprite_manager.create_sprite(
-        blocks = [TestUpdateBlock(blocks)],
+        blocks = [TestUpdateBlock(_blocks) for _blocks in blocks],
         variable_names = list(variables),
         name = name,
         coords = (x, y),
@@ -74,3 +76,5 @@ def update() -> None:
         for sprite in memory.sprites:
             if sprite.update():
                 ok = False
+
+    memory.sprites = []
