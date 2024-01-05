@@ -21,9 +21,9 @@ from ..motion.DirectionNode import DirectionNode
 
 class MotionTestCase(unittest.TestCase):
     def test_move_block(self) -> None:
-        sprite1 = tools.sprite(MoveBlock(10))
-        sprite2 = tools.sprite(MoveBlock(10), direction = 90)
-        sprite3 = tools.sprite(MoveBlock(10), direction = 45)
+        sprite1 = tools.sprite([MoveBlock(10)])
+        sprite2 = tools.sprite([MoveBlock(10)], direction = 90)
+        sprite3 = tools.sprite([MoveBlock(10)], direction = 45)
 
         tools.update()
 
@@ -33,8 +33,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertAlmostEqual(sprite3.coords[1], -math.sin(45 * math.pi / 180) * 10)
 
     def test_turn_right_block(self) -> None:
-        sprite1 = tools.sprite(TurnRightBlock(15))
-        sprite2 = tools.sprite(TurnRightBlock(30), direction = 45)
+        sprite1 = tools.sprite([TurnRightBlock(15)])
+        sprite2 = tools.sprite([TurnRightBlock(30)], direction = 45)
 
         tools.update()
 
@@ -42,8 +42,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertEqual(sprite2.direction, 15)
 
     def test_turn_left_block(self) -> None:
-        sprite1 = tools.sprite(TurnLeftBlock(15))
-        sprite2 = tools.sprite(TurnLeftBlock(30), direction = 45)
+        sprite1 = tools.sprite([TurnLeftBlock(15)])
+        sprite2 = tools.sprite([TurnLeftBlock(30)], direction = 45)
 
         tools.update()
 
@@ -55,9 +55,9 @@ class MotionTestCase(unittest.TestCase):
         tools.sprite(x = 10, y = 10, name = "Sprite PointToward 2")
         tools.sprite(x = 10, y = 20, name = "Sprite PointToward 3")
 
-        sprite1 = tools.sprite(PointTowardsBlock("Sprite PointToward 1", False))
-        sprite2 = tools.sprite(PointTowardsBlock("Sprite PointToward 2", False))
-        sprite3 = tools.sprite(PointTowardsBlock("Sprite PointToward 3", False))
+        sprite1 = tools.sprite([PointTowardsBlock("Sprite PointToward 1", False)])
+        sprite2 = tools.sprite([PointTowardsBlock("Sprite PointToward 2", False)])
+        sprite3 = tools.sprite([PointTowardsBlock("Sprite PointToward 3", False)])
 
         tools.update()
 
@@ -66,8 +66,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertAlmostEqual(sprite3.direction, math.atan(-2) * 180 / math.pi + 360)
 
     def test_change_x_by_block(self) -> None:
-        sprite1 = tools.sprite(ChangeXByBlock(10), x = 10)
-        sprite2 = tools.sprite(ChangeXByBlock(-10), x = 20)
+        sprite1 = tools.sprite([ChangeXByBlock(10)], x = 10)
+        sprite2 = tools.sprite([ChangeXByBlock(-10)], x = 20)
 
         tools.update()
 
@@ -75,8 +75,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertEqual(sprite2.coords[0], 10)
 
     def test_set_x_to_block(self) -> None:
-        sprite1 = tools.sprite(SetXToBlock(10))
-        sprite2 = tools.sprite(SetXToBlock(-10))
+        sprite1 = tools.sprite([SetXToBlock(10)])
+        sprite2 = tools.sprite([SetXToBlock(-10)])
 
         tools.update()
 
@@ -84,8 +84,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertEqual(sprite2.coords[0], -10)
 
     def test_change_y_by_block(self) -> None:
-        sprite1 = tools.sprite(ChangeYByBlock(10), y = 10)
-        sprite2 = tools.sprite(ChangeYByBlock(-10), y = 20)
+        sprite1 = tools.sprite([ChangeYByBlock(10)], y = 10)
+        sprite2 = tools.sprite([ChangeYByBlock(-10)], y = 20)
 
         tools.update()
 
@@ -93,8 +93,8 @@ class MotionTestCase(unittest.TestCase):
         self.assertEqual(sprite2.coords[1], 30)
 
     def test_set_y_to_block(self) -> None:
-        sprite1 = tools.sprite(SetYToBlock(10))
-        sprite2 = tools.sprite(SetYToBlock(-10))
+        sprite1 = tools.sprite([SetYToBlock(10)])
+        sprite2 = tools.sprite([SetYToBlock(-10)])
 
         tools.update()
 
