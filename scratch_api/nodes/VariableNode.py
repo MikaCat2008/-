@@ -1,11 +1,7 @@
 from ..node import Node
 
-from .NumberNode import NumberNode 
-from .StringNode import StringNode
-from .BooleanNode import BooleanNode 
 
-
-class VariableNode(NumberNode, StringNode, BooleanNode, Node):
+class VariableNode(Node):
     name: str
 
     def __init__(self, name: str) -> None:
