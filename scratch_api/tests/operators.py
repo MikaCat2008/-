@@ -56,7 +56,7 @@ class OperatorsTestCase(unittest.TestCase):
         node3 = RandomNumberNode(0, 1)
 
         self.assertIn(node1.get_value(), range(1, 11))
-        self.assertIn(node2.get_value(), range(-10, -1))
+        self.assertIn(node2.get_value(), range(-10, 0))
         self.assertIn(node3.get_value(), range(2))
 
     def test_less_than_node(self) -> None:
