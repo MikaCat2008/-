@@ -1,5 +1,6 @@
 import time
 import unittest
+import threading
 
 from . import tools
 
@@ -52,3 +53,15 @@ class ControlTestCase(unittest.TestCase):
         self.assertEqual(sprite1.coords[0], 3)
         self.assertEqual(sprite2.coords[0], 1)
         self.assertEqual(sprite3.coords[0], 0)
+
+    def test_forever_block(self) -> None:
+        sprite = tools.sprite([ForeverBlock([])])
+
+        t = threading.Thread(target=tools.update)
+        t.start()
+
+        time.sleep(0.1)
+
+        self.assertTrue(t.is_alive)
+
+        sprite.delete()
