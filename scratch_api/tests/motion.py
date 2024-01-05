@@ -14,6 +14,10 @@ from ..motion.SetXToBlock import SetXToBlock
 from ..motion.ChangeYByBlock import ChangeYByBlock
 from ..motion.SetYToBlock import SetYToBlock
 
+from ..motion.XPositionNode import XPositionNode
+from ..motion.YPositionNode import YPositionNode
+from ..motion.DirectionNode import DirectionNode
+
 
 class MotionTestCase(unittest.TestCase):
     def test_move_block(self) -> None:
@@ -96,3 +100,24 @@ class MotionTestCase(unittest.TestCase):
 
         self.assertEqual(sprite1.coords[1], 10)
         self.assertEqual(sprite2.coords[1], -10)
+
+    def test_x_position_node(self) -> None:
+        sprite = tools.sprite(x = 30)
+        node = XPositionNode()
+        node.sprite = sprite
+
+        self.assertEqual(node.get_value(), 30)
+
+    def test_y_position_node(self) -> None:
+        sprite = tools.sprite(y = 30)
+        node = YPositionNode()
+        node.sprite = sprite
+
+        self.assertEqual(node.get_value(), 30)
+
+    def test_direction_node(self) -> None:
+        sprite = tools.sprite(direction = 30)
+        node = DirectionNode()
+        node.sprite = sprite
+
+        self.assertEqual(node.get_value(), 30)
