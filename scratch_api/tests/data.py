@@ -21,3 +21,16 @@ class DataTestCase(unittest.TestCase):
         tools.update()
 
         self.assertEqual(sprite.get_value("a"), 2)
+    
+    def test_change_value_by_block(self) -> None:
+        sprite = tools.sprite([
+            ChangeValueByBlock("a", 2)
+        ], variables = {
+            "a": 1
+        })
+
+        self.assertEqual(sprite.get_value("a"), 1)
+
+        tools.update()
+
+        self.assertEqual(sprite.get_value("a"), 3)
