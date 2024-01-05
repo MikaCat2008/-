@@ -1,9 +1,9 @@
 from pygame.surface import Surface
 
 from .. import sprite as sprite_module
-from ..abstractions import NodeType, SpriteType, Blocks
+from ..abstractions import BlockType, SpriteType, Blocks
 from ..emit import emit
-from ..block import StructureBlock
+from ..block import Block, StructureBlock
 from ..memory import memory
 from ..listener import Listener
 from ..block_iterator import BlockIterator
@@ -38,8 +38,22 @@ class TestUpdateBlock(BlockIterator):
         return []
 
 
+class TestELActivateBlock(Block):
+    is_activate: bool
+
+    def __init__(self, *args: tuple) -> None:
+        super().__init__(args)
+
+        self.is_activate = False
+
+    def execute(self) -> bool:
+        self.is_activate = True
+
+        return True
+
+
 def sprite(
-    *blocks: tuple[Blocks, ...], 
+    *blocks: tuple[Blocks, ...],
     x: float = 0.0,
     y: float = 0.0,
     direction: float = 0.0,
@@ -63,6 +77,40 @@ def sprite(
     memory.sprites.append(new_sprite)
 
     return new_sprite
+
+
+def test_listener_block(
+    listener_block: BlockType,
+    event: str,
+    blocks: Blocks = None,
+    args: tuple = (),
+    test_data: dict[str, object] = None
+) -> bool:
+    blocks = blocks or []
+    test_data = test_data or {}
+
+    test_el_activate_block = TestELActivateBlock()
+
+    blocks = [test_el_activate_block] + blocks
+
+    test_sprite = sprite_manager.create_sprite(
+        blocks = [
+            listener_block(*args, blocks)
+        ],
+        variable_names = [],
+        name = f"Sprite {len(memory.sprites) + 1}",
+        coords = (0, 0),
+        direction = 0,
+        surface = Surface((32, 32)),
+        rotate_style = 1,
+    )
+
+    memory.sprites.append(test_sprite)
+    
+    emit(event, **test_data)
+    update()
+
+    return test_el_activate_block.is_activate
 
 
 def update() -> None:
