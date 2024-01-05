@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-
 import pygame
 from pygame.event import EventType
 from pygame.transform import flip, rotate
@@ -13,6 +12,8 @@ from .memory import memory
 
 screen: SurfaceType = None
 key_map: dict[str, bool] = {}
+
+__api_version__ = 0, 0
 
 
 def set_screen(_screen: SurfaceType) -> None:
