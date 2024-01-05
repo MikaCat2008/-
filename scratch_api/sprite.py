@@ -1,6 +1,6 @@
-from scratch_api.abstractions import NodeType
-from .abstractions import SpriteType, Blocks
+from .abstractions import SpriteType, NodeType, Blocks
 from .nodes.NumberNode import NumberNode
+from .memory import memory
 
 from pygame.surface import SurfaceType
 
@@ -74,3 +74,6 @@ class Sprite(SpriteType):
     
     def set_value(self, variable_name: str, node: NodeType) -> None:
         self.variables[variable_name] = node
+
+    def delete(self) -> None:
+        memory.sprites.remove(self)
