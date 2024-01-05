@@ -13,8 +13,6 @@ class SetValueToBlock(Block):
         self.value = args[1]
 
     def execute(self) -> bool:
-        value = self.value.get_value()
-
-        self.sprite.set_value(str(self.name), value)
+        self.sprite.set_value(str(self.name), self.value)
 
         return True
