@@ -110,6 +110,6 @@ class BooleanNodeType(NodeType):
 
 Blocks = list[BlockType]
 
-Number = NumberNodeType
-String = StringNodeType
-Boolean = BooleanNodeType
+Number = int | NumberNodeType
+String = str | StringNodeType
+Boolean = bool | BooleanNodeType
