@@ -17,13 +17,19 @@ class RepeatBlock(BlockIterator):
         self.blocks = args[1]
 
     def execute(self) -> bool:
+        if int(self.end) == 1:
+            return True
+
         self.index += 1
 
-        if self.index == int(self.end):
+        if self.index >= int(self.end):
             self.index = 0
             
             return True
+
         return False
 
     def iter(self) -> None:
+        if self.end == 0:
+            return []
         return self.blocks
