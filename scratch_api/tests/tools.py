@@ -1,13 +1,16 @@
 from pygame.surface import Surface
 
 from .. import sprite as sprite_module
-from ..abstractions import BlockType, SpriteType, Blocks
+from ..abstractions import NodeType, BlockType, SpriteType, Blocks
 from ..emit import emit
 from ..block import Block, StructureBlock
 from ..memory import memory
 from ..listener import Listener
 from ..block_iterator import BlockIterator
 from ..sprite_manager import SpriteManager
+from ..nodes.NumberNode import NumberNode
+from ..nodes.StringNode import StringNode
+from ..nodes.BooleanNode import BooleanNode
 
 sprite_module.STRUCTURE_BLOCK_DELAY = 0
 sprite_manager = SpriteManager()
@@ -61,7 +64,7 @@ def sprite(
     variables: dict[str, object] = None
 ) -> SpriteType:
     name = name or f"Sprite {len(memory.sprites) + 1}"
-    variables = variables or []
+    variables = variables or {}
     blocks = blocks or []
 
     new_sprite = sprite_manager.create_sprite(
@@ -73,6 +76,18 @@ def sprite(
         surface = Surface((32, 32)),
         rotate_style = 1,
     )
+
+    for name, value in variables.items():
+        if isinstance(value, NodeType):
+            node = value
+        elif isinstance(value, int):
+            node = NumberNode(value)
+        elif isinstance(value, str):
+            node = StringNode(value)
+        elif isinstance(value, bool):
+            node = BooleanNode(value)
+
+        new_sprite.set_value(name, node)
 
     memory.sprites.append(new_sprite)
 
