@@ -83,6 +83,10 @@ class SpriteType(ABC):
     def set_value(self, name: str, value: NodeType) -> None:
         ...
 
+    @abstractmethod
+    def delete(self) -> None:
+        ...
+
 
 class NodeType(ABC):
     sprite: SpriteType
