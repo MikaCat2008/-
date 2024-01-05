@@ -31,3 +31,14 @@ class NodesTestCase(unittest.TestCase):
 
         self.assertEqual(bool(node1), True)
         self.assertEqual(bool(node2), False)
+
+    def test_variable_node(self) -> None:
+        sprite = tools.sprite(
+            variables = {
+                "a": 2
+            }
+        )
+        node = VariableNode("a")
+        node.sprite = sprite
+
+        self.assertEqual(node.get_value(), 2)
