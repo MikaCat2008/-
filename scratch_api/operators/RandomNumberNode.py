@@ -14,5 +14,5 @@ class RandomNumberNode(NumberNode):
         self.from_number = from_number
         self.to_number = to_number
 
-    def get_value(self) -> float:
-        return randint(float(self.from_number), float(self.to_number))
+    def get_value(self) -> int:
+        return randint(int(self.from_number), int(self.to_number))
