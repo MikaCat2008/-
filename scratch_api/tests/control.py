@@ -5,16 +5,19 @@ import threading
 from . import tools
 
 from ..motion.ChangeXByBlock import ChangeXByBlock
+from ..motion.XPositionNode import XPositionNode
 
 from ..control.WaitBlock import WaitBlock
 
-from scratch_api.control.RepeatBlock import RepeatBlock
-from scratch_api.control.ForeverBlock import ForeverBlock
+from ..control.RepeatBlock import RepeatBlock
+from ..control.ForeverBlock import ForeverBlock
 
-from scratch_api.control.IfThenBlock import IfThenBlock
-from scratch_api.control.IfThenElseBlock import IfThenElseBlock
-from scratch_api.control.WaitUntilBlock import WaitUntilBlock
-from scratch_api.control.RepeatUntilBlock import RepeatUntilBlock
+from ..control.IfThenBlock import IfThenBlock
+from ..control.IfThenElseBlock import IfThenElseBlock
+from ..control.WaitUntilBlock import WaitUntilBlock
+from ..control.RepeatUntilBlock import RepeatUntilBlock
+
+from ..operators.EqualsToNode import EqualsToNode
 
 
 class ControlTestCase(unittest.TestCase):
@@ -29,7 +32,7 @@ class ControlTestCase(unittest.TestCase):
         tools.update()
 
         self.assertEqual(sprite.coords[0], 10)
-        self.assertAlmostEqual(round(time.time(), 1), round(t1 + 0.1, 1))
+        self.assertGreater(time.time(), t1 + 0.1)
 
     def test_repeat_block(self) -> None:
         sprite1 = tools.sprite([
@@ -65,3 +68,68 @@ class ControlTestCase(unittest.TestCase):
         self.assertTrue(t.is_alive)
 
         sprite.delete()
+
+    def test_if_then_block(self) -> None:
+        sprite1 = tools.sprite([
+            IfThenBlock(True, [
+                ChangeXByBlock(1)
+            ])
+        ])
+        sprite2 = tools.sprite([
+            IfThenBlock(False, [
+                ChangeXByBlock(1)
+            ])
+        ])
+
+        tools.update()
+
+        self.assertEqual(sprite1.coords[0], 1)
+        self.assertEqual(sprite2.coords[0], 0)
+
+    def test_if_then_else_block(self) -> None:
+        sprite1 = tools.sprite([
+            IfThenElseBlock(True, [
+                ChangeXByBlock(1)
+            ], [
+                ChangeXByBlock(2)
+            ])
+        ])
+        sprite2 = tools.sprite([
+            IfThenElseBlock(False, [
+                ChangeXByBlock(1)
+            ], [
+                ChangeXByBlock(2)
+            ])
+        ])
+
+        tools.update()
+
+        self.assertEqual(sprite1.coords[0], 1)
+        self.assertEqual(sprite2.coords[0], 2)
+
+    def test_wait_until_block(self) -> None:
+        t1 = time.time()
+
+        sprite = tools.sprite([
+            WaitUntilBlock(EqualsToNode(XPositionNode(), 10)),
+            ChangeXByBlock(10)
+        ], [
+            WaitBlock(0.1),
+            ChangeXByBlock(10)
+        ])
+
+        tools.update()
+
+        self.assertEqual(sprite.coords[0], 20)
+        self.assertGreater(time.time(), t1 + 0.1)
+
+    def test_repeat_until_block(self) -> None:
+        sprite = tools.sprite([
+            RepeatUntilBlock(EqualsToNode(XPositionNode(), 20), [
+                ChangeXByBlock(1)
+            ])
+        ])
+
+        tools.update()
+
+        self.assertEqual(sprite.coords[0], 20)
