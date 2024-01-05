@@ -1,8 +1,7 @@
 from time import time
 from functools import reduce
 
-from scratch_api.abstractions import NodeType, Blocks, SpriteType
-from .abstractions import BlockType
+from .abstractions import BlockType, NodeType, Blocks, SpriteType
 
 
 def StructureBlock[BlockType](cls: type[BlockType]) -> type[BlockType]:

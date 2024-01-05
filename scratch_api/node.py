@@ -1,5 +1,4 @@
-from scratch_api.abstractions import SpriteType
-from .abstractions import NodeType
+from .abstractions import NodeType, SpriteType
 
 
 class Node(NodeType):
