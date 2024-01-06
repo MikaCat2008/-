@@ -75,5 +75,8 @@ class Sprite(SpriteType):
     def set_value(self, variable_name: str, node: NodeType) -> None:
         self.variables[variable_name] = node
 
+    def set_direction(self, direction: float) -> None:
+        self.direction = direction % 360
+
     def delete(self) -> None:
         memory.sprites.remove(self)
