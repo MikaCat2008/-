@@ -80,6 +80,7 @@ def update(events: list[EventType]) -> None:
         w, h = surface.get_size()
 
         sprite.display_coords = (x - w / 2, y - h / 2)
+        sprite.rendered_surface = surface
 
         memory.screen.blit(surface, sprite.display_coords)
 

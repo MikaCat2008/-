@@ -15,19 +15,27 @@ from scratch_api.motion.MoveBlock import MoveBlock
 from scratch_api.motion.TurnRightBlock import TurnRightBlock
 from scratch_api.motion.TurnLeftBlock import TurnLeftBlock
 
+from scratch_api.motion.PointInDirectionBlock import PointInDirectionBlock
 from scratch_api.motion.PointTowardsBlock import PointTowardsBlock
+
+from scratch_api.motion.GoToXYBlock import GoToXYBlock
+from scratch_api.motion.GoToBlock import GoToBlock
+from scratch_api.motion.GlideToBlock import GlideToBlock
 
 from scratch_api.motion.ChangeXByBlock import ChangeXByBlock
 from scratch_api.motion.SetXToBlock import SetXToBlock
 from scratch_api.motion.ChangeYByBlock import ChangeYByBlock
 from scratch_api.motion.SetYToBlock import SetYToBlock
 
+from scratch_api.motion.IfOnEdgeBounceBlock import IfOnEdgeBounceBlock
+
+# from scratch_api.motion.SetRotationStyleBlock import SetRotationStyleBlock
+
 from scratch_api.motion.XPositionNode import XPositionNode
 from scratch_api.motion.YPositionNode import YPositionNode
 from scratch_api.motion.DirectionNode import DirectionNode
 
 # looks
-from scratch_api.looks.PrintBlock import PrintBlock
 
 # sound
 
@@ -85,16 +93,12 @@ set_sprites([
     sprite_manager.create_sprite(
         [
             OnStartBlock([
+                PointInDirectionBlock(260),
+                GoToXYBlock(300, 200),
+
                 ForeverBlock([
-                    SetXToBlock(AddNode(
-                        NumberNode(200),
-                        MulNode(MathFuncOfNode(StringNode("sin"), VariableNode("i")), NumberNode(100))
-                    )),
-                    SetYToBlock(AddNode(
-                        NumberNode(200),
-                        MulNode(MathFuncOfNode(StringNode("cos"), VariableNode("i")), NumberNode(100))
-                    )),
-                    ChangeValueByBlock(StringNode("i"), NumberNode(0.1))
+                    MoveBlock(10),
+                    IfOnEdgeBounceBlock()
                 ])
             ])
         ],
@@ -112,5 +116,5 @@ start()
 while 1:
     update(get_events())
 
-    set_caption(str(clock.get_fps()))
+    set_caption(f"{clock.get_fps():.1f} fps")
     clock.tick(120)
