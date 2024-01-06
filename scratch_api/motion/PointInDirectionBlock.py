@@ -11,6 +11,6 @@ class PointInDirectionBlock(Block):
         self.direction = args[0]
 
     def execute(self) -> bool:
-        self.sprite.direction = float(self.direction)
+        self.sprite.set_direction(float(self.direction))
 
         return True

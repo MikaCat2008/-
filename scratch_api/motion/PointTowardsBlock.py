@@ -51,6 +51,6 @@ class PointTowardsBlock(Block):
         else:
             coords2 = self.get_sprite_by_name(str(self.sprite_name)).coords
 
-        self.sprite.direction = angle(coords1, coords2)
+        self.sprite.set_direction(angle(coords1, coords2))
 
         return True

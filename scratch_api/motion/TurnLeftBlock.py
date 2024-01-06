@@ -11,6 +11,6 @@ class TurnLeftBlock(Block):
         self.angle = args[0]
 
     def execute(self) -> bool:
-        self.sprite.direction += float(self.angle)
+        self.sprite.set_direction(self.sprite.direction + float(self.angle))
 
         return True
