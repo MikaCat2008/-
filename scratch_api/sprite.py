@@ -16,7 +16,7 @@ class Sprite(SpriteType):
         coords: tuple[float, float], 
         direction: float,
         surface: SurfaceType,
-        rotate_style: int
+        rotation_style: int
     ) -> None:
         self.blocks = blocks
         self.name = name
@@ -24,7 +24,7 @@ class Sprite(SpriteType):
         self.direction = direction
         self.surface = surface
         self.rendered_surface = surface
-        self.rotate_style = rotate_style
+        self.rotation_style = rotation_style
 
         self.variables = {}
 

@@ -74,7 +74,7 @@ def sprite(
         coords = (x, y),
         direction = direction,
         surface = Surface((32, 32)),
-        rotate_style = 1,
+        rotation_style = 1,
     )
 
     for name, value in variables.items():
@@ -117,7 +117,7 @@ def test_listener_block(
         coords = (0, 0),
         direction = 0,
         surface = Surface((32, 32)),
-        rotate_style = 1,
+        rotation_style = 1,
     )
 
     memory.sprites.append(test_sprite)

@@ -70,7 +70,7 @@ class SpriteType(ABC):
     direction: float
     surface: SurfaceType
     rendered_surface: SurfaceType
-    rotate_style: int
+    rotation_style: int
 
     @abstractmethod
     def emit(self, event: str, **data: dict[str, object]) -> None:

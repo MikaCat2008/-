@@ -14,9 +14,9 @@ class SpriteManager:
         coords: tuple[float, float],
         direction: float,
         surface: SurfaceType,
-        rotate_style: int
+        rotation_style: int
     ) -> SpriteType:        
-        sprite = Sprite(blocks, variable_names, name, coords, direction, surface, rotate_style)
+        sprite = Sprite(blocks, variable_names, name, coords, direction, surface, rotation_style)
 
         for block in blocks:
             block.set_sprite(sprite)

@@ -66,9 +66,9 @@ def update(events: list[EventType]) -> None:
     for sprite in memory.sprites:
         x, y = sprite.coords
 
-        if sprite.rotate_style == 1:
+        if sprite.rotation_style == 1:
             surface = rotate(sprite.surface, sprite.direction)
-        elif sprite.rotate_style == 2:
+        elif sprite.rotation_style == 2:
             surface = sprite.surface
             direction = sprite.direction
 
