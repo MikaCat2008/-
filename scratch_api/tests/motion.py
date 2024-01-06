@@ -38,7 +38,7 @@ class MotionTestCase(unittest.TestCase):
 
         tools.update()
 
-        self.assertEqual(sprite1.direction, -15)
+        self.assertEqual(sprite1.direction, 345)
         self.assertEqual(sprite2.direction, 15)
 
     def test_turn_left_block(self) -> None:
