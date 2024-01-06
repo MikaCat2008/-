@@ -2,7 +2,6 @@ import math
 
 from ..abstractions import String, Boolean
 from ..block import Block
-from ..memory import memory
 
 from pygame.mouse import get_pos
 
