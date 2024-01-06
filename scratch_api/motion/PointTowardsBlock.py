@@ -37,11 +37,11 @@ class PointTowardsBlock(Block):
     sprite_name: String
     mouse_pointer: Boolean
 
-    def __init__(self, *args: tuple[String, Boolean]) -> None:
-        super().__init__(args)
+    def __init__(self, sprite_name: String, mouse_pointer: Boolean) -> None:
+        super().__init__()
 
-        self.sprite_name = args[0]
-        self.mouse_pointer = args[1]
+        self.sprite_name = sprite_name
+        self.mouse_pointer = mouse_pointer
 
     def execute(self) -> bool:
         coords1 = self.sprite.coords

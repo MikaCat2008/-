@@ -5,10 +5,10 @@ from ..block import Block
 class PointInDirectionBlock(Block):
     direction: Number
 
-    def __init__(self, *args: tuple[Number]) -> None:
-        super().__init__(args)
+    def __init__(self, direction: Number) -> None:
+        super().__init__()
 
-        self.direction = args[0]
+        self.direction = direction
 
     def execute(self) -> bool:
         self.sprite.set_direction(float(self.direction))

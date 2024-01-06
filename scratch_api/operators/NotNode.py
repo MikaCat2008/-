@@ -1,4 +1,4 @@
-from scratch_api.abstractions import BooleanNodeType
+from ..abstractions import BooleanNodeType
 from ..nodes.BooleanNode import BooleanNode
 
 

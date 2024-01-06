@@ -10,7 +10,7 @@ class IfThenElseBlock(BlockIterator):
     else_blocks: Blocks
 
     def __init__(self, *args: tuple[Boolean, Blocks, Blocks]) -> None:
-        super().__init__(args)
+        super().__init__()
 
         self.condition = args[0]
         self.then_blocks = args[1]

@@ -5,10 +5,10 @@ from ..block import Block
 class ChangeYByBlock(Block):
     y: Number
 
-    def __init__(self, *args: tuple[Number]) -> None:
-        super().__init__(args)
+    def __init__(self, y: Number) -> None:
+        super().__init__()
 
-        self.y = args[0]
+        self.y = y
 
     def execute(self) -> bool:
         x, y = self.sprite.coords

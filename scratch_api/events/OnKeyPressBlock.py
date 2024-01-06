@@ -12,7 +12,7 @@ class OnKeyPressBlock(BlockIterator):
     blocks: Blocks
 
     def __init__(self, *args: tuple[String, Blocks]) -> None:
-        super().__init__(args)
+        super().__init__()
 
         self.key = args[0]
         self.execute_key = ""

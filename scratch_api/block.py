@@ -15,10 +15,13 @@ class Block(BlockType):
     event = None
     is_structure = False
 
-    def __init__(self, args: tuple) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
-        self.args = args
+        self.main_block = None
+        self.parent_block = None
+        self.sprite = None
+        self.is_initialized = False
         self.unfreeze_time = 0
 
     def execute(self, **data: dict[str, object]) -> bool:
@@ -30,42 +33,12 @@ class Block(BlockType):
     def again(self) -> None:
         ...
 
-    def get_all_nodes(self) -> list[NodeType]:
-        return reduce(lambda x, y: x + [y], (arg for arg in self.args if isinstance(arg, NodeType)), [])
-
-    def get_all_blocks(self) -> Blocks:
-        return reduce(lambda x, y: x + y, (arg for arg in self.args if isinstance(arg, list)), [])
-
-    def ctx(self, node: NodeType) -> NodeType:
-        node.set_sprite(self.sprite)
-        
-        return node
-
-    def set_sprite(self, sprite: SpriteType) -> None:
-        for node in self.get_all_nodes():
-            node.set_sprite(sprite)
-
-        for block in self.get_all_blocks():
-            block.set_sprite(sprite)
-
-            block.sprite = sprite
-
-        self.sprite = sprite
-
-    def set_main(self, main_block: BlockType) -> None:
-        for block in self.get_all_blocks():
-            block.set_main(main_block)
-
-            block.main_block = main_block
-
-    def set_parent(self) -> None:
-        for block in self.get_all_blocks():
-            block.set_parent()
-
-            block.parent_block = self
-
     def freeze(self, seconds: float) -> None:
         self.unfreeze_time = max(time() + seconds, self.unfreeze_time)
+
+    def init_nodes(self) -> None:
+        for k, node in filter(lambda x: isinstance(x[1], NodeType), self.__dict__.items()):
+            node.init(self.sprite)
 
     def is_freeze(self) -> bool:
         return self.unfreeze_time > time()

@@ -5,10 +5,10 @@ from ..block import Block
 class WaitUntilBlock(Block):
     condition: Number
 
-    def __init__(self, *args: tuple[Number]) -> None:
-        super().__init__(args)
+    def __init__(self, condition: Number) -> None:
+        super().__init__()
 
-        self.condition = args[0]
+        self.condition = condition
 
     def execute(self) -> bool:
         return bool(self.condition)

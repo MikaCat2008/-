@@ -1,33 +1,29 @@
-from pygame.surface import SurfaceType
+from pygame.surface import Surface, SurfaceType
 
 from .abstractions import Blocks, SpriteType
 
+from .block_iterator import BlockIterator
 from .sprite import Sprite
+from .memory import memory
 
 
 class SpriteManager:
     def create_sprite(
         self, 
-        blocks: Blocks,
-        variable_names: list[str],
-        name: str,
-        coords: tuple[float, float],
-        direction: float,
-        surface: SurfaceType,
-        rotation_style: int
-    ) -> SpriteType:        
-        sprite = Sprite(blocks, variable_names, name, coords, direction, surface, rotation_style)
-
-        for block in blocks:
-            block.set_sprite(sprite)
-            block.set_main(block)
-            block.set_parent()
-
-        return sprite
-
-    def execute_blocks(
-        self,
-        sprite: SpriteType,
-        *blocks: Blocks
-    ) -> None:
-        sprite.blocks += blocks
+        blocks: Blocks = None,
+        variable_names: list[str] = None,
+        name: str = None,
+        coords: tuple[float, float] = (0, 0),
+        direction: float = 0,
+        surface: SurfaceType = None,
+        rotation_style: int = 2
+    ) -> SpriteType:
+        return Sprite(
+            blocks or [], 
+            variable_names or [], 
+            name or f"Sprite {len(memory.sprites) + 1}", 
+            coords, 
+            direction, 
+            surface or Surface((32, 32)), 
+            rotation_style
+        )

@@ -1,19 +1,23 @@
 from .abstractions import BlockType, Blocks
-from .block import Block
+from .block import Block, StructureBlock
 
 
+@StructureBlock
 class BlockIterator(Block):
     i: int
     __again: bool
     iter_blocks: Blocks
 
-    def __init__(self, args: tuple) -> None:
-        super().__init__(args)
+    def __init__(self, blocks: Blocks = None) -> None:
+        super().__init__()
         
         self.i = 0
         self.__again = False
-        self.iter_blocks = []
+        self.iter_blocks = blocks or []
     
+    def execute(self) -> bool:
+        return True
+
     def iter(self) -> Blocks:
         return self.iter_blocks
 
@@ -30,12 +34,23 @@ class BlockIterator(Block):
             return block
 
         if not self.iter_blocks:
+            if self.sprite is None:
+                self.sprite = ...
+
             self.iter_blocks = self.iter()
 
         if self.i < len(self.iter_blocks):
             block = self.iter_blocks[self.i]
-            
+
+            if block.parent_block is None:
+                block.parent_block = self
+
             if isinstance(block, BlockIterator):
+                if block.sprite is None:
+                    block.sprite = self.sprite
+
+                    block.init_nodes()
+
                 if (next_block := block.next()):
                     return next_block 
 
@@ -45,6 +60,7 @@ class BlockIterator(Block):
 
         self.i = 0
         self.iter_blocks = self.iter()
+
         return None
     
     def again(self) -> None:

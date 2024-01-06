@@ -9,7 +9,7 @@ class IfThenBlock(BlockIterator):
     blocks: Blocks
 
     def __init__(self, *args: tuple[Boolean, Blocks]) -> None:
-        super().__init__(args)
+        super().__init__()
 
         self.condition = args[0]
         self.blocks = args[1]

@@ -7,11 +7,11 @@ class ChangeValueByBlock(Block):
     name: String
     value: Number
 
-    def __init__(self, *args: tuple[String, Number]) -> None:
-        super().__init__(args)
+    def __init__(self, name: String, value: Number) -> None:
+        super().__init__()
 
-        self.name = args[0]
-        self.value = args[1]
+        self.name = name
+        self.value = value
 
     def execute(self) -> bool:
         name = str(self.name)
@@ -19,7 +19,7 @@ class ChangeValueByBlock(Block):
 
         self.sprite.set_value(
             name, 
-            self.ctx(NumberNode(self.sprite.get_value(name) + value))
+            NumberNode(self.sprite.get_value(name) + value)
         )
 
         return True

@@ -26,32 +26,12 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
-    def get_all_nodes(self) -> list[NodeType]:
-        ...
-
-    @abstractmethod
-    def get_all_blocks(self) -> Blocks:
-        ...
-
-    @abstractmethod
-    def ctx(self, node: NodeType) -> NodeType:
-        ...
-
-    @abstractmethod
-    def set_sprite(self, sprite: SpriteType) -> None:
-        ...
-
-    @abstractmethod
-    def set_main(self, main_block: BlockType) -> None:
-        ...
-
-    @abstractmethod
-    def set_parent(self) -> None:
-        ...
-
-    @abstractmethod
     def freeze(self, seconds: float) -> None:
-        ...    
+        ...
+
+    @abstractmethod
+    def init_nodes(self) -> None:
+        ...
 
     @abstractmethod
     def is_freeze(self) -> bool:
@@ -105,7 +85,7 @@ class NodeType(ABC):
         ...
 
     @abstractmethod
-    def set_sprite(self, sprite: SpriteType) -> None:
+    def init(self, sprite: SpriteType) -> None:
         ...
 
 

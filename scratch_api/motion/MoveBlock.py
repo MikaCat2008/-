@@ -14,10 +14,10 @@ def move(x: float, y: float, d: float, v: float) -> tuple[float, float]:
 class MoveBlock(Block):
     velocity: Number
 
-    def __init__(self, *args: tuple[Number]) -> None:
-        super().__init__(args)
+    def __init__(self, velocity: Number) -> None:
+        super().__init__()
 
-        self.velocity = args[0]
+        self.velocity = velocity
 
     def execute(self) -> bool:
         x, y = self.sprite.coords

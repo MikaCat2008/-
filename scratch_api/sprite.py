@@ -1,3 +1,5 @@
+import inspect
+
 from .abstractions import SpriteType, NodeType, Blocks
 from .nodes.NumberNode import NumberNode
 from .memory import memory
@@ -30,12 +32,17 @@ class Sprite(SpriteType):
 
         for variable_name in variable_names:
             node = NumberNode()
-            node.set_sprite(self)
+            node.sprite = self
 
             self.set_value(variable_name, node)
 
     def emit(self, event: str, **data: dict[str, object]) -> None:
         for block in self.blocks:
+            if block.sprite is None:
+                block.sprite = self
+
+                block.init_nodes()
+
             if block.event == event:
                 block.execute(**data)
 
@@ -49,15 +56,21 @@ class Sprite(SpriteType):
                 
                 continue
 
-            if block.event is None:
-                block.execute()
-
             again = False
             is_structure = False
             is_block_updated = False
             
             while not again and not is_structure:
-                if (next_block := block.next()):
+                next_block = block.next()
+
+                if next_block:
+                    if next_block.main_block is None:
+                        next_block.main_block = block
+                    if next_block.sprite is None:
+                        next_block.sprite = self
+
+                        next_block.init_nodes()
+
                     is_updated = True
                     is_block_updated = True
 
@@ -72,7 +85,7 @@ class Sprite(SpriteType):
                 else:
                     break
 
-            if block.event is None and not is_block_updated:
+            if block.event is None and not is_block_updated:                
                 to_delete.append(block)
 
         for block in to_delete:

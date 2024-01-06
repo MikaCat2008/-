@@ -4,6 +4,7 @@ from pygame.image import load as load_picture
 from pygame.display import set_mode, set_caption
 
 from scratch_api import set_screen, set_sprites, start, update
+from scratch_api.block_container import BlockContainer
 
 from scratch_api.nodes.NumberNode import NumberNode
 from scratch_api.nodes.StringNode import StringNode
@@ -91,23 +92,21 @@ sprite_manager = SpriteManager()
 set_screen(screen)
 set_sprites([
     sprite_manager.create_sprite(
-        [
-            OnStartBlock([
-                PointInDirectionBlock(260),
-                GoToXYBlock(300, 200),
+        blocks = [
+            BlockContainer([
+                GoToXYBlock(400, 200),
+                PointInDirectionBlock(260)
+            ]),
 
+            OnStartBlock([
                 ForeverBlock([
                     MoveBlock(10),
                     IfOnEdgeBounceBlock()
                 ])
             ])
         ],
-        ["i"],
-        "Sprite1",
-        (0, 0),
-        0,
-        load_picture("skittle.jpg").convert_alpha(),
-        2
+        surface = load_picture("skittle.jpg").convert_alpha(),
+        rotation_style = 2
     )
 ])
 

@@ -10,7 +10,7 @@ class RepeatBlock(BlockIterator):
     blocks: Blocks
 
     def __init__(self, *args: tuple[Number, Blocks]) -> None:
-        super().__init__(args)
+        super().__init__()
 
         self.index = 0
         self.end = args[0]

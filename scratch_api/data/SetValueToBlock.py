@@ -6,11 +6,11 @@ class SetValueToBlock(Block):
     name: String
     value: NodeType
 
-    def __init__(self, *args: tuple[String, NodeType]) -> None:
-        super().__init__(args)
+    def __init__(self, name: String, value: NodeType) -> None:
+        super().__init__()
 
-        self.name = args[0]
-        self.value = args[1]
+        self.name = name
+        self.value = value
 
     def execute(self) -> bool:
         self.sprite.set_value(str(self.name), self.value)

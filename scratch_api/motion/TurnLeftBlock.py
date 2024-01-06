@@ -5,10 +5,10 @@ from ..block import Block
 class TurnLeftBlock(Block):
     angle: Number
 
-    def __init__(self, *args: tuple[Number]) -> None:
-        super().__init__(args)
+    def __init__(self, angle: Number) -> None:
+        super().__init__()
 
-        self.angle = args[0]
+        self.angle = angle
 
     def execute(self) -> bool:
         self.sprite.set_direction(self.sprite.direction + float(self.angle))

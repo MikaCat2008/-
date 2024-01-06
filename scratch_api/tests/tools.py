@@ -6,7 +6,7 @@ from ..emit import emit
 from ..block import Block, StructureBlock
 from ..memory import memory
 from ..listener import Listener
-from ..block_iterator import BlockIterator
+from ..block_container import BlockContainer
 from ..sprite_manager import SpriteManager
 from ..nodes.NumberNode import NumberNode
 from ..nodes.StringNode import StringNode
@@ -16,36 +16,11 @@ sprite_module.STRUCTURE_BLOCK_DELAY = 0
 sprite_manager = SpriteManager()
 
 
-@StructureBlock
-@Listener("update")
-class TestUpdateBlock(BlockIterator):
-    start: bool
-    blocks: Blocks
-    
-    def __init__(self, *args: tuple[Blocks]) -> None:
-        super().__init__(args)
-
-        self.start = False
-        self.blocks = args[0]
-
-    def execute(self) -> bool:
-        self.start = True
-
-        return True
-    
-    def iter(self) -> Blocks:
-        if self.start:
-            self.start = False
-
-            return self.blocks
-        return []
-
-
 class TestELActivateBlock(Block):
     is_activate: bool
 
-    def __init__(self, *args: tuple) -> None:
-        super().__init__(args)
+    def __init__(self) -> None:
+        super().__init__()
 
         self.is_activate = False
 
@@ -56,25 +31,22 @@ class TestELActivateBlock(Block):
 
 
 def sprite(
-    *blocks: tuple[Blocks, ...],
+    *blocks: list[Blocks],
     x: float = 0.0,
     y: float = 0.0,
     direction: float = 0.0,
     name: str = None,
     variables: dict[str, object] = None
 ) -> SpriteType:
-    name = name or f"Sprite {len(memory.sprites) + 1}"
     variables = variables or {}
     blocks = blocks or []
 
     new_sprite = sprite_manager.create_sprite(
-        blocks = [TestUpdateBlock(_blocks) for _blocks in blocks],
+        blocks = [BlockContainer(_blocks) for _blocks in blocks],
         variable_names = list(variables),
         name = name,
         coords = (x, y),
-        direction = direction,
-        surface = Surface((32, 32)),
-        rotation_style = 1,
+        direction = direction
     )
 
     for name, value in variables.items():
@@ -103,21 +75,13 @@ def test_listener_block(
 ) -> bool:
     blocks = blocks or []
     test_data = test_data or {}
-
     test_el_activate_block = TestELActivateBlock()
-
     blocks = [test_el_activate_block] + blocks
-
+    
     test_sprite = sprite_manager.create_sprite(
         blocks = [
             listener_block(*args, blocks)
-        ],
-        variable_names = [],
-        name = f"Sprite {len(memory.sprites) + 1}",
-        coords = (0, 0),
-        direction = 0,
-        surface = Surface((32, 32)),
-        rotation_style = 1,
+        ]
     )
 
     memory.sprites.append(test_sprite)

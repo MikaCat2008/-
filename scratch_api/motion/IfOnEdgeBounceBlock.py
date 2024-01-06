@@ -3,9 +3,6 @@ from ..memory import memory
 
 
 class IfOnEdgeBounceBlock(Block):
-    def __init__(self, *args: tuple) -> None:
-        super().__init__(())
-
     def execute(self) -> bool:
         screen_w, screen_h = memory.screen.get_size()
         sprite_x, sprite_y = self.sprite.coords

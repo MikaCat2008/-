@@ -10,11 +10,11 @@ class GlideToBlock(Block):
     original_coords: tuple[float]
     start_time: float
 
-    def __init__(self, *args: tuple[Number, Number, Number]) -> None:
-        super().__init__(args)
+    def __init__(self, seconds: Number, end_x: Number, end_y: Number) -> None:
+        super().__init__()
 
-        self.seconds = args[0]
-        self.end_coords = args[1], args[2]
+        self.seconds = seconds
+        self.end_coords = end_x, end_y
         self.original_coords = None
         self.start_time = time.time()
 

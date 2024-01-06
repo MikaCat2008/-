@@ -10,11 +10,11 @@ class OnStartBlock(BlockIterator):
     start: bool
     blocks: Blocks
     
-    def __init__(self, *args: tuple[Blocks]) -> None:
-        super().__init__(args)
+    def __init__(self, blocks: Blocks) -> None:
+        super().__init__()
 
         self.start = False
-        self.blocks = args[0]
+        self.blocks = blocks
 
     def execute(self) -> bool:
         self.start = True
