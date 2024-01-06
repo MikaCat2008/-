@@ -69,6 +69,7 @@ class SpriteType(ABC):
     coords: tuple[float, float]
     direction: float
     surface: SurfaceType
+    rendered_surface: SurfaceType
     rotate_style: int
 
     @abstractmethod

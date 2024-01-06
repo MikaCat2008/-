@@ -23,6 +23,7 @@ class Sprite(SpriteType):
         self.coords = coords
         self.direction = direction
         self.surface = surface
+        self.rendered_surface = surface
         self.rotate_style = rotate_style
 
         self.variables = {}
