@@ -29,7 +29,7 @@ from scratch_api.motion.SetYToBlock import SetYToBlock
 
 from scratch_api.motion.IfOnEdgeBounceBlock import IfOnEdgeBounceBlock
 
-# from scratch_api.motion.SetRotationStyleBlock import SetRotationStyleBlock
+from scratch_api.motion.SetRotationStyleBlock import SetRotationStyleBlock
 
 from scratch_api.motion.XPositionNode import XPositionNode
 from scratch_api.motion.YPositionNode import YPositionNode
