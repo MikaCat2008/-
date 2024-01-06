@@ -24,3 +24,10 @@ class SpriteManager:
             block.set_parent()
 
         return sprite
+
+    def execute_blocks(
+        self,
+        sprite: SpriteType,
+        *blocks: Blocks
+    ) -> None:
+        sprite.blocks += blocks
