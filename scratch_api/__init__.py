@@ -10,16 +10,13 @@ from .abstractions import SpriteType
 from .emit import emit
 from .memory import memory
 
-screen: SurfaceType = None
 key_map: dict[str, bool] = {}
 
 __api_version__ = 0, 0
 
 
-def set_screen(_screen: SurfaceType) -> None:
-    global screen
-
-    screen = _screen
+def set_screen(screen: SurfaceType) -> None:
+    memory.screen = screen
 
 
 def set_sprites(sprites: list[SpriteType]) -> None:
@@ -31,7 +28,7 @@ def start() -> None:
 
 
 def update(events: list[EventType]) -> None:
-    screen.fill((255, 255, 255))
+    memory.screen.fill((255, 255, 255))
 
     for event in events:
         if event.type == pygame.QUIT:
@@ -84,6 +81,6 @@ def update(events: list[EventType]) -> None:
 
         sprite.display_coords = (x - w / 2, y - h / 2)
 
-        screen.blit(surface, sprite.display_coords)
+        memory.screen.blit(surface, sprite.display_coords)
 
     flip_screen()
