@@ -41,21 +41,25 @@ class Sprite(SpriteType):
 
     def update(self) -> bool:
         is_updated = False
+        to_delete = []
 
         for block in self.blocks:
             if block.is_freeze():
                 is_updated = True
                 
                 continue
-            elif block.event is None:
-                continue
+
+            if block.event is None:
+                block.execute()
 
             again = False
             is_structure = False
+            is_block_updated = False
             
             while not again and not is_structure:
                 if (next_block := block.next()):
                     is_updated = True
+                    is_block_updated = True
 
                     again = not next_block.execute()
                     is_structure = next_block.is_structure
@@ -67,6 +71,12 @@ class Sprite(SpriteType):
                         block.freeze(STRUCTURE_BLOCK_DELAY)
                 else:
                     break
+
+            if block.event is None and not is_block_updated:
+                to_delete.append(block)
+
+        for block in to_delete:
+            self.blocks.remove(block)
 
         return is_updated
 
