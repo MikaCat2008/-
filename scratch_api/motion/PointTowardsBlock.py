@@ -50,7 +50,7 @@ class PointTowardsBlock(Block):
         if bool(self.mouse_pointer):
             coords2 = get_pos()
         else:
-            coords2 = [sprite for sprite in memory.sprites if sprite.name == str(self.sprite_name)][0].coords
+            coords2 = self.get_sprite_by_name(str(self.sprite_name)).coords
 
         self.sprite.direction = angle(coords1, coords2)
 
