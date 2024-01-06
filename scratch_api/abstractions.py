@@ -57,6 +57,10 @@ class BlockType(ABC):
     def is_freeze(self) -> bool:
         ...
 
+    @abstractmethod
+    def get_sprite_by_name(self, name: str) -> SpriteType:
+        ...
+
 
 class SpriteType(ABC):
     blocks: Blocks

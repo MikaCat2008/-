@@ -2,6 +2,7 @@ from time import time
 from functools import reduce
 
 from .abstractions import BlockType, NodeType, Blocks, SpriteType
+from .memory import memory
 
 
 def StructureBlock[BlockType](cls: type[BlockType]) -> type[BlockType]:
@@ -68,3 +69,6 @@ class Block(BlockType):
 
     def is_freeze(self) -> bool:
         return self.unfreeze_time > time()
+
+    def get_sprite_by_name(self, name: str) -> SpriteType:
+        return [sprite for sprite in memory.sprites if sprite.name == name][0]
