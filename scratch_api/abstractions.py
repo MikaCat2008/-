@@ -88,6 +88,10 @@ class SpriteType(ABC):
         ...
 
     @abstractmethod
+    def set_direction(self, direction: float) -> None:
+        ...
+
+    @abstractmethod
     def delete(self) -> None:
         ...
 
