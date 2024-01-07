@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class TurnRightBlock(Block):
+class TurnRightBlock(MotionBlock):
     angle: Number
 
     def __init__(self, angle: Number) -> None:

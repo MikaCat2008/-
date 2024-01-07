@@ -1,10 +1,10 @@
 from pygame.mouse import get_pos
 
 from ..abstractions import String, Boolean
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class GoToBlock(Block):
+class GoToBlock(MotionBlock):
     sprite_name: String
     mouse_pointer: Boolean
 

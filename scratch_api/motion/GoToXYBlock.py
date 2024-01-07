@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class GoToXYBlock(Block):
+class GoToXYBlock(MotionBlock):
     x: Number
     y: Number
 

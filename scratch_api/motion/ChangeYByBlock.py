@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class ChangeYByBlock(Block):
+class ChangeYByBlock(MotionBlock):
     y: Number
 
     def __init__(self, y: Number) -> None:

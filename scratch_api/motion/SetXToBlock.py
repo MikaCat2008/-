@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class SetXToBlock(Block):
+class SetXToBlock(MotionBlock):
     x: Number
 
     def __init__(self, x: Number) -> None:

@@ -1,10 +1,10 @@
 import time
 
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class GlideToBlock(Block):
+class GlideToBlock(MotionBlock):
     seconds: Number
     end_x: Number
     end_y: Number

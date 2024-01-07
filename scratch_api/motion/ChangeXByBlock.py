@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class ChangeXByBlock(Block):
+class ChangeXByBlock(MotionBlock):
     x: Number
 
     def __init__(self, x: Number) -> None:

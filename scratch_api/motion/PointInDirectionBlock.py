@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class PointInDirectionBlock(Block):
+class PointInDirectionBlock(MotionBlock):
     direction: Number
 
     def __init__(self, direction: Number) -> None:

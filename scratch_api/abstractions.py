@@ -47,6 +47,25 @@ class BlockType(ABC):
         ...
 
 
+class PenType(ABC):
+    sprite: SpriteType
+    color: tuple[int, int, int]
+    size: int
+    is_down: bool
+
+    @abstractmethod
+    def stamp(self) -> None:
+        ...
+
+    @abstractmethod
+    def down(self) -> None:
+        ...
+
+    @abstractmethod
+    def up(self) -> None:
+        ...
+
+
 class SpriteType(ABC):
     blocks: Blocks
     variables: list[str]
@@ -57,6 +76,7 @@ class SpriteType(ABC):
     surface: SurfaceType
     rendered_surface: SurfaceType
     rotation_style: int
+    pen: PenType
 
     @abstractmethod
     def emit(self, event: str, **data: dict[str, object]) -> None:
@@ -80,10 +100,6 @@ class SpriteType(ABC):
 
     @abstractmethod
     def delete(self) -> None:
-        ...
-
-    @abstractmethod
-    def stamp(self) -> None:
         ...
 
 

@@ -1,9 +1,8 @@
 from ..block import Block
-from ..stamp import clear
 
 
-class ClearBlock(Block):
+class PenDownBlock(Block):
     def execute(self) -> bool:
-        clear()
-
+        self.sprite.pen.down()
+        
         return True

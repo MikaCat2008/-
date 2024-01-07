@@ -1,8 +1,8 @@
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
-class SetRotationStyleBlock(Block):
+class SetRotationStyleBlock(MotionBlock):
     rotation_style: Number
 
     def __init__(self, rotation_style: Number) -> None:

@@ -46,6 +46,9 @@ from scratch_api.pen.ClearBlock import ClearBlock
 
 from scratch_api.pen.StampBlock import StampBlock
 
+from scratch_api.pen.PenDownBlock import PenDownBlock
+from scratch_api.pen.PenUpBlock import PenUpBlock
+
 # data
 from scratch_api.data.SetValueToBlock import SetValueToBlock
 from scratch_api.data.ChangeValueByBlock import ChangeValueByBlock
@@ -98,30 +101,17 @@ set_sprites([
     sprite_manager.create_sprite(
         blocks = [
             OnStartBlock([
-                GoToXYBlock(400, 200),
+                GoToXYBlock(200, 300),
+                PenDownBlock(),
 
                 ForeverBlock([
-                    PointTowardsBlock("Trah-trah")
-                ])
-            ]),
-
-            OnKeyPressBlock("a", [ChangeXByBlock(-5)]),
-            OnKeyPressBlock("d", [ChangeXByBlock(5)]),
-            OnKeyPressBlock("w", [ChangeYByBlock(5)]),
-            OnKeyPressBlock("s", [ChangeYByBlock(-5)])
-        ],
-        name = "Artem",
-        surface = scale_by(load_picture("artem.jpg").convert_alpha(), 0.5)
-    ),
-    sprite_manager.create_sprite(
-        blocks = [
-            OnStartBlock([
-                ForeverBlock([
-                    PointTowardsBlock("Artem"),
-                    MoveBlock(5)
+                    MoveBlock(MulNode(10, MathFuncOfNode("sin", VariableNode("i")))),
+                    TurnLeftBlock(1),
+                    ChangeValueByBlock("i", 0.05)
                 ])
             ])
         ],
+        variable_names=["i"],
         name = "Trah-trah",
         surface = load_picture("trah-trah.jpg").convert_alpha()
     )

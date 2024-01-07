@@ -1,7 +1,7 @@
 import math
 
 from ..abstractions import Number
-from ..block import Block
+from ..motion_block import MotionBlock
 
 
 def move(x: float, y: float, d: float, v: float) -> tuple[float, float]:
@@ -11,7 +11,7 @@ def move(x: float, y: float, d: float, v: float) -> tuple[float, float]:
     return x, y
 
 
-class MoveBlock(Block):
+class MoveBlock(MotionBlock):
     velocity: Number
 
     def __init__(self, velocity: Number) -> None:

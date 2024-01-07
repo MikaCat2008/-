@@ -1,7 +1,7 @@
 import math
 
 from ..abstractions import String, Boolean
-from ..block import Block
+from ..motion_block import MotionBlock
 
 from pygame.mouse import get_pos
 
@@ -33,7 +33,7 @@ def angle(point1: tuple[float, float], point2: tuple[float, float]) -> float:
         return 360 - abs(angle)
 
 
-class PointTowardsBlock(Block):
+class PointTowardsBlock(MotionBlock):
     sprite_name: String
     mouse_pointer: Boolean
 

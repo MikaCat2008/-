@@ -1,8 +1,10 @@
 from pygame.surface import SurfaceType
 
 from .abstractions import SpriteType, NodeType, Blocks
+from .stamp import Pen
 from .nodes.NumberNode import NumberNode
 from .memory import memory
+from .motion_block import MotionBlock
 
 from . import stamp
 
@@ -28,6 +30,7 @@ class Sprite(SpriteType):
         self.surface = surface
         self.rendered_surface = surface
         self.rotation_style = rotation_style
+        self.pen = Pen(self, (0, 0, 0), 3)
 
         self.variables = {}
 
@@ -75,6 +78,9 @@ class Sprite(SpriteType):
                     is_updated = True
                     is_block_updated = True
 
+                    if isinstance(next_block, MotionBlock):
+                        last_coords = next_block.sprite.coords
+
                     again = not next_block.execute()
                     is_structure = next_block.is_structure
 
@@ -82,6 +88,9 @@ class Sprite(SpriteType):
                         next_block.parent_block.again()
                     else:
                         next_block.reset_nodes()
+
+                    if isinstance(next_block, MotionBlock):
+                        MotionBlock.execute(next_block, last_coords = last_coords)
 
                     if is_structure:
                         block.freeze(STRUCTURE_BLOCK_DELAY)
@@ -107,6 +116,3 @@ class Sprite(SpriteType):
 
     def delete(self) -> None:
         memory.sprites.remove(self)
-
-    def stamp(self) -> None:
-        stamp.stamp(self.rendered_surface, self.rendered_coords)

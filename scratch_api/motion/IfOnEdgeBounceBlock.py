@@ -1,8 +1,8 @@
-from ..block import Block
 from ..memory import memory
+from ..motion_block import MotionBlock
 
 
-class IfOnEdgeBounceBlock(Block):
+class IfOnEdgeBounceBlock(MotionBlock):
     def execute(self) -> bool:
         screen_w, screen_h = memory.screen.get_size()
         sprite_x, sprite_y = self.sprite.coords
