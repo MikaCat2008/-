@@ -2,6 +2,7 @@ from pygame.time import Clock
 from pygame.event import get as get_events
 from pygame.image import load as load_picture
 from pygame.display import set_mode, set_caption
+from pygame.transform import scale_by
 
 from scratch_api import set_screen, set_sprites, start, update
 from scratch_api.block_container import BlockContainer
@@ -41,6 +42,9 @@ from scratch_api.motion.DirectionNode import DirectionNode
 # sound
 
 # pen
+from scratch_api.pen.ClearBlock import ClearBlock
+
+from scratch_api.pen.StampBlock import StampBlock
 
 # data
 from scratch_api.data.SetValueToBlock import SetValueToBlock
@@ -93,20 +97,33 @@ set_screen(screen)
 set_sprites([
     sprite_manager.create_sprite(
         blocks = [
-            BlockContainer([
+            OnStartBlock([
                 GoToXYBlock(400, 200),
-                PointInDirectionBlock(260)
+
+                ForeverBlock([
+                    PointTowardsBlock("Trah-trah")
+                ])
             ]),
 
+            OnKeyPressBlock("a", [ChangeXByBlock(-5)]),
+            OnKeyPressBlock("d", [ChangeXByBlock(5)]),
+            OnKeyPressBlock("w", [ChangeYByBlock(5)]),
+            OnKeyPressBlock("s", [ChangeYByBlock(-5)])
+        ],
+        name = "Artem",
+        surface = scale_by(load_picture("artem.jpg").convert_alpha(), 0.5)
+    ),
+    sprite_manager.create_sprite(
+        blocks = [
             OnStartBlock([
                 ForeverBlock([
-                    MoveBlock(10),
-                    IfOnEdgeBounceBlock()
+                    PointTowardsBlock("Artem"),
+                    MoveBlock(5)
                 ])
             ])
         ],
-        surface = load_picture("skittle.jpg").convert_alpha(),
-        rotation_style = 2
+        name = "Trah-trah",
+        surface = load_picture("trah-trah.jpg").convert_alpha()
     )
 ])
 

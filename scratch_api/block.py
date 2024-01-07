@@ -1,7 +1,6 @@
 from time import time
-from functools import reduce
 
-from .abstractions import BlockType, NodeType, Blocks, SpriteType
+from .abstractions import BlockType, NodeType, SpriteType
 from .memory import memory
 
 
@@ -21,8 +20,9 @@ class Block(BlockType):
         self.main_block = None
         self.parent_block = None
         self.sprite = None
-        self.is_initialized = False
         self.unfreeze_time = 0
+
+        self.nodes = []
 
     def execute(self, **data: dict[str, object]) -> bool:
         ...
@@ -37,8 +37,14 @@ class Block(BlockType):
         self.unfreeze_time = max(time() + seconds, self.unfreeze_time)
 
     def init_nodes(self) -> None:
-        for k, node in filter(lambda x: isinstance(x[1], NodeType), self.__dict__.items()):
+        self.nodes = [node for _, node in self.__dict__.items() if isinstance(node, NodeType)]
+
+        for node in self.nodes:
             node.init(self.sprite)
+
+    def reset_nodes(self) -> None:
+        for node in self.nodes:
+            node.reset()
 
     def is_freeze(self) -> bool:
         return self.unfreeze_time > time()

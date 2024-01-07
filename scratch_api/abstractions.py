@@ -12,6 +12,7 @@ class BlockType(ABC):
     sprite: SpriteType
     is_structure: bool
     unfreeze_time: float
+    nodes: list[NodeType]
 
     @abstractmethod
     def execute(self, **data: dict[str, object]) -> bool:
@@ -34,6 +35,10 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
+    def reset_nodes(self) -> None:
+        ...
+
+    @abstractmethod
     def is_freeze(self) -> bool:
         ...
 
@@ -47,6 +52,7 @@ class SpriteType(ABC):
     variables: list[str]
     name: str
     coords: tuple[float, float]
+    rendered_coords = tuple[float, float]
     direction: float
     surface: SurfaceType
     rendered_surface: SurfaceType
@@ -76,9 +82,14 @@ class SpriteType(ABC):
     def delete(self) -> None:
         ...
 
+    @abstractmethod
+    def stamp(self) -> None:
+        ...
+
 
 class NodeType(ABC):
     sprite: SpriteType
+    nodes: list[NodeType]
 
     @abstractmethod
     def get_value(self) -> object:
@@ -86,6 +97,10 @@ class NodeType(ABC):
 
     @abstractmethod
     def init(self, sprite: SpriteType) -> None:
+        ...
+
+    @abstractmethod
+    def reset(self) -> None:
         ...
 
 

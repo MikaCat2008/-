@@ -37,7 +37,7 @@ class PointTowardsBlock(Block):
     sprite_name: String
     mouse_pointer: Boolean
 
-    def __init__(self, sprite_name: String, mouse_pointer: Boolean) -> None:
+    def __init__(self, sprite_name: String, mouse_pointer: Boolean = False) -> None:
         super().__init__()
 
         self.sprite_name = sprite_name

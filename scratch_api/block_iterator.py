@@ -34,9 +34,6 @@ class BlockIterator(Block):
             return block
 
         if not self.iter_blocks:
-            if self.sprite is None:
-                self.sprite = ...
-
             self.iter_blocks = self.iter()
 
         if self.i < len(self.iter_blocks):
@@ -52,7 +49,7 @@ class BlockIterator(Block):
                     block.init_nodes()
 
                 if (next_block := block.next()):
-                    return next_block 
+                    return next_block
 
             self.i += 1
 

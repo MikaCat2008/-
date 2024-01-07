@@ -4,7 +4,7 @@ import pygame
 from pygame.event import EventType
 from pygame.transform import flip, rotate
 from pygame.display import flip as flip_screen
-from pygame.surface import SurfaceType
+from pygame.surface import Surface, SurfaceType
 
 from .abstractions import SpriteType
 from .emit import emit
@@ -17,6 +17,9 @@ __api_version__ = 0, 1
 
 def set_screen(screen: SurfaceType) -> None:
     memory.screen = screen
+    memory.stamp_screen = Surface(screen.get_size()).convert_alpha()
+
+    memory.stamp_screen.fill((255, 255, 255, 255))
 
 
 def set_sprites(sprites: list[SpriteType]) -> None:
@@ -63,6 +66,8 @@ def update(events: list[EventType]) -> None:
     for sprite in memory.sprites:
         sprite.update()
 
+    memory.screen.blit(memory.stamp_screen, (0, 0))
+
     for sprite in memory.sprites:
         x, y = sprite.coords
 
@@ -79,9 +84,9 @@ def update(events: list[EventType]) -> None:
 
         w, h = surface.get_size()
 
-        sprite.display_coords = (x - w / 2, y - h / 2)
+        sprite.rendered_coords = (x - w / 2, y - h / 2)
         sprite.rendered_surface = surface
 
-        memory.screen.blit(surface, sprite.display_coords)
+        memory.screen.blit(surface, sprite.rendered_coords)
 
     flip_screen()

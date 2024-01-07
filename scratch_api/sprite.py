@@ -1,10 +1,10 @@
-import inspect
+from pygame.surface import SurfaceType
 
 from .abstractions import SpriteType, NodeType, Blocks
 from .nodes.NumberNode import NumberNode
 from .memory import memory
 
-from pygame.surface import SurfaceType
+from . import stamp
 
 STRUCTURE_BLOCK_DELAY = 0.01
 
@@ -23,6 +23,7 @@ class Sprite(SpriteType):
         self.blocks = blocks
         self.name = name
         self.coords = coords
+        self.rendered_coords = coords
         self.direction = direction
         self.surface = surface
         self.rendered_surface = surface
@@ -79,7 +80,9 @@ class Sprite(SpriteType):
 
                     if again:
                         next_block.parent_block.again()
-                    
+                    else:
+                        next_block.reset_nodes()
+
                     if is_structure:
                         block.freeze(STRUCTURE_BLOCK_DELAY)
                 else:
@@ -104,3 +107,6 @@ class Sprite(SpriteType):
 
     def delete(self) -> None:
         memory.sprites.remove(self)
+
+    def stamp(self) -> None:
+        stamp.stamp(self.rendered_surface, self.rendered_coords)

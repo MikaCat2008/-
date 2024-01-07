@@ -13,6 +13,14 @@ class RandomNumberNode(NumberNode):
 
         self.from_number = from_number
         self.to_number = to_number
+        self.random_int = None
+
+        self.reset()
 
     def get_value(self) -> int:
-        return randint(int(self.from_number), int(self.to_number))
+        return self.random_int
+
+    def reset(self) -> None:
+        super().reset()
+        
+        self.random_int = randint(int(self.from_number), int(self.to_number))
