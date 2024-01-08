@@ -1,22 +1,34 @@
 import math
+import time
 import unittest
 
 from . import tools
 
-from ..motion.MoveBlock import MoveBlock
-from ..motion.TurnRightBlock import TurnRightBlock
-from ..motion.TurnLeftBlock import TurnLeftBlock
+from scratch_api.memory import memory
 
-from ..motion.PointTowardsBlock import PointTowardsBlock
+from scratch_api.motion.MoveBlock import MoveBlock
+from scratch_api.motion.TurnRightBlock import TurnRightBlock
+from scratch_api.motion.TurnLeftBlock import TurnLeftBlock
 
-from ..motion.ChangeXByBlock import ChangeXByBlock
-from ..motion.SetXToBlock import SetXToBlock
-from ..motion.ChangeYByBlock import ChangeYByBlock
-from ..motion.SetYToBlock import SetYToBlock
+from scratch_api.motion.PointInDirectionBlock import PointInDirectionBlock
+from scratch_api.motion.PointTowardsBlock import PointTowardsBlock
 
-from ..motion.XPositionNode import XPositionNode
-from ..motion.YPositionNode import YPositionNode
-from ..motion.DirectionNode import DirectionNode
+from scratch_api.motion.GoToBlock import GoToBlock
+from scratch_api.motion.GoToXYBlock import GoToXYBlock
+from scratch_api.motion.GlideToBlock import GlideToBlock
+
+from scratch_api.motion.ChangeXByBlock import ChangeXByBlock
+from scratch_api.motion.SetXToBlock import SetXToBlock
+from scratch_api.motion.ChangeYByBlock import ChangeYByBlock
+from scratch_api.motion.SetYToBlock import SetYToBlock
+
+from scratch_api.motion.IfOnEdgeBounceBlock import IfOnEdgeBounceBlock
+
+from scratch_api.motion.SetRotationStyleBlock import SetRotationStyleBlock
+
+from scratch_api.motion.XPositionNode import XPositionNode
+from scratch_api.motion.YPositionNode import YPositionNode
+from scratch_api.motion.DirectionNode import DirectionNode
 
 
 class MotionTestCase(unittest.TestCase):
@@ -50,6 +62,13 @@ class MotionTestCase(unittest.TestCase):
         self.assertEqual(sprite1.direction, 15)
         self.assertEqual(sprite2.direction, 75)
 
+    def test_point_in_direction(self) -> None:
+        sprite1 = tools.sprite([PointInDirectionBlock(47)])
+
+        tools.update()
+
+        self.assertEqual(sprite1.direction, 47)
+
     def test_point_towards_block(self) -> None:
         tools.sprite(x = 10, y = 0, name = "Sprite PointToward 1")
         tools.sprite(x = 10, y = 10, name = "Sprite PointToward 2")
@@ -64,6 +83,35 @@ class MotionTestCase(unittest.TestCase):
         self.assertAlmostEqual(sprite1.direction, 0)
         self.assertAlmostEqual(sprite2.direction, 315)
         self.assertAlmostEqual(sprite3.direction, math.atan(-2) * 180 / math.pi + 360)
+
+    def test_go_to_block(self) -> None:
+        sprite1 = tools.sprite(name = "Target sprite", x = 20, y = 20)
+        sprite2 = tools.sprite([GoToBlock("Target sprite")])
+
+        tools.update()
+
+        self.assertEqual(sprite2.coords, sprite1.coords)
+
+    def test_go_to_xy_block(self) -> None:
+        sprite = tools.sprite([GoToXYBlock(20, 20)])
+
+        tools.update()
+
+        self.assertEqual(sprite.coords, (20, 20))
+
+    def test_glide_to_block(self) -> None:
+        sprite = tools.sprite([GlideToBlock(1, 20, 20)])
+
+        tools.update()
+
+        self.assertEqual(sprite.coords, (20, 20))
+
+    def test_set_rotation_style_block(self) -> None:
+        sprite = tools.sprite([SetRotationStyleBlock(1)])
+
+        tools.update()
+
+        self.assertEqual(sprite.rotation_style, 1)
 
     def test_change_x_by_block(self) -> None:
         sprite1 = tools.sprite([ChangeXByBlock(10)], x = 10)
@@ -100,6 +148,21 @@ class MotionTestCase(unittest.TestCase):
 
         self.assertEqual(sprite1.coords[1], 10)
         self.assertEqual(sprite2.coords[1], -10)
+
+    def test_if_on_edge_bounce_block(self) -> None:
+        sprite1 = tools.sprite([
+            MoveBlock(47),
+            IfOnEdgeBounceBlock()
+        ])
+        sprite2 = tools.sprite([
+            MoveBlock(48),
+            IfOnEdgeBounceBlock()
+        ])
+
+        tools.update()
+
+        self.assertEqual(sprite1.direction, 0)
+        self.assertEqual(sprite2.direction, 180)
 
     def test_x_position_node(self) -> None:
         sprite = tools.sprite(x = 30)
