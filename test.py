@@ -11,7 +11,7 @@ from scratch_api.tests.events import EventsTestCase as t4
 from scratch_api.tests.control import ControlTestCase as t5
 from scratch_api.tests.operators import OperatorsTestCase as t6
 
-set_screen(set_mode((32, 32)))
+set_screen(set_mode((64, 64)))
 
 if __name__ == "__main__":
     unittest.main()
