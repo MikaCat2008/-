@@ -28,6 +28,8 @@ class GlideToBlock(MotionBlock):
             self.start_time = None
             self.original_coords = None
 
+            self.sprite.coords = float(self.end_x), float(self.end_y)
+
             return True
         
         if self.original_coords is None:
