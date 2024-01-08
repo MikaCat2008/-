@@ -76,6 +76,7 @@ class SpriteType(ABC):
     surface: SurfaceType
     rendered_surface: SurfaceType
     rotation_style: int
+    is_show: bool
     pen: PenType
 
     @abstractmethod
@@ -100,6 +101,14 @@ class SpriteType(ABC):
 
     @abstractmethod
     def delete(self) -> None:
+        ...
+
+    @abstractmethod
+    def show(self) -> None:
+        ...
+
+    @abstractmethod
+    def hide(self) -> None:
         ...
 
 

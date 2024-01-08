@@ -2,7 +2,6 @@ from pygame.surface import Surface, SurfaceType
 
 from .abstractions import Blocks, SpriteType
 
-from .block_iterator import BlockIterator
 from .sprite import Sprite
 from .memory import memory
 
@@ -16,7 +15,8 @@ class SpriteManager:
         coords: tuple[float, float] = (0, 0),
         direction: float = 0,
         surface: SurfaceType = None,
-        rotation_style: int = 2
+        rotation_style: int = 2,
+        is_show: bool = True
     ) -> SpriteType:
         return Sprite(
             blocks or [], 
@@ -25,5 +25,6 @@ class SpriteManager:
             coords, 
             direction, 
             surface or Surface((32, 32)), 
-            rotation_style
+            rotation_style,
+            is_show
         )

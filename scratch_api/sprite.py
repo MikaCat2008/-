@@ -20,7 +20,8 @@ class Sprite(SpriteType):
         coords: tuple[float, float], 
         direction: float,
         surface: SurfaceType,
-        rotation_style: int
+        rotation_style: int,
+        is_show: bool
     ) -> None:
         self.blocks = blocks
         self.name = name
@@ -30,6 +31,7 @@ class Sprite(SpriteType):
         self.surface = surface
         self.rendered_surface = surface
         self.rotation_style = rotation_style
+        self.is_show = is_show
         self.pen = Pen(self, (0, 0, 0), 3)
 
         self.variables = {}
@@ -116,3 +118,9 @@ class Sprite(SpriteType):
 
     def delete(self) -> None:
         memory.sprites.remove(self)
+
+    def show(self) -> None:
+        self.is_show = True
+
+    def hide(self) -> None:
+        self.is_show = False
