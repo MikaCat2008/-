@@ -11,6 +11,6 @@ class SetRotationStyleBlock(MotionBlock):
         self.rotation_style = rotation_style
 
     def execute(self) -> bool:
-        self.sprite.rotation_style = int(self.rotate_style)
+        self.sprite.rotation_style = int(self.rotation_style)
 
         return True
