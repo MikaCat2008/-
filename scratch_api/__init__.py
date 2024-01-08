@@ -87,6 +87,7 @@ def update(events: list[EventType]) -> None:
         sprite.rendered_coords = (x - w / 2, y - h / 2)
         sprite.rendered_surface = surface
 
-        memory.screen.blit(surface, sprite.rendered_coords)
+        if sprite.is_show:
+            memory.screen.blit(surface, sprite.rendered_coords)
 
     flip_screen()
