@@ -38,6 +38,8 @@ from scratch_api.motion.YPositionNode import YPositionNode
 from scratch_api.motion.DirectionNode import DirectionNode
 
 # looks
+from scratch_api.looks.ShowBlock import ShowBlock
+from scratch_api.looks.HideBlock import HideBlock
 
 # sound
 
@@ -101,17 +103,20 @@ set_sprites([
     sprite_manager.create_sprite(
         blocks = [
             OnStartBlock([
-                GoToXYBlock(200, 300),
-                PenDownBlock(),
+                GlideToBlock(1, 200, 200)
+                
+                # GoToXYBlock(200, 300),
+                # PenDownBlock(),
+                # HideBlock(),
 
-                ForeverBlock([
-                    MoveBlock(MulNode(10, MathFuncOfNode("sin", VariableNode("i")))),
-                    TurnLeftBlock(1),
-                    ChangeValueByBlock("i", 0.05)
-                ])
+                # ForeverBlock([
+                #     MoveBlock(MulNode(10, MathFuncOfNode("sin", VariableNode("i")))),
+                #     TurnLeftBlock(1),
+                #     ChangeValueByBlock("i", 0.05)
+                # ])
             ])
         ],
-        variable_names=["i"],
+        variable_names = ["i"],
         name = "Trah-trah",
         surface = load_picture("trah-trah.jpg").convert_alpha()
     )
