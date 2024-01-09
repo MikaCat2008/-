@@ -1,24 +1,22 @@
 import math
 import unittest
 
-from . import tools
+from scratch_api.operators import AddNode
+from scratch_api.operators import SubNode
+from scratch_api.operators import MulNode
+from scratch_api.operators import DivNode
 
-from scratch_api.operators.AddNode import AddNode
-from scratch_api.operators.SubNode import SubNode
-from scratch_api.operators.MulNode import MulNode
-from scratch_api.operators.DivNode import DivNode
+from scratch_api.operators import RandomNumberNode
 
-from scratch_api.operators.RandomNumberNode import RandomNumberNode
+from scratch_api.operators import LessThanNode
+from scratch_api.operators import EqualsToNode
+from scratch_api.operators import BiggerThanNode
 
-from scratch_api.operators.LessThanNode import LessThanNode
-from scratch_api.operators.EqualsToNode import EqualsToNode
-from scratch_api.operators.BiggerThanNode import BiggerThanNode
+from scratch_api.operators import AndNode
+from scratch_api.operators import OrNode
+from scratch_api.operators import NotNode
 
-from scratch_api.operators.AndNode import AndNode
-from scratch_api.operators.OrNode import OrNode
-from scratch_api.operators.NotNode import NotNode
-
-from scratch_api.operators.MathFuncOfNode import MathFuncOfNode
+from scratch_api.operators import MathFuncOfNode
 
 
 class OperatorsTestCase(unittest.TestCase):

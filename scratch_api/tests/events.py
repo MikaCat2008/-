@@ -2,8 +2,8 @@ import unittest
 
 from . import tools
 
-from ..events.OnStartBlock import OnStartBlock
-from ..events.OnKeyPressBlock import OnKeyPressBlock
+from ..events import OnStartBlock
+from ..events import OnKeyPressBlock
 
 
 class EventsTestCase(unittest.TestCase):

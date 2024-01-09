@@ -6,29 +6,29 @@ from . import tools
 
 from scratch_api.memory import memory
 
-from scratch_api.motion.MoveBlock import MoveBlock
-from scratch_api.motion.TurnRightBlock import TurnRightBlock
-from scratch_api.motion.TurnLeftBlock import TurnLeftBlock
+from scratch_api.motion import MoveBlock
+from scratch_api.motion import TurnRightBlock
+from scratch_api.motion import TurnLeftBlock
 
-from scratch_api.motion.PointInDirectionBlock import PointInDirectionBlock
-from scratch_api.motion.PointTowardsBlock import PointTowardsBlock
+from scratch_api.motion import PointInDirectionBlock
+from scratch_api.motion import PointTowardsBlock
 
-from scratch_api.motion.GoToBlock import GoToBlock
-from scratch_api.motion.GoToXYBlock import GoToXYBlock
-from scratch_api.motion.GlideToBlock import GlideToBlock
+from scratch_api.motion import GoToBlock
+from scratch_api.motion import GoToXYBlock
+from scratch_api.motion import GlideToBlock
 
-from scratch_api.motion.ChangeXByBlock import ChangeXByBlock
-from scratch_api.motion.SetXToBlock import SetXToBlock
-from scratch_api.motion.ChangeYByBlock import ChangeYByBlock
-from scratch_api.motion.SetYToBlock import SetYToBlock
+from scratch_api.motion import ChangeXByBlock
+from scratch_api.motion import SetXToBlock
+from scratch_api.motion import ChangeYByBlock
+from scratch_api.motion import SetYToBlock
 
-from scratch_api.motion.IfOnEdgeBounceBlock import IfOnEdgeBounceBlock
+from scratch_api.motion import IfOnEdgeBounceBlock
 
-from scratch_api.motion.SetRotationStyleBlock import SetRotationStyleBlock
+from scratch_api.motion import SetRotationStyleBlock
 
-from scratch_api.motion.XPositionNode import XPositionNode
-from scratch_api.motion.YPositionNode import YPositionNode
-from scratch_api.motion.DirectionNode import DirectionNode
+from scratch_api.motion import XPositionNode
+from scratch_api.motion import YPositionNode
+from scratch_api.motion import DirectionNode
 
 
 class MotionTestCase(unittest.TestCase):

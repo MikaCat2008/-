@@ -12,7 +12,7 @@ from .memory import memory
 
 key_map: dict[str, bool] = {}
 
-__api_version__ = 0, 1
+__api_version__ = 1, 0
 
 
 def set_screen(screen: SurfaceType) -> None:

@@ -2,10 +2,10 @@ import unittest
 
 from . import tools
 
-from ..nodes.NumberNode import NumberNode
+from ..nodes import NumberNode
 
-from ..data.SetValueToBlock import SetValueToBlock
-from ..data.ChangeValueByBlock import ChangeValueByBlock
+from ..data import SetValueToBlock
+from ..data import ChangeValueByBlock
 
 
 class DataTestCase(unittest.TestCase):
