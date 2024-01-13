@@ -2,8 +2,7 @@ import math
 
 from ..abstractions import String, Boolean
 from ..motion_block import MotionBlock
-
-from pygame.mouse import get_pos
+from ..memory import memory
 
 
 def angle(point1: tuple[float, float], point2: tuple[float, float]) -> float:
@@ -47,7 +46,7 @@ class PointTowardsBlock(MotionBlock):
         coords1 = self.sprite.coords
 
         if bool(self.mouse_pointer):
-            coords2 = get_pos()
+            coords2 = memory.mouse_pos
         else:
             coords2 = self.get_sprite_by_name(str(self.sprite_name)).coords
 

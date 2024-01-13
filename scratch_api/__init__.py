@@ -3,7 +3,6 @@ from __future__ import annotations
 import pygame
 from pygame.event import EventType
 from pygame.transform import flip, rotate
-from pygame.display import flip as flip_screen
 from pygame.surface import Surface, SurfaceType
 
 from .abstractions import SpriteType
@@ -30,8 +29,9 @@ def start() -> None:
     emit("start")
 
 
-def update(events: list[EventType]) -> None:
+def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
     memory.screen.fill((255, 255, 255))
+    memory.mouse_pos = mouse_pos
 
     for event in events:
         if event.type == pygame.QUIT:
@@ -89,5 +89,3 @@ def update(events: list[EventType]) -> None:
 
         if sprite.is_show:
             memory.screen.blit(surface, sprite.rendered_coords)
-
-    flip_screen()

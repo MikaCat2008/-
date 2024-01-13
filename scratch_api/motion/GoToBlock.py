@@ -1,6 +1,5 @@
-from pygame.mouse import get_pos
-
 from ..abstractions import String, Boolean
+from ..memory import memory
 from ..motion_block import MotionBlock
 
 
@@ -16,7 +15,7 @@ class GoToBlock(MotionBlock):
 
     def execute(self) -> bool:
         if bool(self.mouse_pointer):
-            self.sprite.coords = get_pos()
+            self.sprite.coords = memory.mouse_pos
         else:
             sprite = self.get_sprite_by_name(str(self.sprite_name))
 
