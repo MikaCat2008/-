@@ -1,10 +1,12 @@
 from .abstractions import NodeType, NodeManagerType
 from .node import Node
-from .nodes.NumberNode import NumberNode
 
-from .operators.AddNode import AddNode
+from .nodes import NumberNode
+
+from .operators import AddNode
 
 from scratch_api.abstractions import NodeType as GameNodeType
+
 from scratch_api.nodes import NumberNode as NumberGameNode
 
 from scratch_api.operators import AddNode as AddGameNode

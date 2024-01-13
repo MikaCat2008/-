@@ -1,6 +1,3 @@
-from pygame import SRCALPHA
-from pygame.surface import Surface, SurfaceType
-
 from .abstractions import BlockType, BlockSlotType
 
 from scratch_api.abstractions import BlockType as GameBlockType
