@@ -132,13 +132,25 @@ class NodeType(ABC):
 class NumberNodeType(NodeType):
     value: float
 
+    @abstractmethod
+    def get_value(self) -> float:
+        ...
+
 
 class StringNodeType(NodeType):
     value: str
 
+    @abstractmethod
+    def get_value(self) -> str:
+        ...
+
 
 class BooleanNodeType(NodeType):
     value: bool
+
+    @abstractmethod
+    def get_value(self) -> bool:
+        ...
 
 
 Blocks = list[BlockType]

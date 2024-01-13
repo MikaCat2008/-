@@ -15,9 +15,10 @@ from scratch_api.motion import MoveBlock
 
 from scratch_api.events import OnStartBlock
 
-from scratch_api.control import RepeatBlock
-
 from scratch_api.operators import AddNode
+from scratch_api.operators import SubNode
+from scratch_api.operators import MulNode
+from scratch_api.operators import DivNode
 
 WINDOW_SIZE = (1400, 750)
 
@@ -44,6 +45,21 @@ class Window:
         on_start_block.add_block(
             block_manager.create_block(
                 sprite, None, MoveBlock(AddNode(NumberNode(10), NumberNode(4)))
+            ), 0
+        )
+        on_start_block.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(SubNode(NumberNode(10), NumberNode(4)))
+            ), 0
+        )
+        on_start_block.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(MulNode(NumberNode(10), NumberNode(4)))
+            ), 0
+        )
+        on_start_block.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(DivNode(NumberNode(10), NumberNode(4)))
             ), 0
         )
 
