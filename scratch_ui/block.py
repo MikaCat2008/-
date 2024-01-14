@@ -37,7 +37,7 @@ class Block(BlockType):
             tew, teh = template_element.rendered.get_size()
 
             if h <= y <= h + teh:
-                return template_element, tew, h
+                return template_element, tew, h + teh
 
             h += teh
 
