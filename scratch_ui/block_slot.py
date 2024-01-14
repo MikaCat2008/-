@@ -10,5 +10,6 @@ class BlockSlot(BlockSlotType):
         self.game_blocks = game_blocks
     
     def add(self, block: BlockType) -> None:
+        block.slot = self
         self.blocks.append(block)
         self.game_blocks.append(block.game_block)
