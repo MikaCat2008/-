@@ -22,9 +22,12 @@ class Template(TemplateType):
 
         for i, template_element in enumerate(self.template_elements):
             if i == 0:
-                surfaces[i] = template_element.render()
+                surface = template_element.render()
             else:
-                surfaces[i] = template_element.render(surfaces[i - 1].get_size()[1])
+                surface = template_element.render(surfaces[i - 1].get_size()[1])
+
+            surfaces[i] = surface
+            template_element.rendered = surface
 
         return surfaces
 

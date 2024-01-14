@@ -15,24 +15,16 @@ class Sprite(SpriteType):
         self.blocks = blocks
 
     def add_block(self, coords: tuple[int, int], game_block: GameBlockType) -> None:
-        for block in self.blocks:
-            if False:
-            # if block.can_add_block(coords, game_block):
-                block.add_block(coords, game_block)
-                
-                break
-        else:
-            block = block_manager.create_block(
-                self,
-                coords,
-                game_block
-            )
+        block = block_manager.create_block(
+            self,
+            coords,
+            game_block
+        )
 
-            block.deep = 0
-            block.init()
+        block.deep = 0
+        block.init()
 
-            self.blocks.append(block)
-
+        self.blocks.append(block)
         self.game_sprite.blocks.append(game_block)
         
         return block
