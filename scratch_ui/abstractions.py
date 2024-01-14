@@ -46,6 +46,7 @@ class BlockType(ABC):
     coords: tuple[int, int]
     game_block: GameBlockType
     rendered: SurfaceType
+    slot: BlockSlotType
 
     slots: list[SlotType]
     template: TemplateType
@@ -58,20 +59,37 @@ class BlockType(ABC):
     def render(self) -> SurfaceType:
         ...
 
-    # @abstractmethod
-    # def can_add_block(self, coords: tuple[int, int], game_block) -> bool:
-    #     ...
+    @abstractmethod
+    def add_block(self, game_block: BlockType, slot: int) -> BlockType:
+        ...
+
+    @abstractmethod
+    def get_template_element_by_y(self, y: int) -> tuple[TemplateElementType, int, int]:        
+        ...
+
+    @abstractmethod
+    def get_slot_by_coords(self, x: int, y: int) -> tuple[BlockSlotType, int, int]:
+        ...
 
     @abstractmethod
     def get_child(self, x: int, y: int) -> tuple[BlockType, int, int]:
         ...
 
     @abstractmethod
-    def add_block(self, game_block: BlockType, slot: int) -> BlockType:
+    def render(self) -> SurfaceType:
+        ...
+
+    @abstractmethod
+    def is_event(self) -> bool:
+        ...
+
+    @abstractmethod
+    def is_iterable(self) -> bool:
         ...
 
 
 class NodeManagerType(ABC):
+    @abstractmethod
     def create_node(self, game_node: GameNodeType) -> NodeType:
         ...
 
@@ -79,7 +97,16 @@ class NodeManagerType(ABC):
 class BlockManagerType(ABC):
     selected_block: BlockType
 
+    @abstractmethod
     def create_block(self, game_block: GameBlockType) -> BlockType:
+        ...
+
+    @abstractmethod
+    def select(self, block: BlockType) -> None:
+        ...
+
+    @abstractmethod
+    def free(self) -> None:
         ...
 
 
@@ -117,6 +144,7 @@ class FrameType(ABC):
 
 class TemplateElementType(ABC):
     color: tuple[int, int, int]
+    rendered: SurfaceType
     template: TemplateType
 
     @abstractmethod
