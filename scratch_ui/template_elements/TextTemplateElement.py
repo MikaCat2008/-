@@ -22,7 +22,7 @@ class TextTemplateElement(TemplateElement):
     def format_text(self) -> str:
         return re.sub("<(\d)>", self.get_str, self.text)
 
-    def render(self) -> SurfaceType:
+    def render(self, sy: int = 0) -> SurfaceType:
         text = text_render(self.format_text())
         surface = Surface((text.get_size()[0] + 10, 25))
 

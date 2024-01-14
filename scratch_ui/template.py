@@ -21,7 +21,10 @@ class Template(TemplateType):
         surfaces = [None] * len(self.template_elements)
 
         for i, template_element in enumerate(self.template_elements):
-            surfaces[i] = template_element.render()
+            if i == 0:
+                surfaces[i] = template_element.render()
+            else:
+                surfaces[i] = template_element.render(surfaces[i - 1].get_size()[1])
 
         return surfaces
 
@@ -35,7 +38,7 @@ class Template(TemplateType):
             sw = max(w, sw)
             sh += h
         
-        surface = Surface((sw + 20, sh), SRCALPHA, 32)
+        surface = Surface((sw, sh), SRCALPHA, 32)
         
         y = 0
         for _surface in surfaces:

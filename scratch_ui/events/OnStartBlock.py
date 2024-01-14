@@ -13,7 +13,7 @@ class OnStartBlock(Block):
 
     def init(self) -> None:
         self.slots = [
-            BlockSlot(self.game_block.blocks, self)
+            BlockSlot(self.game_block.blocks)
         ]
 
         self.template = Template([

@@ -16,7 +16,7 @@ class RepeatBlock(Block):
     def init(self) -> None:
         self.slots = [
             NodeSlot(self.game_block.end),
-            BlockSlot(self.game_block.blocks, self)
+            BlockSlot(self.game_block.blocks)
         ]
 
         self.template = Template([

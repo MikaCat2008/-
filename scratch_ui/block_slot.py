@@ -4,10 +4,10 @@ from scratch_api.abstractions import BlockType as GameBlockType
 
 
 class BlockSlot(BlockSlotType):
-    def __init__(self, game_blocks: list[GameBlockType], parent_block: BlockType) -> None:
+    def __init__(self, game_blocks: list[GameBlockType]) -> None:
         self.blocks = []
+        self.indent = False
         self.game_blocks = game_blocks
-        self.parent_block = parent_block
     
     def add(self, block: BlockType) -> None:
         self.blocks.append(block)

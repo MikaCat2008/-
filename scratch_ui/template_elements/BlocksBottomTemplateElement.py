@@ -6,7 +6,7 @@ from ..template_element import TemplateElementType
 
 
 class BlocksBottomTemplateElement(TemplateElementType):
-    def render(self) -> SurfaceType:
+    def render(self, sy: int = 0) -> SurfaceType:
         surface = Surface((self.template.width, 20), SRCALPHA, 32)
 
         rect(surface, self.color, (0, 0, self.template.width, 20))

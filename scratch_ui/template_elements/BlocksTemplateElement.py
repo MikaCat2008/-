@@ -13,10 +13,11 @@ class BlocksTemplateElement(TemplateElement):
     def __init__(self, slot: BlockSlotType, indent: bool) -> None:
         super().__init__()
 
+        slot.indent = indent
         self.slot = slot
         self.indent = indent
 
-    def render(self) -> SurfaceType:
+    def render(self, sy: int = 0) -> SurfaceType:
         surfaces = [None] * len(self.slot.blocks)
 
         for i, block in enumerate(self.slot.blocks):
@@ -29,11 +30,14 @@ class BlocksTemplateElement(TemplateElement):
             sw = max(w, sw)
             sh += h
 
-        surface = Surface((sw, sh), SRCALPHA, 32)
+        surface = Surface((sw + self.indent * bool(self.slot.blocks)* 20, sh), SRCALPHA, 32)
         
         y = 0
-        for _surface in surfaces:
-            surface.blit(_surface, (self.indent * 20, y))
+        for block, _surface in zip(self.slot.blocks, surfaces):
+            bx, by = (self.indent * 20, y)
+
+            block.coords = bx, by + sy
+            surface.blit(_surface, (bx, by))
 
             y += _surface.get_size()[1]
 

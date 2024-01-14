@@ -16,6 +16,9 @@ from scratch_api.control.RepeatBlock import RepeatBlock as RepeatGameBlock
 
 
 class BlockManager(BlockManagerType):
+    def __init__(self) -> None:
+        self.selected_block = None
+
     def create_block(
         self,
         sprite: SpriteType,

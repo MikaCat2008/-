@@ -70,28 +70,33 @@ class Window:
                 sprite, None, RepeatBlock(NumberNode(40), [])
             ), 0
         )
-        # repeat_block1 = repeat_block0.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, RepeatBlock(10, [])
-        #     ), 0
-        # )
+        repeat_block1 = repeat_block0.add_block(
+            block_manager.create_block(
+                sprite, None, RepeatBlock(NumberNode(69), [])
+            ), 1
+        )
 
         repeat_block0.add_block(
             block_manager.create_block(
                 sprite, None, MoveBlock(NumberNode(3))
             ), 1
         )
+        repeat_block0.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(NumberNode(3))
+            ), 1
+        )
 
-        # repeat_block1.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(10)
-        #     ), 0
-        # )
-        # repeat_block1.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(10)
-        #     ), 0
-        # )
+        repeat_block1.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(NumberNode(3))
+            ), 1
+        )
+        repeat_block1.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(NumberNode(3))
+            ), 1
+        )
 
         sprite_manager.selected_sprite = sprite
 

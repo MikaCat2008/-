@@ -1,6 +1,6 @@
-from pygame.surface import Surface, SurfaceType
+from pygame.surface import SurfaceType
 
-from .abstractions import BlockType, SpriteType
+from .abstractions import BlockType, SpriteType, BlockSlotType
 
 from scratch_api.block import BlockType as GameBlockType
 
@@ -15,6 +15,7 @@ class Block(BlockType):
         self.sprite = sprite
         self.coords = coords
         self.game_block = game_block
+        self.rendered = None
 
         self.slots = []
         self.template = None
@@ -28,5 +29,27 @@ class Block(BlockType):
 
         return block
     
+    def get_child(self, mx: int, my: int) -> tuple[BlockType, int, int]:
+        for slot in self.slots:
+            y = 25
+            if isinstance(slot, BlockSlotType):
+                for i, block in enumerate(slot.blocks):
+                    bx, by = block.coords
+                    bw, bh = block.rendered.get_size()
+
+                    if bx <= mx <= bx + bw and by <= my <= by + bh:
+                        indent = 0
+                        if slot.indent:
+                            indent = 20
+
+                        child, cx, cy = block.get_child(mx - indent, my - y)
+                        
+                        return child, cx + indent, cy + y
+                    y += bh
+
+        return self, 0, 0
+
     def render(self) -> SurfaceType:
-        return self.template.render()
+        self.rendered = self.template.render()
+        
+        return self.rendered

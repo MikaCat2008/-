@@ -24,6 +24,7 @@ class NodeSlotType(SlotType):
 
 class BlockSlotType(SlotType):
     blocks: list[BlockType]
+    indent: bool
     game_blocks: list[GameBlockType]
 
     @abstractmethod
@@ -44,8 +45,10 @@ class BlockType(ABC):
     sprite: SpriteType
     coords: tuple[int, int]
     game_block: GameBlockType
-    
+    rendered: SurfaceType
+
     slots: list[SlotType]
+    template: TemplateType
 
     @abstractmethod
     def init(self) -> None:
@@ -60,6 +63,10 @@ class BlockType(ABC):
     #     ...
 
     @abstractmethod
+    def get_child(self, x: int, y: int) -> tuple[BlockType, int, int]:
+        ...
+
+    @abstractmethod
     def add_block(self, game_block: BlockType, slot: int) -> BlockType:
         ...
 
@@ -70,6 +77,8 @@ class NodeManagerType(ABC):
 
 
 class BlockManagerType(ABC):
+    selected_block: BlockType
+
     def create_block(self, game_block: GameBlockType) -> BlockType:
         ...
 
@@ -109,6 +118,10 @@ class FrameType(ABC):
 class TemplateElementType(ABC):
     color: tuple[int, int, int]
     template: TemplateType
+
+    @abstractmethod
+    def render(self, sy: int = 0) -> SurfaceType:
+        ...
 
 
 class TemplateType(ABC):
