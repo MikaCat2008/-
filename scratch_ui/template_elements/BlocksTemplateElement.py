@@ -30,7 +30,7 @@ class BlocksTemplateElement(TemplateElement):
             sw = max(w, sw)
             sh += h
 
-        surface = Surface((sw + self.indent * bool(self.slot.blocks)* 20, sh), SRCALPHA, 32)
+        surface = Surface((sw + self.indent * bool(self.slot.blocks) * 20, sh), SRCALPHA, 32)
         
         y = 0
         for block, _surface in zip(self.slot.blocks, surfaces):
