@@ -12,34 +12,59 @@ from ..sprite_manager import sprite_manager
 def update_blocks_field(s, selected_sprite: SpriteType, mx: int, my: int) -> None:
     m0 = mouse.get_pressed()[0]
 
-    if not block_manager.selected_block:
-        for block in selected_sprite.blocks:
-            x, y = block.coords
-            w, h = block.rendered.get_size()
+    hovered_block = None
+    for block in selected_sprite.blocks:
+        x, y = block.coords
+        w, h = block.rendered.get_size()
+        
+        if x <= mx <= x + w and y <= my <= y + h:
+            child, cx, cy = block.get_child(mx - x, my - y)
             
-            if x <= mx <= x + w and y <= my <= y + h:
-                child, cx, cy = block.get_child(mx - x, my - y)
-                
-                if child:
-                    cw, ch = child.rendered.get_size()
+            if child:
+                hovered_block = child
+                cw, ch = child.rendered.get_size()
 
+                if not block_manager.selected_block:
                     rect(s, (0, 0, 0), (x + cx, y + cy, cw, ch), 1)
 
-                break
+                if m0 and not block_manager.selected_block:
+                    block_manager.select(child)
+                    block_manager.free()
 
-    if block_manager.selected_block:
-        x, y, w, h = block_manager.selected_block.rendered.get_rect()
+            break
 
-        print(block_manager.selected_block)
+    block = block_manager.selected_block
 
-        if not (m0 or x <= mx <= x + w and y <= my <= y + h):
-            block_manager.selected_block = None
+    if block:
+        bx, by, bw, bh = block.rendered.get_rect()
+
+        if not m0:
+            block_manager.unselect()
+        
+            if hovered_block.is_iterable():
+                slot, slot_w, slot_y = hovered_block.get_slot_by_coords(mx - x - cx, my - y - cy)
+
+                if slot:
+                    slot.add(block)
+                else:
+                    if hovered_block.is_event():
+                        hovered_block.slots[-1].add(block)
+                    else:
+                        hovered_block.slot.add(block)
+            else:
+                hovered_block.slot.add(block)
         else:
-            block_manager.selected_block.coords = mx - w / 2, my - 10
+            block.coords = mx - bw / 2, my - 10
 
 
 def draw_blocks_field(screen: SurfaceType, sprite: SpriteType) -> None:
     for block in sprite.blocks:
+        screen.blit(block.render(), block.coords)
+
+
+    block = block_manager.selected_block
+    
+    if block:
         screen.blit(block.render(), block.coords)
 
 
