@@ -36,5 +36,17 @@ class BlockManager(BlockManagerType):
 
         return block_factory(sprite, coords, game_block)
 
+    def select(self, block: BlockType) -> None:
+        self.selected_block = block
+
+    def unselect(self) -> None:
+        self.selected_block = None
+
+    def free(self) -> None:
+        block = self.selected_block
+
+        if block.slot:
+            block.slot.blocks.remove(block)
+
 
 block_manager = BlockManager()
