@@ -27,3 +27,9 @@ class OnStartBlock(BlockIterator):
 
             return self.blocks
         return []
+
+    def stop(self) -> None:
+        super().stop()
+        
+        for block in self.blocks:
+            block.stop()

@@ -21,3 +21,9 @@ class IfThenBlock(BlockIterator):
         if bool(self.condition):
             return self.blocks
         return []
+
+    def stop(self) -> None:
+        super().stop()
+        
+        for block in self.blocks:
+            block.stop()

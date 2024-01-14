@@ -43,6 +43,10 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
+    def stop(self) -> None:
+        ...
+
+    @abstractmethod
     def get_sprite_by_name(self, name: str) -> SpriteType:
         ...
 

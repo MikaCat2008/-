@@ -29,6 +29,12 @@ def start() -> None:
     emit("start")
 
 
+def stop() -> None:
+    for sprite in memory.sprites:
+        for block in sprite.blocks:
+            block.stop()
+
+
 def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
     memory.screen.fill((255, 255, 255))
     memory.mouse_pos = mouse_pos
@@ -63,8 +69,10 @@ def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
     if any_key:
         emit("key", key="any")
     
+    changes = False
     for sprite in memory.sprites:
-        sprite.update()
+        if sprite.update():
+            changes = True
 
     memory.screen.blit(memory.stamp_screen, (0, 0))
 
@@ -89,3 +97,5 @@ def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
 
         if sprite.is_show:
             memory.screen.blit(surface, sprite.rendered_coords)
+
+    return changes

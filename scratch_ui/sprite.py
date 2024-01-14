@@ -32,6 +32,8 @@ class Sprite(SpriteType):
             block.init()
 
             self.blocks.append(block)
+
+        self.game_sprite.blocks.append(game_block)
         
         return block
 

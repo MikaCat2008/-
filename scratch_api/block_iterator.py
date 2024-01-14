@@ -5,6 +5,7 @@ from .block import Block, StructureBlock
 @StructureBlock
 class BlockIterator(Block):
     i: int
+    __stop: bool
     __again: bool
     iter_blocks: Blocks
 
@@ -12,6 +13,7 @@ class BlockIterator(Block):
         super().__init__()
         
         self.i = 0
+        self.__stop = False
         self.__again = False
         self.iter_blocks = blocks or []
     
@@ -22,6 +24,11 @@ class BlockIterator(Block):
         return self.iter_blocks
 
     def next(self) -> BlockType | None:
+        if self.__stop:
+            self.__stop = False
+
+            return None
+
         if self.__again:
             block = self.iter_blocks[self.i - 1]
 
@@ -62,3 +69,13 @@ class BlockIterator(Block):
     
     def again(self) -> None:
         self.__again = True
+
+    def stop(self) -> None:
+        self.i = 0
+        self.__again = False
+        self.__stop = True
+
+        for block in self.iter_blocks:
+            block.stop()
+
+        self.iter_blocks = []

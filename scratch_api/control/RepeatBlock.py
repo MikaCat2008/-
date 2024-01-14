@@ -33,3 +33,11 @@ class RepeatBlock(BlockIterator):
         if self.end == 0:
             return []
         return self.blocks
+
+    def stop(self) -> None:
+        super().stop()
+
+        self.index = 0
+        
+        for block in self.blocks:
+            block.stop()

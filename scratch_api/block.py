@@ -49,5 +49,8 @@ class Block(BlockType):
     def is_freeze(self) -> bool:
         return self.unfreeze_time > time()
 
+    def stop(self) -> None:
+        ...
+
     def get_sprite_by_name(self, name: str) -> SpriteType:
         return [sprite for sprite in memory.sprites if sprite.name == name][0]

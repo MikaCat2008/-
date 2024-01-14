@@ -17,3 +17,9 @@ class ForeverBlock(BlockIterator):
 
     def iter(self) -> None:
         return self.blocks
+
+    def stop(self) -> None:
+        super().stop()
+        
+        for block in self.blocks:
+            block.stop()

@@ -14,3 +14,8 @@ class WaitBlock(Block):
         self.main_block.freeze(self.freeze_time)
 
         return True
+
+    def stop(self) -> None:
+        super().stop()
+
+        self.freeze_time = 0

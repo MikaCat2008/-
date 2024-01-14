@@ -15,6 +15,8 @@ from scratch_api.motion import MoveBlock
 
 from scratch_api.events import OnStartBlock
 
+from scratch_api.control import RepeatBlock
+
 from scratch_api.operators import AddNode
 from scratch_api.operators import SubNode
 from scratch_api.operators import MulNode
@@ -42,48 +44,43 @@ class Window:
             OnStartBlock([])
         )
 
-        on_start_block.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(AddNode(NumberNode(10), NumberNode(4)))
-            ), 0
-        )
-        on_start_block.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(SubNode(NumberNode(10), NumberNode(4)))
-            ), 0
-        )
-        on_start_block.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(MulNode(NumberNode(10), NumberNode(4)))
-            ), 0
-        )
-        on_start_block.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(DivNode(NumberNode(10), NumberNode(4)))
-            ), 0
-        )
-
-        # repeat_block0 = on_start_block.add_block(
+        # on_start_block.add_block(
         #     block_manager.create_block(
-        #         sprite, None, RepeatBlock(NumberNode(11), [])
+        #         sprite, None, MoveBlock(AddNode(NumberNode(10), NumberNode(4)))
         #     ), 0
         # )
+        # on_start_block.add_block(
+        #     block_manager.create_block(
+        #         sprite, None, MoveBlock(SubNode(NumberNode(10), NumberNode(4)))
+        #     ), 0
+        # )
+        # on_start_block.add_block(
+        #     block_manager.create_block(
+        #         sprite, None, MoveBlock(MulNode(NumberNode(10), NumberNode(4)))
+        #     ), 0
+        # )
+        # on_start_block.add_block(
+        #     block_manager.create_block(
+        #         sprite, None, MoveBlock(DivNode(NumberNode(10), NumberNode(4)))
+        #     ), 0
+        # )
+
+        repeat_block0 = on_start_block.add_block(
+            block_manager.create_block(
+                sprite, None, RepeatBlock(NumberNode(40), [])
+            ), 0
+        )
         # repeat_block1 = repeat_block0.add_block(
         #     block_manager.create_block(
         #         sprite, None, RepeatBlock(10, [])
         #     ), 0
         # )
 
-        # repeat_block0.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(NumberNode(10))
-        #     ), 1
-        # )
-        # repeat_block0.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(10)
-        #     ), 0
-        # )
+        repeat_block0.add_block(
+            block_manager.create_block(
+                sprite, None, MoveBlock(NumberNode(3))
+            ), 1
+        )
 
         # repeat_block1.add_block(
         #     block_manager.create_block(

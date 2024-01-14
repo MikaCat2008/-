@@ -23,3 +23,12 @@ class IfThenElseBlock(BlockIterator):
         if bool(self.condition):
             return self.then_blocks
         return self.else_blocks
+
+    def stop(self) -> None:
+        super().stop()
+        
+        for block in self.then_blocks:
+            block.stop()
+        
+        for block in self.else_blocks:
+            block.stop()
