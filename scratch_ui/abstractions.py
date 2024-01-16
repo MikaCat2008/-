@@ -31,6 +31,22 @@ class BlockSlotType(SlotType):
     def add(self, game_block: GameBlockType) -> None:
         ...
 
+    @abstractmethod
+    def index(self, block: BlockType) -> int:
+        ...
+
+    @abstractmethod
+    def insert(self, index: int, block: BlockType) -> None:
+        ...
+
+    @abstractmethod
+    def insert_before(self, block: BlockType, insertable_block: BlockType) -> None:
+        ...
+
+    @abstractmethod
+    def insert_after(self, block: BlockType, insertable_block: BlockType) -> None:
+        ...
+
 
 class NodeType(ABC):
     game_node: GameNodeType
@@ -56,10 +72,6 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
-    def render(self) -> SurfaceType:
-        ...
-
-    @abstractmethod
     def add_block(self, game_block: BlockType, slot: int) -> BlockType:
         ...
 
@@ -76,15 +88,15 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
-    def render(self) -> SurfaceType:
-        ...
-
-    @abstractmethod
     def is_event(self) -> bool:
         ...
 
     @abstractmethod
     def is_iterable(self) -> bool:
+        ...
+
+    @abstractmethod
+    def render(self) -> SurfaceType:
         ...
 
 

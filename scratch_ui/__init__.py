@@ -83,18 +83,18 @@ class Window:
         )
         repeat_block0.add_block(
             block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(3))
+                sprite, None, MoveBlock(NumberNode(4))
             ), 1
         )
 
         repeat_block1.add_block(
             block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(3))
+                sprite, None, MoveBlock(NumberNode(5))
             ), 1
         )
         repeat_block1.add_block(
             block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(3))
+                sprite, None, MoveBlock(NumberNode(6))
             ), 1
         )
 
@@ -107,6 +107,7 @@ class Window:
     def update(self, events: list[EventType]) -> None:
         self.screen.fill((245, 245, 245))
         self.window_frame.update_frames(events, mouse.get_pos())
+        self.window_frame.update(events, mouse.get_pos())
 
         flip()
 

@@ -57,20 +57,21 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                         if hovered_block.is_event():
                             hovered_block.slots[-1].add(block)
                         else:
-                            hovered_block.slot.add(block)
+                            if my - y - cy > hovered_block.rendered.get_height() / 2:
+                                hovered_block.slot.insert_after(hovered_block, block)
+                            else:
+                                hovered_block.slot.insert_before(hovered_block, block)
                 else:
-                    hovered_block.slot.add(block)
+                    if my - y - cy > hovered_block.rendered.get_height() / 2:
+                        hovered_block.slot.insert_after(hovered_block, block)
+                    else:
+                        hovered_block.slot.insert_before(hovered_block, block)
         else:
             block.coords = mx - bw / 2, my - 10
 
 
 def draw_blocks_field(screen: SurfaceType, sprite: SpriteType) -> None:
     for block in sprite.blocks:
-        screen.blit(block.render(), block.coords)
-
-    block = block_manager.selected_block
-    
-    if block:
         screen.blit(block.render(), block.coords)
 
 
