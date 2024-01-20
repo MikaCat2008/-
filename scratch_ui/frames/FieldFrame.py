@@ -66,8 +66,6 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                         hovered_block.slot.insert_after(hovered_block, block)
                     else:
                         hovered_block.slot.insert_before(hovered_block, block)
-        else:
-            block.coords = mx - bw / 2, my - 10
 
 
 def draw_blocks_field(screen: SurfaceType, sprite: SpriteType) -> None:

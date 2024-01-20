@@ -20,6 +20,8 @@ class WindowFrame(Frame):
         block = block_manager.selected_block
     
         if block:
-            bx, by = block.coords
+            bx, by = mouse_coords
 
-            self.screen.blit(block.render(), (bx + 820, by + 10))
+            rendered = block.render()
+
+            self.screen.blit(rendered, (bx - rendered.get_width() / 2, by - 10))
