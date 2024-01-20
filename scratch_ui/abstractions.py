@@ -98,6 +98,10 @@ class BlockType(ABC):
     @abstractmethod
     def render(self) -> SurfaceType:
         ...
+        
+    @abstractmethod
+    def remove(self) -> None:
+        ...
 
 
 class NodeManagerType(ABC):

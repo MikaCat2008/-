@@ -17,7 +17,7 @@ class RepeatBlock(BlockIterator):
         self.blocks = args[1]
 
     def execute(self) -> bool:
-        if int(self.end) == 1:
+        if len(self.blocks) == 0 or int(self.end) == 1:
             return True
 
         self.index += 1

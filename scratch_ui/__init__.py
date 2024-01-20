@@ -35,9 +35,10 @@ class Window:
         self.screen = screen
         self.window_frame = WindowFrame(screen, screen.get_size(), (0, 0))
 
-        sprite = sprite_manager.create_sprite(
+        sprite_manager.selected_sprite = sprite = sprite_manager.create_sprite(
             load_image("artem.jpg").convert_alpha()
         )
+        # print(sprite_manager.selected_sprite)
 
         on_start_block = sprite.add_block(
             (100, 100),
@@ -72,7 +73,7 @@ class Window:
         )
         repeat_block1 = repeat_block0.add_block(
             block_manager.create_block(
-                sprite, None, RepeatBlock(NumberNode(69), [])
+                sprite, None, RepeatBlock(NumberNode(400), [])
             ), 1
         )
 
@@ -97,8 +98,6 @@ class Window:
                 sprite, None, MoveBlock(NumberNode(6))
             ), 1
         )
-
-        sprite_manager.selected_sprite = sprite
 
     def start(self) -> None:
         self.window_frame.start()

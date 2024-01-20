@@ -92,7 +92,7 @@ class Sprite(SpriteType):
                         next_block.reset_nodes()
 
                     if isinstance(next_block, MotionBlock):
-                        MotionBlock.execute(next_block, last_coords = last_coords)
+                        MotionBlock.execute(next_block, last_coords)
 
                     if is_structure:
                         block.freeze(STRUCTURE_BLOCK_DELAY)

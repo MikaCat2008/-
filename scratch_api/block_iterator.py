@@ -48,6 +48,7 @@ class BlockIterator(Block):
 
             if block.parent_block is None:
                 block.parent_block = self
+                block.parent_blocks = self.iter_blocks
 
             if isinstance(block, BlockIterator):
                 if block.sprite is None:

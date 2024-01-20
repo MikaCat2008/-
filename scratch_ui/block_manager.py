@@ -25,6 +25,9 @@ class BlockManager(BlockManagerType):
         coords: tuple[int, int],
         game_block: GameBlockType
     ) -> BlockType:
+        if sprite:
+            game_block.sprite = sprite.game_sprite
+
         if isinstance(game_block, MoveGameBlock):
             block_factory = MoveBlock
 
@@ -46,10 +49,7 @@ class BlockManager(BlockManagerType):
         self.selected_block = None
 
     def free(self) -> None:
-        block = self.selected_block
-
-        if block.slot:
-            block.slot.blocks.remove(block)
+        self.selected_block.remove()
 
 
 block_manager = BlockManager()

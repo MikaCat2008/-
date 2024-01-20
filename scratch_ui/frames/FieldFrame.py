@@ -41,15 +41,13 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
     block = block_manager.selected_block
 
     if block:
-        bx, by, bw, bh = block.rendered.get_rect()
-
         if not m0:
             block_manager.unselect()
-            
-            if block.is_event():
-                return 
 
             if hovered_block:
+                if block.is_event():
+                    return 
+                
                 if hovered_block.is_iterable():
                     if slot:
                         slot.add(block)
@@ -66,6 +64,13 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                         hovered_block.slot.insert_after(hovered_block, block)
                     else:
                         hovered_block.slot.insert_before(hovered_block, block)
+            else:
+                if block.is_event():
+                    block.deep = 0
+                    block.coords = mx - block.rendered.get_width() / 2, my - 10
+
+                    selected_sprite.blocks.append(block)
+                    selected_sprite.game_sprite.blocks.append(block.game_block)
 
 
 def draw_blocks_field(screen: SurfaceType, sprite: SpriteType) -> None:

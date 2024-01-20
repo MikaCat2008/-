@@ -79,3 +79,11 @@ class Block(BlockType):
         self.rendered = self.template.render()
         
         return self.rendered
+
+    def remove(self) -> None:
+        self.game_block.remove()
+        
+        if self.slot:
+            self.slot.blocks.remove(self)
+        elif self in self.sprite.blocks:
+            self.sprite.blocks.remove(self)

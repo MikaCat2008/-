@@ -9,6 +9,7 @@ class BlockType(ABC):
     event: str
     main_block: BlockType
     parent_block: BlockType
+    parent_blocks: list[BlockType]
     sprite: SpriteType
     is_structure: bool
     unfreeze_time: float
@@ -44,6 +45,10 @@ class BlockType(ABC):
 
     @abstractmethod
     def stop(self) -> None:
+        ...
+
+    @abstractmethod
+    def remove(self) -> None:
         ...
 
     @abstractmethod

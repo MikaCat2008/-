@@ -11,6 +11,8 @@ class BlockSlot(BlockSlotType):
     
     def add(self, block: BlockType) -> None:
         block.slot = self
+        block.game_block.parent_blocks = self.game_blocks
+
         self.blocks.append(block)
         self.game_blocks.append(block.game_block)
 
@@ -19,6 +21,8 @@ class BlockSlot(BlockSlotType):
 
     def insert(self, index: int, block: BlockType) -> None:
         block.slot = self
+        block.game_block.parent_blocks = self.game_blocks
+
         self.blocks.insert(index, block)
         self.game_blocks.insert(index, block.game_block)
 

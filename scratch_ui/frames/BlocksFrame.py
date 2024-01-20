@@ -13,6 +13,8 @@ from scratch_api.nodes import NumberNode
 
 from scratch_api.motion import MoveBlock
 
+from scratch_api.events import OnStartBlock
+
 
 def get_spawners(
     *game_block_groups: tuple[tuple[tuple[GameBlockType], ...], tuple[int, int]]
@@ -63,63 +65,9 @@ def draw_block_spawners(screen: SurfaceType, scroll: int) -> None:
 block_spawners = get_spawners(
     (
         MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
     ),
     (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
-    ),
-    (
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10)),
-        MoveBlock(NumberNode(10))
+        OnStartBlock([]),
     )
 )
 
@@ -133,7 +81,7 @@ class BlocksFrame(Frame):
 
         for event in events:
             if event.type == pygame.MOUSEWHEEL:
-                self.scroll -= event.y * 25
+                self.scroll = min(max(self.scroll - event.y * 25, 0), self.screen.get_height())
 
         draw_block_spawners(self.screen, self.scroll)
 

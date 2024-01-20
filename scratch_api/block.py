@@ -19,6 +19,7 @@ class Block(BlockType):
 
         self.main_block = None
         self.parent_block = None
+        self.parent_blocks = None
         self.sprite = None
         self.unfreeze_time = 0
 
@@ -51,6 +52,12 @@ class Block(BlockType):
 
     def stop(self) -> None:
         ...
+
+    def remove(self) -> None:
+        if self.parent_blocks:
+            self.parent_blocks.remove(self)
+        elif self in self.sprite.blocks:
+            self.sprite.blocks.remove(self)
 
     def get_sprite_by_name(self, name: str) -> SpriteType:
         return [sprite for sprite in memory.sprites if sprite.name == name][0]
