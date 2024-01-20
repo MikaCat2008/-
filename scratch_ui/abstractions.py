@@ -18,7 +18,7 @@ class NodeSlotType(SlotType):
     node: NodeType
 
     @abstractmethod
-    def get_str(self) -> str:
+    def render(self) -> str:
         ...
 
 
@@ -53,7 +53,7 @@ class NodeType(ABC):
     nodes: list[NodeType]
 
     @abstractmethod
-    def get_str(self) -> str:
+    def render(self) -> str:
         ...
 
 

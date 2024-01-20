@@ -6,5 +6,5 @@ init_font()
 font = SysFont(None, 32)
 
 
-def text_render(text: str) -> SurfaceType:
-    return font.render(text, None, (255, 255, 255))
+def text_render(text: str, color: tuple[int, int, int] = (255, 255, 255)) -> SurfaceType:
+    return font.render(text, None, color)
