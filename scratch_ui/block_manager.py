@@ -34,7 +34,10 @@ class BlockManager(BlockManagerType):
         elif isinstance(game_block, RepeatGameBlock):
             block_factory = RepeatBlock
 
-        return block_factory(sprite, coords, game_block)
+        block = block_factory(sprite, coords, game_block)
+        block.init()
+
+        return block
 
     def select(self, block: BlockType) -> None:
         self.selected_block = block
