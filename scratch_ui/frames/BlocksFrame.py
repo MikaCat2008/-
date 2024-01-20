@@ -15,6 +15,8 @@ from scratch_api.motion import MoveBlock
 
 from scratch_api.events import OnStartBlock
 
+from scratch_api.control import RepeatBlock
+
 
 def get_spawners(
     *game_block_groups: tuple[tuple[tuple[GameBlockType], ...], tuple[int, int]]
@@ -68,6 +70,9 @@ block_spawners = get_spawners(
     ),
     (
         OnStartBlock([]),
+    ),
+    (
+        RepeatBlock(NumberNode(5), []),
     )
 )
 
