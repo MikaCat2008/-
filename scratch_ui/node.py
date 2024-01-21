@@ -7,6 +7,8 @@ class Node(NodeType):
 
         self.game_node = game_node
         self.nodes = []
+        self.coords = None
+        self.rendered = None
 
         self.init()
 

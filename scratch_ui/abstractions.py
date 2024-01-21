@@ -18,7 +18,7 @@ class NodeSlotType(SlotType):
     node: NodeType
 
     @abstractmethod
-    def render(self) -> str:
+    def render(self) -> SurfaceType:
         ...
 
 
@@ -51,6 +51,8 @@ class BlockSlotType(SlotType):
 class NodeType(ABC):
     game_node: GameNodeType
     nodes: list[NodeType]
+    coords: tuple[int, int]
+    rendered: SurfaceType
 
     @abstractmethod
     def render(self) -> str:
@@ -80,7 +82,7 @@ class BlockType(ABC):
         ...
 
     @abstractmethod
-    def get_slot_by_coords(self, x: int, y: int) -> tuple[BlockSlotType, int, int]:
+    def get_slot_by_coords(self, x: int, y: int) -> tuple[SlotType, int, int]:
         ...
 
     @abstractmethod

@@ -18,9 +18,9 @@ class TextTemplateElement(TemplateElement):
         self.node_slots: tuple[NodeSlotType, ...] = node_slots
 
     def node_render(self, i: int) -> SurfaceType:
-        node = self.node_slots[i]
-        surface = node.render()
-        node.rendered = surface
+        node_slot = self.node_slots[i]
+        surface = node_slot.render()
+        node_slot.node.rendered = surface
         
         return surface
 
@@ -29,18 +29,26 @@ class TextTemplateElement(TemplateElement):
         len_lines = len(lines)
         surfaces: list[SurfaceType] = [None] * (len_lines * 2 - 1)
 
+        w = 0
         for i, text in enumerate(lines):
-            surfaces[i * 2] = text_render(text)
+            surface = text_render(text)
+            
+            surfaces[i * 2] = surface
+            w += surface.get_width()
 
             if i + 1 < len_lines:
-                surfaces[i * 2 + 1] = self.node_render(i)
+                surface = self.node_render(i)
+
+                surfaces[i * 2 + 1] = surface
+                self.node_slots[i].node.coords = (w, 0)
+                w += surface.get_width()
 
         surface = Surface((
             sum(element.get_width() for element in surfaces), 25
         ), SRCALPHA, 32)
         
         w = 0
-        for i, _surface in enumerate(surfaces):
+        for _surface in surfaces:
             surface.blit(_surface, (w, 0))
             
             w += _surface.get_width()
