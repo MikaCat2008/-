@@ -39,7 +39,7 @@ class BlocksTemplateElement(TemplateElement):
             block.coords = bx, by + sy
             surface.blit(_surface, (bx, by))
 
-            y += _surface.get_size()[1]
+            y += _surface.get_height()
 
         if self.indent:
             rect(surface, self.color, (0, 0, 20, y))
