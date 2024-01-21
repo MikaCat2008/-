@@ -3,9 +3,11 @@ from pygame.draw import rect
 from pygame.event import EventType
 from pygame.surface import SurfaceType
 
-from ..abstractions import SpriteType
+from ..abstractions import SpriteType, NodeSlotType, BlockSlotType
 from ..frame import Frame
+from ..nodes import NumberNode
 from ..block_manager import block_manager
+from ..input_manager import input_manager
 from ..sprite_manager import sprite_manager
 
 
@@ -24,17 +26,25 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                 hovered_block = child
                 cw, ch = child.rendered.get_size()
 
-                if block_manager.selected_block:
-                    slot, slot_w, slot_y = hovered_block.get_slot_by_coords(mx - x - cx, my - y - cy)
+                slot, slot_w, slot_y = hovered_block.get_slot_by_coords(mx - x - cx, my - y - cy)
 
-                    if slot:
+                if slot:      
+                    if isinstance(slot, BlockSlotType) and block_manager.selected_block:
                         rect(screen, (0, 0, 0), (x + cx + 20, y + cy + slot_y - 15, slot_w, 15), 1)
+                    elif isinstance(slot, NodeSlotType):
+                        rect(screen, (0, 0, 0), (x + cx + slot_y + 4, y + cy, slot_w + 2, 25), 1)
                 else:
                     rect(screen, (0, 0, 0), (x + cx, y + cy, cw, ch), 1)
 
                 if m0 and not block_manager.selected_block:
-                    block_manager.select(child)
-                    block_manager.free()
+                    if isinstance(slot, NodeSlotType):
+                        node = slot.node
+                        
+                        if type(node) is NumberNode:
+                            input_manager.select(node)
+                    else:
+                        block_manager.select(child)
+                        block_manager.free()
 
             break
 
