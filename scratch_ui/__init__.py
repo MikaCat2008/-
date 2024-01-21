@@ -7,6 +7,7 @@ from pygame.surface import SurfaceType
 from .abstractions import FrameType
 from .frames.WindowFrame import WindowFrame
 from .block_manager import block_manager
+from .input_manager import input_manager
 from .sprite_manager import sprite_manager
 
 from scratch_api.nodes import NumberNode
@@ -105,8 +106,11 @@ class Window:
 
     def update(self, events: list[EventType]) -> None:
         self.screen.fill((245, 245, 245))
+
         self.window_frame.update_frames(events, mouse.get_pos())
         self.window_frame.update(events, mouse.get_pos())
+
+        input_manager.update()
 
         flip()
 
