@@ -8,8 +8,7 @@ from pygame.surface import Surface, SurfaceType
 from .abstractions import SpriteType
 from .emit import emit
 from .memory import memory
-
-key_map: dict[str, bool] = {}
+from .input_manager import input_manager
 
 __api_version__ = 1, 1
 
@@ -39,29 +38,19 @@ def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
     memory.screen.fill((255, 255, 255))
     memory.mouse_pos = mouse_pos
 
+    for key in input_manager.key_pmap:
+        input_manager.key_pmap[key] = False
+
     for event in events:
         if event.type == pygame.QUIT:
             exit()
+        
         elif event.type in (pygame.KEYDOWN, pygame.KEYUP):
-            state = event.type == pygame.KEYDOWN
-
-            if 4 <= event.scancode <= 29:
-                symbol = chr(event.scancode + 61).casefold()
-
-                key_map[symbol] = state
-            elif event.scancode == 44:
-                key_map["space"] = state
-            elif 30 <= event.scancode <= 39:
-                if 30 <= event.scancode <= 38:
-                    symbol = str(event.scancode - 29)
-                else:
-                    symbol = "0"
-                
-                key_map[symbol] = state
+            input_manager.update(event.type == pygame.KEYDOWN, event.scancode)
 
     any_key = False
 
-    for key, _ in filter(lambda x: x[1], key_map.items()):
+    for key, _ in filter(lambda x: x[1], input_manager.key_map.items()):
         any_key = True
         
         emit("key", key=key)
