@@ -48,22 +48,27 @@ class BlockSlotType(SlotType):
         ...
 
 
-class NodeType(ABC):
-    game_node: GameNodeType
-    nodes: list[NodeType]
+class RenderableObjectType(ABC):
     coords: tuple[int, int]
     rendered: SurfaceType
 
     @abstractmethod
-    def render(self) -> str:
+    def render(self) -> SurfaceType:
         ...
 
 
-class BlockType(ABC):
+class SelectableObjectType(RenderableObjectType):
+    ...
+
+
+class NodeType(SelectableObjectType):
+    game_node: GameNodeType
+    nodes: list[NodeType]
+    slot: NodeSlotType
+
+
+class BlockType(SelectableObjectType):
     sprite: SpriteType
-    coords: tuple[int, int]
-    game_block: GameBlockType
-    rendered: SurfaceType
     slot: BlockSlotType
 
     slots: list[SlotType]
@@ -96,13 +101,33 @@ class BlockType(ABC):
     @abstractmethod
     def is_iterable(self) -> bool:
         ...
-
-    @abstractmethod
-    def render(self) -> SurfaceType:
-        ...
         
     @abstractmethod
     def remove(self) -> None:
+        ...
+
+
+class SelectManagerType(ABC):
+    selected_object: SelectableObjectType
+
+    @abstractmethod
+    def select(self, selectable_object: SelectableObjectType) -> None:
+        ...
+
+    @abstractmethod
+    def unselect(self) -> None:
+        ...
+
+    @abstractmethod
+    def get_node(self) -> None | NodeType:
+        ...
+
+    @abstractmethod
+    def get_block(self) -> None | BlockType:
+        ...
+
+    @abstractmethod
+    def free(self) -> None:
         ...
 
 
@@ -111,20 +136,14 @@ class NodeManagerType(ABC):
     def create_node(self, game_node: GameNodeType) -> NodeType:
         ...
 
+    @abstractmethod
+    def create_slot(self, game_node: GameBlockType) -> NodeSlotType:
+        ...
+
 
 class BlockManagerType(ABC):
-    selected_block: BlockType
-
     @abstractmethod
     def create_block(self, game_block: GameBlockType) -> BlockType:
-        ...
-
-    @abstractmethod
-    def select(self, block: BlockType) -> None:
-        ...
-
-    @abstractmethod
-    def free(self) -> None:
         ...
 
 
