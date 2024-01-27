@@ -16,8 +16,6 @@ class NodeSpawner(NodeSpawnerType):
 
     def spawn(self) -> NodeType:
         return node_manager.create_node(
-            sprite_manager.selected_sprite,
-            self.coords,
             deepcopy(self.game_node)
         )
 

@@ -17,6 +17,11 @@ from scratch_api.events import OnStartBlock
 
 from scratch_api.control import RepeatBlock
 
+from scratch_api.operators import AddNode
+from scratch_api.operators import SubNode
+from scratch_api.operators import MulNode
+from scratch_api.operators import DivNode
+
 
 def get_spawners(
     *game_object_groups: tuple[tuple[tuple[GameObjectType], ...], tuple[int, int]]
@@ -51,7 +56,7 @@ def update_spawners(spawners: list[SpawnerType], mx: int, my: int) -> None:
 
     for spawner in spawners:
         x, y = spawner.coords
-        w, h = spawner.block.rendered.get_size()
+        w, h = spawner.render().get_size()
         
         if x <= mx <= x + w and y <= my <= y + h:
             if m0 and not select_manager.selected_object:
@@ -86,6 +91,12 @@ class BlocksFrame(Frame):
             ),
             (
                 RepeatBlock(NumberNode(5), []),
+            ),
+            (
+                AddNode(NumberNode(0), NumberNode(0)),
+                SubNode(NumberNode(0), NumberNode(0)),
+                MulNode(NumberNode(0), NumberNode(0)),
+                DivNode(NumberNode(0), NumberNode(1))
             )
         )
 

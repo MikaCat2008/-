@@ -1,4 +1,6 @@
 from ..nodes.NumberNode import NumberNode
+from ..template import Template
+from ..template_elements import TextTemplateElement
 
 from scratch_api.operators import DivNode as DivGameNode
 
@@ -11,6 +13,10 @@ class DivNode(NumberNode):
             self.up(self.game_node.a),
             self.up(self.game_node.b)
         ]
-    
-    def get_str(self) -> str:
-        return f"({self.nodes[0].get_str()} / {self.nodes[1].get_str()})"
+
+        self.template = Template([
+            TextTemplateElement(
+                "<0> / <1>", *self.nodes,
+                color = (0, 0, 0)
+            )
+        ], (0, 255, 0), "node")
