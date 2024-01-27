@@ -1,3 +1,4 @@
 from .TextTemplateElement import TextTemplateElement
 from .BlocksTemplateElement import BlocksTemplateElement
+from .TextLineTemplateElement import TextLineTemplateElement
 from .BlocksBottomTemplateElement import BlocksBottomTemplateElement

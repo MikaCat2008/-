@@ -1,7 +1,7 @@
 from pygame.surface import SurfaceType
 
 from .abstractions import BlockType, SpriteType, BlockSlotType, TemplateElementType
-from .template_elements import TextTemplateElement, BlocksTemplateElement
+from .template_elements import TextLineTemplateElement, BlocksTemplateElement
 
 from scratch_api.block import BlockType as GameBlockType
 
@@ -47,7 +47,7 @@ class Block(BlockType):
         if isinstance(template_element, BlocksTemplateElement):
             if 20 <= x:
                 return template_element.slot, w, h
-        elif isinstance(template_element, TextTemplateElement):
+        elif isinstance(template_element, TextLineTemplateElement):
             for node_slot in template_element.node_slots:
                 node = node_slot.node
 
