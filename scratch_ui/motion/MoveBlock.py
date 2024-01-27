@@ -2,7 +2,7 @@ from ..block import Block
 from ..template import Template
 from ..node_slot import NodeSlot
 
-from ..template_elements.TextTemplateElement import TextTemplateElement
+from ..template_elements.TextLineTemplateElement import TextLineTemplateElement
 
 from scratch_api.motion import MoveBlock as MoveGameBlock
 
@@ -16,7 +16,7 @@ class MoveBlock(Block):
         ]
 
         self.template = Template([
-            TextTemplateElement(
+            TextLineTemplateElement(
                 "move <0> steps", 
                 self.slots[0]
             )

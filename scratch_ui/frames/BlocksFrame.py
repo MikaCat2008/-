@@ -64,22 +64,26 @@ def draw_block_spawners(screen: SurfaceType, scroll: int) -> None:
         screen.blit(block_spawner.render(), (bx, by - scroll))
 
 
-block_spawners = get_spawners(
-    (
-        MoveBlock(NumberNode(10)),
-    ),
-    (
-        OnStartBlock([]),
-    ),
-    (
-        RepeatBlock(NumberNode(5), []),
-    )
-)
+block_spawners = None
 
 
 class BlocksFrame(Frame):
     def start(self) -> None:
+        global block_spawners
+
         self.scroll = 0
+
+        block_spawners = get_spawners(
+            (
+                MoveBlock(NumberNode(10)),
+            ),
+            (
+                OnStartBlock([]),
+            ),
+            (
+                RepeatBlock(NumberNode(5), []),
+            )
+        )
 
     def update(self, events: list[EventType], mouse_coords: tuple[int, int]) -> None:
         self.screen.fill((255, 255, 255))

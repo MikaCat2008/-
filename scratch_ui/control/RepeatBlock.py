@@ -3,7 +3,7 @@ from ..template import Template
 from ..node_slot import NodeSlot
 from ..block_slot import BlockSlot
 
-from ..template_elements.TextTemplateElement import TextTemplateElement
+from ..template_elements.TextLineTemplateElement import TextLineTemplateElement
 from ..template_elements.BlocksTemplateElement import BlocksTemplateElement
 from ..template_elements.BlocksBottomTemplateElement import BlocksBottomTemplateElement
 
@@ -20,7 +20,7 @@ class RepeatBlock(Block):
         ]
 
         self.template = Template([
-            TextTemplateElement(
+            TextLineTemplateElement(
                 "repeat <0>",
                 self.slots[0]
             ),

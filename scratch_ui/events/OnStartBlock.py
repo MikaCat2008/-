@@ -2,7 +2,7 @@ from ..block import Block
 from ..template import Template
 from ..block_slot import BlockSlot
 
-from ..template_elements.TextTemplateElement import TextTemplateElement
+from ..template_elements.TextLineTemplateElement import TextLineTemplateElement
 from ..template_elements.BlocksTemplateElement import BlocksTemplateElement
 
 from scratch_api.events import OnStartBlock as OnStartGameBlock
@@ -17,7 +17,7 @@ class OnStartBlock(Block):
         ]
 
         self.template = Template([
-            TextTemplateElement(
+            TextLineTemplateElement(
                 "when Start clicked"
             ),
             BlocksTemplateElement(
