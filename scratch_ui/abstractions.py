@@ -16,6 +16,7 @@ class SlotType(ABC):
 
 class NodeSlotType(SlotType):
     node: NodeType
+    parent_node: NodeType
 
     @abstractmethod
     def render(self) -> SurfaceType:

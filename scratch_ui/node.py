@@ -16,7 +16,14 @@ class Node(NodeType):
         self.slot = None
         self.template = None
 
+        self.parent_node = None
+        self.parent_block = None
+
         self.init()
+
+        for node_slot in self.nodes:
+            node_slot.node.parent_node = self
+            node_slot.node.game_node.parent_node = game_node
 
     def init(self) -> None:
         ...
@@ -41,21 +48,16 @@ class Node(NodeType):
         return self.rendered
     
     def remove(self) -> None:
-        self.game_node.remove()
-        
         if self.slot:
-            node = self.slot.node
-            new_node = self.up(NumberGameNode(0)).node
-            slot = self.slot
-            self.slot.node = new_node
-            node.slot = None
-            new_node.slot = slot
-            self.slot = slot
-
-            print(self.slot, new_node.slot)
+            self.slot.set_node(self.up(NumberGameNode(0)).node)
 
     def up(self, game_node: GameNodeType) -> NodeSlotType:
-        return self.node_manager.create_slot(game_node)
+        node_slot = self.node_manager.create_slot(game_node)
+
+        node_slot.parent_node = self
+        node_slot.node.parent_node = self
+        
+        return node_slot
 
     @classmethod
     def set_node_manager(cls, node_manager: NodeManagerType) -> None:

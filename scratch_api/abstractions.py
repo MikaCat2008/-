@@ -124,6 +124,7 @@ class SpriteType(ABC):
 class NodeType(ABC):
     sprite: SpriteType
     nodes: list[NodeType]
+    block: BlockType
     parent_node: NodeType
 
     @abstractmethod
@@ -132,6 +133,10 @@ class NodeType(ABC):
 
     @abstractmethod
     def init(self, sprite: SpriteType) -> None:
+        ...
+
+    @abstractmethod
+    def replace_node(self, node_a: NodeType, node_b: NodeType) -> None:
         ...
 
     @abstractmethod

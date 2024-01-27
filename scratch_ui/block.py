@@ -1,6 +1,6 @@
 from pygame.surface import SurfaceType
 
-from .abstractions import BlockType, SpriteType, BlockSlotType, TemplateElementType
+from .abstractions import BlockType, SpriteType, NodeSlotType, BlockSlotType, TemplateElementType
 from .template_elements import TextLineTemplateElement, BlocksTemplateElement
 
 from scratch_api.block import BlockType as GameBlockType
@@ -22,12 +22,18 @@ class Block(BlockType):
         self.slots = []
         self.template = None
 
+        self.init()
+
+        for slot in self.slots:
+            if isinstance(slot, NodeSlotType):
+                slot.parent_block = self
+                slot.node.game_node.parent_block = self.game_block
+
     def init(self) -> None:
         ...
 
     def add_block(self, block: BlockType, slot: int) -> None:
         self.slots[slot].add(block)
-        block.init()
 
         return block
 

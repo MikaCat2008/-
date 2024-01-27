@@ -34,10 +34,7 @@ class BlockManager(BlockManagerType):
         elif isinstance(game_block, RepeatGameBlock):
             block_factory = RepeatBlock
 
-        block = block_factory(sprite, coords, game_block)
-        block.init()
-
-        return block
+        return block_factory(sprite, coords, game_block)
 
 
 block_manager = BlockManager()

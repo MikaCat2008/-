@@ -59,5 +59,10 @@ class Block(BlockType):
         elif self in self.sprite.blocks:
             self.sprite.blocks.remove(self)
 
+    def replace_node(self, node_a: NodeType, node_b: NodeType) -> None:        
+        for k, v in self.__dict__.items():
+            if v is node_a:
+                setattr(self, k, node_b)
+
     def get_sprite_by_name(self, name: str) -> SpriteType:
         return [sprite for sprite in memory.sprites if sprite.name == name][0]
