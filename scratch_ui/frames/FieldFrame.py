@@ -8,6 +8,7 @@ from ..frame import Frame
 from ..nodes import NumberNode
 from ..block_manager import block_manager
 from ..input_manager import input_manager
+from ..select_manager import select_manager
 from ..sprite_manager import sprite_manager
 
 
@@ -28,54 +29,67 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
 
                 slot, slot_w, slot_y = hovered_block.get_slot_by_coords(mx - x - cx, my - y - cy)
 
-                if slot:      
-                    if isinstance(slot, BlockSlotType) and block_manager.selected_block:
+                if slot:
+                    block = select_manager.get_block()
+
+                    if isinstance(slot, BlockSlotType) and block and not block.is_event:
                         rect(screen, (0, 0, 0), (x + cx + 20, y + cy + slot_y - 15, slot_w, 15), 1)
                     elif isinstance(slot, NodeSlotType):
-                        rect(screen, (0, 0, 0), (x + cx + slot_y + 4, y + cy, slot_w + 2, 25), 1)
+                        cx = x + cx + slot_y + 4
+                        child, _cx = slot.node.get_child(mx - cx)
+
+                        rect(screen, (0, 0, 0), (cx + _cx, y + cy, child.rendered.get_width() + 1, 25), 1)
                 else:
                     rect(screen, (0, 0, 0), (x + cx, y + cy, cw, ch), 1)
 
-                if m0 and not block_manager.selected_block:
+                if m0 and not select_manager.selected_object:
                     if isinstance(slot, NodeSlotType):
                         node = slot.node
-                        
+
                         if type(node) is NumberNode:
                             input_manager.select(node)
+                        else:
+                            select_manager.select(slot.node)
+                            select_manager.free()
                     else:
-                        block_manager.select(child)
-                        block_manager.free()
+                        select_manager.select(child)
+                        select_manager.free()
 
             break
 
-    block = block_manager.selected_block
+    selected_object = select_manager.selected_object
 
-    if block:
+    if selected_object:
+        node = select_manager.get_node()
+        block = select_manager.get_block()
+
         if not m0:
-            block_manager.unselect()
+            select_manager.unselect()
 
             if hovered_block:
-                if block.is_event():
-                    return 
-                
-                if hovered_block.is_iterable():
-                    if slot:
-                        slot.add(block)
-                    else:
-                        if hovered_block.is_event():
-                            hovered_block.slots[-1].add(block)
+                if block and not block.is_event():
+                    if hovered_block.is_iterable():
+                        if slot:
+                            if isinstance(slot, BlockSlotType):
+                                slot.add(block)
                         else:
-                            if my - y - cy > hovered_block.rendered.get_height() / 2:
-                                hovered_block.slot.insert_after(hovered_block, block)
+                            if hovered_block.is_event():
+                                hovered_block.slots[-1].add(block)
                             else:
-                                hovered_block.slot.insert_before(hovered_block, block)
-                else:
-                    if my - y - cy > hovered_block.rendered.get_height() / 2:
-                        hovered_block.slot.insert_after(hovered_block, block)
+                                if my - y - cy > hovered_block.rendered.get_height() / 2:
+                                    hovered_block.slot.insert_after(hovered_block, block)
+                                else:
+                                    hovered_block.slot.insert_before(hovered_block, block)
                     else:
-                        hovered_block.slot.insert_before(hovered_block, block)
+                        if my - y - cy > hovered_block.rendered.get_height() / 2:
+                            hovered_block.slot.insert_after(hovered_block, block)
+                        else:
+                            hovered_block.slot.insert_before(hovered_block, block)
+                elif node:
+                    # print(node)
+                    ...
             else:
-                if block.is_event():
+                if block and block.is_event():
                     block.deep = 0
                     block.coords = mx - block.rendered.get_width() / 2, my - 10
 
