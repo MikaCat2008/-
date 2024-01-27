@@ -70,7 +70,7 @@ class Window:
         repeat_block0 = on_start_block.add_block(
             block_manager.create_block(
                 # sprite, None, RepeatBlock(AddNode(NumberNode(20), NumberNode(20)), [])
-                sprite, None, RepeatBlock(AddNode(AddNode(NumberNode(20), NumberNode(20)), NumberNode(5)), [])
+                sprite, None, RepeatBlock(AddNode(NumberNode(20), AddNode(NumberNode(5), NumberNode(20))), [])
             ), 0
         )
         repeat_block1 = repeat_block0.add_block(

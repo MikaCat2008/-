@@ -22,7 +22,6 @@ class Node(NodeType):
         ...
 
     def get_child(self, mx: int) -> tuple[NodeType, int]:
-        x = 0
         for node_slot in self.nodes:
             node = node_slot.node
 
@@ -30,10 +29,9 @@ class Node(NodeType):
             nw = node.rendered.get_width()
 
             if nx <= mx <= nx + nw:
-                child, cx = node.get_child(mx - x)
+                child, cx = node.get_child(mx - nx)
                 
                 return child, cx + nx
-            x += nw
 
         return self, 0
 
@@ -46,9 +44,17 @@ class Node(NodeType):
         self.game_node.remove()
         
         if self.slot:
-            self.slot.node = self.up(NumberGameNode(0))
+            node = self.slot.node
+            new_node = self.up(NumberGameNode(0)).node
+            slot = self.slot
+            self.slot.node = new_node
+            node.slot = None
+            new_node.slot = slot
+            self.slot = slot
 
-    def up(self, game_node: GameNodeType) -> None:
+            print(self.slot, new_node.slot)
+
+    def up(self, game_node: GameNodeType) -> NodeSlotType:
         return self.node_manager.create_slot(game_node)
 
     @classmethod

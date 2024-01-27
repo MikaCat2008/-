@@ -15,7 +15,7 @@ from ..sprite_manager import sprite_manager
 def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: int, my: int) -> None:
     m0 = mouse.get_pressed()[0]
 
-    hovered_block = None
+    hovered_block, hovered_node = None, None
     for block in selected_sprite.blocks:
         x, y = block.coords
         w, h = block.rendered.get_size()
@@ -37,6 +37,7 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                     elif isinstance(slot, NodeSlotType):
                         cx = x + cx + slot_y + 4
                         child, _cx = slot.node.get_child(mx - cx)
+                        hovered_node = child
 
                         rect(screen, (0, 0, 0), (cx + _cx, y + cy, child.rendered.get_width() + 1, 25), 1)
                 else:
@@ -44,12 +45,10 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
 
                 if m0 and not select_manager.selected_object:
                     if isinstance(slot, NodeSlotType):
-                        node = slot.node
-
-                        if type(node) is NumberNode:
-                            input_manager.select(node)
+                        if type(child) is NumberNode:
+                            input_manager.select(child)
                         else:
-                            select_manager.select(slot.node)
+                            select_manager.select(child)
                             select_manager.free()
                     else:
                         select_manager.select(child)
@@ -86,8 +85,8 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                         else:
                             hovered_block.slot.insert_before(hovered_block, block)
                 elif node:
-                    # print(node)
-                    ...
+                    hovered_node.slot.node = node
+                    node.slot = hovered_node.slot
             else:
                 if block and block.is_event():
                     block.deep = 0
