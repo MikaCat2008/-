@@ -22,6 +22,6 @@ class WindowFrame(Frame):
         if selected_object:
             bx, by = mouse_coords
 
-            rendered = selected_object.rendered
+            rendered = selected_object.render()
 
             self.screen.blit(rendered, (bx - rendered.get_width() / 2, by - 10))

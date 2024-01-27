@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from pygame.event import EventType
 from pygame.surface import SurfaceType
 
+from scratch_api.abstractions import GameObjectType
 from scratch_api.node import NodeType as GameNodeType
 from scratch_api.block import BlockType as GameBlockType
 from scratch_api.sprite import SpriteType as GameSpriteType
@@ -195,3 +196,25 @@ class TemplateType(ABC):
     template_elements: list[TemplateElementType]
 
     def render(self) -> SurfaceType: ...
+
+
+class SpawnerType(ABC):
+    coords: tuple[int, int]
+    
+    @abstractmethod
+    def spawn(self) -> SelectableObjectType:
+        ...
+
+    @abstractmethod
+    def render(self) -> SelectableObjectType:
+        ...
+
+
+class NodeSpawnerType(SpawnerType):
+    node: NodeType
+    game_node: GameNodeType
+
+
+class BlockSpawnerType(SpawnerType):
+    block: BlockType
+    game_block: GameBlockType

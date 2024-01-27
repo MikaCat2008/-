@@ -2,12 +2,12 @@ from copy import deepcopy
 
 from pygame.surface import SurfaceType
 
-from .abstractions import BlockType, GameBlockType
+from .abstractions import BlockType, GameBlockType, BlockSpawnerType
 from .block_manager import block_manager
 from .sprite_manager import sprite_manager
 
 
-class BlockSpawner:
+class BlockSpawner(BlockSpawnerType):
     def __init__(self, coords: tuple[int, int], game_block: GameBlockType) -> None:
         self.coords = coords
         self.game_block = game_block

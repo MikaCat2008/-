@@ -5,12 +5,37 @@ from abc import ABC, abstractmethod
 from pygame.surface import SurfaceType
 
 
-class BlockType(ABC):
+class GameObjectType(ABC):
+    sprite: SpriteType
+
+
+class NodeType(GameObjectType):
+    nodes: list[NodeType]
+    block: BlockType
+    parent_node: NodeType
+
+    @abstractmethod
+    def get_value(self) -> object:
+        ...
+
+    @abstractmethod
+    def init(self, sprite: SpriteType) -> None:
+        ...
+
+    @abstractmethod
+    def replace_node(self, node_a: NodeType, node_b: NodeType) -> None:
+        ...
+
+    @abstractmethod
+    def reset(self) -> None:
+        ...
+
+
+class BlockType(GameObjectType):
     event: str
     main_block: BlockType
     parent_block: BlockType
     parent_blocks: list[BlockType]
-    sprite: SpriteType
     is_structure: bool
     unfreeze_time: float
     nodes: list[NodeType]
@@ -118,29 +143,6 @@ class SpriteType(ABC):
 
     @abstractmethod
     def hide(self) -> None:
-        ...
-
-
-class NodeType(ABC):
-    sprite: SpriteType
-    nodes: list[NodeType]
-    block: BlockType
-    parent_node: NodeType
-
-    @abstractmethod
-    def get_value(self) -> object:
-        ...
-
-    @abstractmethod
-    def init(self, sprite: SpriteType) -> None:
-        ...
-
-    @abstractmethod
-    def replace_node(self, node_a: NodeType, node_b: NodeType) -> None:
-        ...
-
-    @abstractmethod
-    def reset(self) -> None:
         ...
 
 
