@@ -26,7 +26,7 @@ from scratch_api.operators import DivNode
 
 WINDOW_SIZE = (1400, 750)
 
-__scratch_version__ = 0, 3
+__scratch_version__ = 0, 4
 
 
 class Window:
