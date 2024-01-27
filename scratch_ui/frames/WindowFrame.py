@@ -5,7 +5,7 @@ from .GameFrame import GameFrame
 from .SpritesFrame import SpritesFrame
 from .ScriptsFrame import ScriptsFrame
 
-from ..block_manager import block_manager
+from ..select_manager import select_manager
 
 
 class WindowFrame(Frame):    
@@ -17,11 +17,11 @@ class WindowFrame(Frame):
         ]
 
     def update(self, events: list[EventType], mouse_coords: tuple[int, int]) -> None:
-        block = block_manager.selected_block
+        selected_object = select_manager.selected_object
     
-        if block:
+        if selected_object:
             bx, by = mouse_coords
 
-            rendered = block.render()
+            rendered = selected_object.rendered
 
             self.screen.blit(rendered, (bx - rendered.get_width() / 2, by - 10))
