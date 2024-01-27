@@ -1,5 +1,6 @@
-from .abstractions import NodeType, NodeManagerType
+from .abstractions import NodeType, NodeSlotType, NodeManagerType
 from .node import Node
+from .node_slot import NodeSlot
 
 from .nodes import NumberNode
 
@@ -19,10 +20,7 @@ from scratch_api.operators import DivNode as DivGameNode
 
 
 class NodeManager(NodeManagerType):
-    def create_node(
-        self,
-        game_node: GameNodeType
-    ) -> NodeType:
+    def create_node(self, game_node: GameNodeType) -> NodeType:
         if isinstance(game_node, AddGameNode):
             node_factory = AddNode
         elif isinstance(game_node, SubGameNode):
@@ -35,6 +33,9 @@ class NodeManager(NodeManagerType):
             node_factory = NumberNode
 
         return node_factory(game_node)
+    
+    def create_slot(self, game_node: GameNodeType) -> NodeSlotType:
+        return NodeSlot(game_node)
 
 
 node_manager = NodeManager()
