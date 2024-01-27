@@ -124,6 +124,7 @@ class SpriteType(ABC):
 class NodeType(ABC):
     sprite: SpriteType
     nodes: list[NodeType]
+    parent_node: NodeType
 
     @abstractmethod
     def get_value(self) -> object:
