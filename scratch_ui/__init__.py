@@ -5,7 +5,8 @@ from pygame.display import set_mode, flip
 from pygame.surface import SurfaceType
 
 from .abstractions import FrameType
-from .frames.WindowFrame import WindowFrame
+from .frames import WindowFrame
+from .node_manager import node_manager
 from .block_manager import block_manager
 from .input_manager import input_manager
 from .sprite_manager import sprite_manager
@@ -39,7 +40,6 @@ class Window:
         sprite_manager.selected_sprite = sprite = sprite_manager.create_sprite(
             load_image("artem.jpg").convert_alpha()
         )
-        # print(sprite_manager.selected_sprite)
 
         on_start_block = sprite.add_block(
             (100, 100),
@@ -69,7 +69,8 @@ class Window:
 
         repeat_block0 = on_start_block.add_block(
             block_manager.create_block(
-                sprite, None, RepeatBlock(NumberNode(40), [])
+                # sprite, None, RepeatBlock(AddNode(NumberNode(20), NumberNode(20)), [])
+                sprite, None, RepeatBlock(AddNode(AddNode(NumberNode(20), NumberNode(20)), NumberNode(5)), [])
             ), 0
         )
         repeat_block1 = repeat_block0.add_block(
