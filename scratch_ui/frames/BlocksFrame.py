@@ -12,6 +12,8 @@ from ..select_manager import select_manager
 from scratch_api.nodes import NumberNode
 
 from scratch_api.motion import MoveBlock
+from scratch_api.motion import TurnRightBlock
+from scratch_api.motion import TurnLeftBlock
 
 from scratch_api.events import OnStartBlock
 
@@ -85,6 +87,8 @@ class BlocksFrame(Frame):
         spawners = get_spawners(
             (
                 MoveBlock(NumberNode(10)),
+                TurnRightBlock(NumberNode(15)),
+                TurnLeftBlock(NumberNode(15))
             ),
             (
                 OnStartBlock([]),
