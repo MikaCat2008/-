@@ -42,7 +42,7 @@ class BlocksTemplateElement(TemplateElement):
             y += _surface.get_height()
 
         if self.indent:
-            rect(surface, self.color, (0, 0, 20, y))
-            rect(surface, self.color, (0, y, 20, 15))
+            rect(surface, self.template.color, (0, 0, 20, y))
+            rect(surface, self.template.color, (0, y, 20, 15))
 
         return surface
