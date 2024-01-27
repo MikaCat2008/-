@@ -30,7 +30,7 @@ class RepeatBlock(BlockIterator):
         return False
 
     def iter(self) -> None:
-        if self.end == 0:
+        if int(self.end) == 0:
             return []
         return self.blocks
 
