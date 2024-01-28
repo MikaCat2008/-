@@ -9,20 +9,7 @@ from ..node_spawner import NodeSpawner
 from ..block_spawner import BlockSpawner
 from ..select_manager import select_manager
 
-from scratch_api.nodes import NumberNode
-
-from scratch_api.motion import MoveBlock
-from scratch_api.motion import TurnRightBlock
-from scratch_api.motion import TurnLeftBlock
-
-from scratch_api.events import OnStartBlock
-
-from scratch_api.control import RepeatBlock
-
-from scratch_api.operators import AddNode
-from scratch_api.operators import SubNode
-from scratch_api.operators import MulNode
-from scratch_api.operators import DivNode
+from scratch_api.objects import *
 
 
 def get_spawners(
@@ -95,6 +82,9 @@ class BlocksFrame(Frame):
             ),
             (
                 RepeatBlock(NumberNode(5), []),
+            ),
+            (
+                IfThenBlock(BooleanNode(False), []),
             ),
             (
                 AddNode(NumberNode(0), NumberNode(0)),

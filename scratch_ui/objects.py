@@ -1,5 +1,6 @@
 # nodes
 from .nodes import NumberNode
+from .nodes import BooleanNode
 
 # motion
 from .motion import MoveBlock
@@ -12,6 +13,8 @@ from .events import OnStartBlock
 # control
 from .control import RepeatBlock
 
+from .control import IfThenBlock
+
 # operators
 from .operators import AddNode
 from .operators import SubNode
@@ -22,6 +25,7 @@ from .operators import DivNode
 from scratch_api.objects import (
     # nodes
     NumberNode as NumberGameNode,
+    BooleanNode as BooleanGameNode,
 
     # motion
     MoveBlock as MoveGameBlock,
@@ -34,6 +38,8 @@ from scratch_api.objects import (
     # control
     RepeatBlock as RepeatGameBlock,
 
+    IfThenBlock as IfThenGameBlock,
+
     # operators
     AddNode as AddGameNode,
     SubNode as SubGameNode,
@@ -41,10 +47,10 @@ from scratch_api.objects import (
     DivNode as DivGameNode
 )
 
-
 objects = {
     # nodes
     NumberGameNode: NumberNode,
+    BooleanGameNode: BooleanNode,
 
     # motion
     MoveGameBlock: MoveBlock,
@@ -56,6 +62,8 @@ objects = {
 
     # controls
     RepeatGameBlock: RepeatBlock,
+
+    IfThenGameBlock: IfThenBlock,
 
     # operators
     AddGameNode: AddNode,

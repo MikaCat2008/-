@@ -64,7 +64,7 @@ class BlockIterator(Block):
             return block
 
         self.i = 0
-        self.iter_blocks = self.iter()
+        self.iter_blocks = []
 
         return None
     

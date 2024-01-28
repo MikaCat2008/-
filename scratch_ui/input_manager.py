@@ -1,11 +1,12 @@
 from .abstractions import NodeType
-from .nodes import NumberNode
+from .nodes import NumberNode, BooleanNode
 
 from scratch_api.input_manager import input_manager as game_input_manager
 
 
 class InputField:
-    ...
+    def press(self, key: str) -> None:
+        ...
 
 
 class NumberInputField(InputField):
@@ -13,6 +14,8 @@ class NumberInputField(InputField):
         self.node = node
 
     def press(self, key: str) -> None:
+        value = None
+
         if key == "backspace":
             value = self.node.game_node.value
 
@@ -20,12 +23,28 @@ class NumberInputField(InputField):
                 value = 0
             else:
                 value = int(str(value)[:-1])
-                
-            self.node.game_node.value = value
         elif len(key) == 1 and 48 <= ord(key) <= 57:
-            value = self.node.game_node.value
+            value = int(str(self.node.game_node.value) + key)
 
-            self.node.game_node.value = int(str(value) + key)
+        if value is not None:
+            self.node.game_node.value = value
+
+
+class BooleanInputField(InputField):
+    def __init__(self, node: BooleanNode) -> None:
+        self.node = node
+
+    def press(self, key: str) -> None:
+        value = None
+        
+        if key == "0":
+            value = False
+        elif key == "1":
+            value = True
+
+        if value is not None:
+            self.node.game_node.value = value
+
 
 class InputManager:
     selected_field: InputField
@@ -46,6 +65,8 @@ class InputManager:
     def select(self, selectable: NodeType) -> None:
         if isinstance(selectable, NumberNode):
             self.selected_field = NumberInputField(selectable)
+        elif isinstance(selectable, BooleanNode):
+            self.selected_field = BooleanInputField(selectable)
 
 
 input_manager = InputManager()
