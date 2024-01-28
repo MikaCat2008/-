@@ -34,7 +34,7 @@ def stop() -> None:
             block.stop()
 
 
-def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
+def update(events: list[EventType], mouse_pos: tuple[int, int], keyboard: bool = True) -> None:
     memory.screen.fill((255, 255, 255))
     memory.mouse_pos = mouse_pos
 
@@ -48,15 +48,16 @@ def update(events: list[EventType], mouse_pos: tuple[int, int]) -> None:
         elif event.type in (pygame.KEYDOWN, pygame.KEYUP):
             input_manager.update(event.type == pygame.KEYDOWN, event.scancode)
 
-    any_key = False
-
-    for key, _ in filter(lambda x: x[1], input_manager.key_map.items()):
-        any_key = True
+    if keyboard:
+        any_key = False
         
-        emit("key", key=key)
+        for key, _ in filter(lambda x: x[1], input_manager.key_map.items()):
+            any_key = True
+            
+            emit("key", key=key)
 
-    if any_key:
-        emit("key", key="any")
+        if any_key:
+            emit("key", key="any")
     
     changes = False
     for sprite in memory.sprites:

@@ -5,6 +5,7 @@ from pygame.surface import Surface
 from pygame.transform import scale
 
 from ..frame import Frame
+from ..input_manager import input_manager
 
 from scratch_api import set_screen, start as start_game, stop as stop_game, update as update_game
 
@@ -19,7 +20,7 @@ class GameFrame(Frame):
     def update(self, events: list[EventType], mouse_coords: tuple[int, int]) -> None:
         mx, my = mouse_coords
 
-        changes = update_game(events, (mx, my - 40))
+        changes = update_game(events, (mx, my - 40), input_manager.selected_field is None)
 
         self.screen.blit(scale(self.game_screen, (600, 350)), (0, 40))
 

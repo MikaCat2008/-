@@ -1,3 +1,5 @@
+from pygame.surface import SurfaceType
+
 from ..abstractions import GameNodeType
 from ..node import Node
 from ..template import Template
@@ -24,3 +26,10 @@ class VariableNode(Node):
                 "  <0>", *self.nodes, indent = 2
             )
         ], (255, 0, 0), "node")
+
+    def render(self) -> SurfaceType:
+        self.rendered = self.template.render()
+        
+        self.check_selected()
+
+        return self.rendered

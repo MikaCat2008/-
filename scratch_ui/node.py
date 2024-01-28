@@ -1,4 +1,5 @@
-from pygame.surface import SurfaceType
+from pygame.draw import rect
+from pygame.surface import Surface, SurfaceType
 
 from .abstractions import (
     NodeType, NodeSlotType, GameNodeType, NodeManagerType
@@ -17,6 +18,7 @@ class Node(NodeType):
         self.slot = None
         self.template = None
         self.prototype = None
+        self.selected_field = False
 
         self.parent_node = None
         self.parent_block = None
@@ -45,13 +47,17 @@ class Node(NodeType):
         return self, 0
 
     def render(self) -> SurfaceType:
-        self.rendered = self.template.render()
-        
-        return self.rendered
+        return self.template.render()
     
     def remove(self) -> None:
         if self.slot:
             self.slot.set_node(self.up(NumberGameNode(0)).node)
+
+    def check_selected(self) -> None:
+        if self.selected_field:
+            w, h = self.rendered.get_size()
+
+            rect(self.rendered, (0, 255, 0), (0, 0, w, h), 1)
 
     def up(self, game_node: GameNodeType) -> NodeSlotType:
         node_slot = self.node_manager.create_slot(game_node)

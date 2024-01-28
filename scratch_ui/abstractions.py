@@ -74,6 +74,7 @@ class NodeType(SelectableObjectType):
     nodes: list[NodeType]
     slot: NodeSlotType
     prototype: type[NodeType]
+    selected_field: bool
 
     parent_node: NodeType | None
     parent_block: BlockType | None
@@ -88,6 +89,10 @@ class NodeType(SelectableObjectType):
 
     @abstractmethod
     def remove(self) -> None:
+        ...
+
+    @abstractmethod
+    def check_selected(self) -> None:
         ...
 
     @abstractmethod
@@ -266,6 +271,8 @@ class BlockSpawnerType(SpawnerType):
 
 
 class InputFieldType(ABC):
+    node: NodeType
+
     @abstractmethod
     def press(self, key: str) -> None:
         ...

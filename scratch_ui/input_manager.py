@@ -31,7 +31,7 @@ class NumberInputField(InputFieldType):
 
 
 class StringInputField(InputFieldType):
-    noed: StringNode
+    node: StringNode
 
     def __init__(self, node: StringNode) -> None:
         self.node = node
@@ -75,19 +75,30 @@ class InputManager(InputManagerType):
         if self.selected_field:
             for key in filter(lambda x: x[1], game_input_manager.key_pmap.items()):
                 if key[0] == "esc":
-                    self.selected_field = None
-
-                    return
+                    return self.unselect()
 
                 self.selected_field.press(key[0])
 
     def select(self, selectable: NodeType) -> None:
+        if self.selected_field:
+            if selectable is self.selected_field.node:
+                return
+
+        self.unselect()
+        
+        selectable.selected_field = True
+
         if isinstance(selectable, NumberNode):
             self.selected_field = NumberInputField(selectable)
         elif isinstance(selectable, StringNode):
             self.selected_field = StringInputField(selectable)
         elif isinstance(selectable, BooleanNode):
             self.selected_field = BooleanInputField(selectable)
+
+    def unselect(self) -> None:
+        if self.selected_field:
+            self.selected_field.node.selected_field = False
+            self.selected_field = None
 
 
 input_manager = InputManager()

@@ -176,4 +176,6 @@ class BlocksFrame(Frame):
         draw_spawners(self.screen, self.scroll)
 
         mx, my = mouse_coords
-        update_spawners(spawners, mx, my + self.scroll)
+
+        if mx <= self.screen.get_width():
+            update_spawners(spawners, mx, my + self.scroll)

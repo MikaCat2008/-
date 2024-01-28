@@ -32,7 +32,7 @@ class TextTemplateElement(TemplateElement):
             node = node_slot.node
         else:
             node = node_slot
-        
+
         return node.render()
 
     def get_surfaces(self) -> list[SurfaceType]:

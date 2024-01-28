@@ -24,4 +24,6 @@ class NumberNode(Node):
         else:
             self.rendered = self.template.render()
 
+        self.check_selected()
+
         return self.rendered

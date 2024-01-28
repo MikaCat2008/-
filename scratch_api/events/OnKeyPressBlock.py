@@ -16,7 +16,7 @@ class OnKeyPressBlock(BlockIterator):
 
         self.key = key
         self.blocks = blocks
-        self.execute_key = ""
+        self.execute_key = None
 
     def execute(self, key: str) -> bool:
         if not self.execute_key == str(self.key):
@@ -26,7 +26,7 @@ class OnKeyPressBlock(BlockIterator):
 
     def iter(self) -> None:
         if str(self.key) == self.execute_key:
-            self.execute_key = ""
+            self.execute_key = None
 
             return self.blocks
         return []
