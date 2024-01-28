@@ -1,4 +1,4 @@
-from pygame.surface import Surface, SurfaceType
+from pygame.surface import SurfaceType
 
 from ..node import Node
 from ..font import text_render

@@ -1,6 +1,4 @@
-from .abstractions import BlockType, BlockSlotType
-
-from scratch_api.abstractions import BlockType as GameBlockType
+from .abstractions import BlockType, BlockSlotType, GameBlockType
 
 
 class BlockSlot(BlockSlotType):

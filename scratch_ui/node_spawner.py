@@ -4,7 +4,6 @@ from pygame.surface import SurfaceType
 
 from .abstractions import NodeType, GameNodeType, NodeSpawnerType
 from .node_manager import node_manager
-from .sprite_manager import sprite_manager
 
 
 class NodeSpawner(NodeSpawnerType):

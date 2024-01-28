@@ -1,9 +1,10 @@
 from pygame.surface import SurfaceType
 
-from .abstractions import BlockType, SpriteType, NodeSlotType, BlockSlotType, TemplateElementType
+from .abstractions import (
+    BlockType, SpriteType, NodeSlotType, BlockSlotType, 
+    GameBlockType, TemplateElementType
+)
 from .template_elements import TextLineTemplateElement, BlocksTemplateElement
-
-from scratch_api.block import BlockType as GameBlockType
 
 
 class Block(BlockType):

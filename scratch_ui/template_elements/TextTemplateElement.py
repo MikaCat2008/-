@@ -5,8 +5,6 @@ from pygame.surface import Surface, SurfaceType
 
 from ..abstractions import NodeType, NodeSlotType
 from ..font import text_render
-from ..node import Node
-from ..nodes import NumberNode
 from ..template_element import TemplateElement
 
 

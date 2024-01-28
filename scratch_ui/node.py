@@ -1,7 +1,8 @@
 from pygame.surface import SurfaceType
 
-from .abstractions import NodeType, NodeSlotType, GameNodeType, NodeManagerType
-
+from .abstractions import (
+    NodeType, NodeSlotType, GameNodeType, NodeManagerType
+)
 from scratch_api.nodes import NumberNode as NumberGameNode
 
 

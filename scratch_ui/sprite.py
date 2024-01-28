@@ -1,8 +1,5 @@
-from .abstractions import BlockType, SpriteType
+from .abstractions import BlockType, SpriteType, GameBlockType, GameSpriteType
 from .block_manager import block_manager
-
-from scratch_api.block import BlockType as GameBlockType
-from scratch_api.sprite import SpriteType as GameSpriteType
 
 
 class Sprite(SpriteType):

@@ -6,7 +6,6 @@ from pygame.surface import SurfaceType
 
 from .abstractions import FrameType
 from .frames import WindowFrame
-from .node_manager import node_manager
 from .block_manager import block_manager
 from .input_manager import input_manager
 from .sprite_manager import sprite_manager
@@ -20,13 +19,10 @@ from scratch_api.events import OnStartBlock
 from scratch_api.control import RepeatBlock
 
 from scratch_api.operators import AddNode
-from scratch_api.operators import SubNode
-from scratch_api.operators import MulNode
-from scratch_api.operators import DivNode
 
 WINDOW_SIZE = (1400, 750)
 
-__scratch_version__ = 0, 4
+__scratch_version__ = 0, 5
 
 
 class Window:
