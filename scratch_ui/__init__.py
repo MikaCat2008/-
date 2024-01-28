@@ -6,13 +6,12 @@ from pygame.surface import SurfaceType
 
 from .abstractions import FrameType
 from .frames import WindowFrame
-from .block_manager import block_manager
 from .input_manager import input_manager
 from .sprite_manager import sprite_manager
 
 WINDOW_SIZE = (1400, 750)
 
-__scratch_version__ = 0, 7
+__scratch_version__ = 0, 8
 
 
 class Window:
