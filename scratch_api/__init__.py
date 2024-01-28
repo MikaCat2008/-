@@ -10,7 +10,7 @@ from .emit import emit
 from .memory import memory
 from .input_manager import input_manager
 
-__api_version__ = 1, 5
+__api_version__ = 1, 6
 
 
 def set_screen(screen: SurfaceType) -> None:

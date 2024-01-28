@@ -11,7 +11,7 @@ from .sprite_manager import sprite_manager
 
 WINDOW_SIZE = (1400, 750)
 
-__scratch_version__ = 0, 9
+__scratch_version__ = 1, 0
 
 
 class Window:
