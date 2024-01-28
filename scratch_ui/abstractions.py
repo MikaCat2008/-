@@ -73,6 +73,7 @@ class NodeType(SelectableObjectType):
     game_node: GameNodeType
     nodes: list[NodeType]
     slot: NodeSlotType
+    prototype: type[NodeType]
 
     parent_node: NodeType | None
     parent_block: BlockType | None

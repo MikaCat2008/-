@@ -16,6 +16,7 @@ class Node(NodeType):
         self.rendered = None
         self.slot = None
         self.template = None
+        self.prototype = None
 
         self.parent_node = None
         self.parent_block = None

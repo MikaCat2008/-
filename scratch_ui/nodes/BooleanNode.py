@@ -1,5 +1,6 @@
 from pygame.surface import SurfaceType
 
+from ..abstractions import GameNodeType
 from ..node import Node
 from ..font import text_render
 
@@ -8,6 +9,11 @@ from scratch_api.abstractions import BooleanNodeType as BooleanGameNodeType
 
 class BooleanNode(Node):
     game_node: BooleanGameNodeType
+
+    def __init__(self, game_node: GameNodeType) -> None:
+        super().__init__(game_node)
+
+        self.prototype = BooleanNode
 
     def get_surfaces(self) -> list[SurfaceType]:
         return [self.render()]

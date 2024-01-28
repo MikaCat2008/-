@@ -83,7 +83,7 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                             hovered_block.slot.insert_after(hovered_block, block)
                         else:
                             hovered_block.slot.insert_before(hovered_block, block)
-                elif node and hovered_node:
+                elif node and hovered_node and node.prototype is hovered_node.prototype:
                     hovered_node.slot.set_node(node)
             else:
                 if block and block.is_event():
