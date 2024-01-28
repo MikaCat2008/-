@@ -9,12 +9,12 @@ class IfThenElseBlock(BlockIterator):
     then_blocks: Blocks
     else_blocks: Blocks
 
-    def __init__(self, *args: tuple[Boolean, Blocks, Blocks]) -> None:
+    def __init__(self, condition: Boolean, then_blocks: Blocks, else_blocks: Blocks) -> None:
         super().__init__()
 
-        self.condition = args[0]
-        self.then_blocks = args[1]
-        self.else_blocks = args[2]
+        self.condition = condition
+        self.then_blocks = then_blocks
+        self.else_blocks = else_blocks
 
     def execute(self) -> bool:
         return True

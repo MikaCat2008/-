@@ -1,7 +1,7 @@
-class InputManager:
-    key_map: dict[str, bool]
-    key_pmap: dict[str, bool]
-    
+from .abstractions import InputManagerType
+
+
+class InputManager(InputManagerType):    
     def __init__(self) -> None:
         self.key_map = {}
         self.key_pmap = {}

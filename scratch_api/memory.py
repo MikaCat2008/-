@@ -1,14 +1,7 @@
-from pygame.surface import SurfaceType
-
-from .abstractions import SpriteType
+from .abstractions import MemoryType
 
 
-class Memory:
-    screen: SurfaceType
-    stamp_screen: SurfaceType
-    sprites: list[SpriteType]
-    mouse_pos: tuple[int, int]
-
+class Memory(MemoryType):
     def __init__(self) -> None:
         self.screen = None
         self.stamp_screen = None

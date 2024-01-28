@@ -6,8 +6,6 @@ from .nodes.NumberNode import NumberNode
 from .memory import memory
 from .motion_block import MotionBlock
 
-from . import stamp
-
 STRUCTURE_BLOCK_DELAY = 0.01
 
 

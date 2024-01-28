@@ -33,7 +33,7 @@ class Block(BlockType):
     def init(self) -> None:
         ...
 
-    def add_block(self, block: BlockType, slot: int) -> None:
+    def add_block(self, block: BlockType, slot: int) -> BlockType:
         self.slots[slot].add(block)
 
         return block

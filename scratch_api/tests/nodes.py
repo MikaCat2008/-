@@ -2,10 +2,7 @@ import unittest
 
 from . import tools
 
-from ..nodes import NumberNode
-from ..nodes import StringNode
-from ..nodes import BooleanNode
-from ..nodes import VariableNode
+from ..objects import *
 
 
 class NodesTestCase(unittest.TestCase):
