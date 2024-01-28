@@ -9,7 +9,7 @@ from scratch_api.abstractions import (
     NodeType as GameNodeType,
     BlockType as GameBlockType,
     SpriteType as GameSpriteType,
-    GameObjectType
+    GameObjectType as GameObjectType
 )
 
 
