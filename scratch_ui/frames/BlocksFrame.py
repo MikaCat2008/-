@@ -79,32 +79,87 @@ class BlocksFrame(Frame):
                 TurnLeftBlock(NumberNode(15)),
             ),
             (
+                PointInDirectionBlock(NumberNode(90)),
+                PointTowardsBlock(StringNode("mouse-pointer"), BooleanNode(True))
+            ),
+            (
                 GoToXYBlock(NumberNode(0), NumberNode(0)),
+                GoToBlock(StringNode("mouse-pointer"), BooleanNode(True)),
+                GlideToBlock(NumberNode(1), NumberNode(0), NumberNode(0))
+            ),
+            (
+                ChangeXByBlock(NumberNode(10)),
+                SetXToBlock(NumberNode(0)),
+                ChangeYByBlock(NumberNode(10)),
+                SetYToBlock(NumberNode(0))
+            ),
+            (
+                IfOnEdgeBounceBlock(),
+            ),
+            (
+                SetRotationStyleBlock(NumberNode(1)),
+            ),
+            (
+                XPositionNode(),
+                YPositionNode(),
+                DirectionNode()
+            ),
+            (
+                ShowBlock(),
+                HideBlock()
+            ),
+            (
+                ClearBlock(),
+            ),
+            (
+                StampBlock(),
             ),
             (
                 PenDownBlock(),
+                PenUpBlock()
             ),
             (
                 VariableNode(StringNode("variable")),
             ),
             (
-                ChangeValueByBlock(StringNode("variable"), NumberNode(0)),
+                SetValueToBlock(StringNode("variable"), NumberNode(0)),
+                ChangeValueByBlock(StringNode("variable"), NumberNode(10)),
             ),
             (
                 OnStartBlock([]),
+                OnKeyPressBlock(StringNode("space"), [])
+            ),
+            (
+                WaitBlock(NumberNode(1)),
             ),
             (
                 RepeatBlock(NumberNode(5), []),
+                ForeverBlock([])
             ),
             (
                 IfThenBlock(BooleanNode(False), []),
-                IfThenElseBlock(BooleanNode(False), [], [])
+                IfThenElseBlock(BooleanNode(False), [], []),
+                WaitUntilBlock(BooleanNode(True)),
+                RepeatUntilBlock(BooleanNode(True), [])
             ),
             (
                 AddNode(NumberNode(0), NumberNode(0)),
                 SubNode(NumberNode(0), NumberNode(0)),
                 MulNode(NumberNode(0), NumberNode(0)),
-                DivNode(NumberNode(0), NumberNode(1))
+                DivNode(NumberNode(0), NumberNode(0))
+            ),
+            (
+                RandomNumberNode(NumberNode(0), NumberNode(10)),
+            ),
+            (
+                LessThanNode(NumberNode(0), NumberNode(0)),
+                EqualsToNode(NumberNode(0), NumberNode(0)),
+                BiggerThanNode(NumberNode(0), NumberNode(0)),
+            ),
+            (
+                AndNode(BooleanNode(False), BooleanNode(False)),
+                OrNode(BooleanNode(False), BooleanNode(False)),
+                NotNode(BooleanNode(False)),
             ),
             (
                 MathFuncOfNode(StringNode("sin"), NumberNode(0)),
@@ -116,7 +171,7 @@ class BlocksFrame(Frame):
 
         for event in events:
             if event.type == pygame.MOUSEWHEEL:
-                self.scroll = min(max(self.scroll - event.y * 25, 0), self.screen.get_height())
+                self.scroll -= event.y * 25
 
         draw_spawners(self.screen, self.scroll)
 

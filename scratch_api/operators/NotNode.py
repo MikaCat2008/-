@@ -1,4 +1,3 @@
-from ..abstractions import BooleanNodeType
 from ..nodes.BooleanNode import BooleanNode
 
 

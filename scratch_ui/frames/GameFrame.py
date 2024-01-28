@@ -18,6 +18,7 @@ class GameFrame(Frame):
     
     def update(self, events: list[EventType], mouse_coords: tuple[int, int]) -> None:
         mx, my = mouse_coords
+
         changes = update_game(events, (mx, my - 40))
 
         self.screen.blit(scale(self.game_screen, (600, 350)), (0, 40))

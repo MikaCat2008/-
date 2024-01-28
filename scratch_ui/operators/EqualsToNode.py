@@ -2,11 +2,11 @@ from ..nodes.NumberNode import NumberNode
 from ..template import Template
 from ..template_elements import TextTemplateElement
 
-from scratch_api.operators import AddNode as AddGameNode
+from scratch_api.operators import EqualsToNode as EqualsToGameNode
 
 
-class AddNode(NumberNode):
-    game_node: AddGameNode
+class EqualsToNode(NumberNode):
+    game_node: EqualsToGameNode
 
     def init(self) -> None:
         self.nodes = [
@@ -16,7 +16,7 @@ class AddNode(NumberNode):
 
         self.template = Template([
             TextTemplateElement(
-                "<0> + <1>", 
+                "<0> = <1>", 
                 *self.nodes,
                 color = (0, 0, 0)
             )

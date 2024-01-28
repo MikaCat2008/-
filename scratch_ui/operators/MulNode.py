@@ -16,7 +16,8 @@ class MulNode(NumberNode):
 
         self.template = Template([
             TextTemplateElement(
-                "<0> * <1>", *self.nodes,
+                "<0> * <1>", 
+                *self.nodes,
                 color = (0, 0, 0)
             )
         ], (0, 255, 0), "node")

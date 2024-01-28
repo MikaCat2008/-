@@ -25,7 +25,7 @@ class OnKeyPressBlock(BlockIterator):
         return True
 
     def iter(self) -> None:
-        if self.key == self.execute_key:
+        if str(self.key) == self.execute_key:
             self.execute_key = ""
 
             return self.blocks
