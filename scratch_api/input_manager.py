@@ -20,6 +20,10 @@ class InputManager(InputManagerType):
             symbol = "space"
         elif scancode == 42:
             symbol = "backspace"
+        elif scancode == 45:
+            symbol = "-"
+        elif scancode == 55:
+            symbol = "."
         else:
             symbol = ""
             

@@ -11,20 +11,23 @@ class NumberInputField(InputFieldType):
         self.node = node
 
     def press(self, key: str) -> None:
-        value = None
+        value = self.node.game_node.value
+        new_value = None
 
         if key == "backspace":
-            value = self.node.game_node.value
-
             if value < 10:
-                value = 0
+                new_value = 0
             else:
-                value = int(str(value)[:-1])
+                new_value = int(str(value)[:-1])
         elif len(key) == 1 and 48 <= ord(key) <= 57:
-            value = int(str(self.node.game_node.value) + key)
+            v = str(value) + key
+            
+            new_value = float(v) if "." in v else int(v)
+        elif key == "-":
+            new_value = -value
 
-        if value is not None:
-            self.node.game_node.value = value
+        if new_value is not None:
+            self.node.game_node.value = new_value
 
 
 class BooleanInputField(InputFieldType):
@@ -34,15 +37,15 @@ class BooleanInputField(InputFieldType):
         self.node = node
 
     def press(self, key: str) -> None:
-        value = None
+        new_value = None
         
         if key == "0":
-            value = False
+            new_value = False
         elif key == "1":
-            value = True
+            new_value = True
 
-        if value is not None:
-            self.node.game_node.value = value
+        if new_value is not None:
+            self.node.game_node.value = new_value
 
 
 class InputManager(InputManagerType):
