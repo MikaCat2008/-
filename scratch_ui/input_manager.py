@@ -1,15 +1,12 @@
-from .abstractions import NodeType
+from .abstractions import NodeType, InputFieldType, InputManagerType
 from .nodes import NumberNode, BooleanNode
 
 from scratch_api.input_manager import input_manager as game_input_manager
 
 
-class InputField:
-    def press(self, key: str) -> None:
-        ...
+class NumberInputField(InputFieldType):
+    node: NumberNode
 
-
-class NumberInputField(InputField):
     def __init__(self, node: NumberNode) -> None:
         self.node = node
 
@@ -30,7 +27,9 @@ class NumberInputField(InputField):
             self.node.game_node.value = value
 
 
-class BooleanInputField(InputField):
+class BooleanInputField(InputFieldType):
+    node: BooleanNode
+
     def __init__(self, node: BooleanNode) -> None:
         self.node = node
 
@@ -46,9 +45,7 @@ class BooleanInputField(InputField):
             self.node.game_node.value = value
 
 
-class InputManager:
-    selected_field: InputField
-
+class InputManager(InputManagerType):
     def __init__(self) -> None:
         self.selected_field = None
 

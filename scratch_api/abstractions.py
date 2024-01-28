@@ -77,6 +77,10 @@ class BlockType(GameObjectType):
         ...
 
     @abstractmethod
+    def replace_node(self, node_a: NodeType, node_b: NodeType) -> None: 
+        ...
+
+    @abstractmethod
     def get_sprite_by_name(self, name: str) -> SpriteType:
         ...
 
@@ -144,6 +148,37 @@ class SpriteType(ABC):
     @abstractmethod
     def hide(self) -> None:
         ...
+
+
+class InputManagerType(ABC):
+    key_map: dict[str, bool]
+    key_pmap: dict[str, bool]
+
+    @abstractmethod
+    def update(self, state: bool, scancode: int) -> None:
+        ...
+
+
+class SpriteManagerType(ABC):
+    def create_sprite(
+        self, 
+        blocks: Blocks = None,
+        variable_names: list[str] = None,
+        name: str = None,
+        coords: tuple[float, float] = (0, 0),
+        direction: float = 0,
+        surface: SurfaceType = None,
+        rotation_style: int = 2,
+        is_show: bool = True
+    ) -> SpriteType:
+        ...
+
+
+class MemoryType:
+    screen: SurfaceType | None
+    stamp_screen: SurfaceType | None
+    sprites: list[SpriteType]
+    mouse_pos: tuple[int, int]
 
 
 class NumberNodeType(NodeType):

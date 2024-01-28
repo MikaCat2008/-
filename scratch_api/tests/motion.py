@@ -1,34 +1,9 @@
 import math
-import time
 import unittest
 
 from . import tools
 
-from scratch_api.memory import memory
-
-from scratch_api.motion import MoveBlock
-from scratch_api.motion import TurnRightBlock
-from scratch_api.motion import TurnLeftBlock
-
-from scratch_api.motion import PointInDirectionBlock
-from scratch_api.motion import PointTowardsBlock
-
-from scratch_api.motion import GoToBlock
-from scratch_api.motion import GoToXYBlock
-from scratch_api.motion import GlideToBlock
-
-from scratch_api.motion import ChangeXByBlock
-from scratch_api.motion import SetXToBlock
-from scratch_api.motion import ChangeYByBlock
-from scratch_api.motion import SetYToBlock
-
-from scratch_api.motion import IfOnEdgeBounceBlock
-
-from scratch_api.motion import SetRotationStyleBlock
-
-from scratch_api.motion import XPositionNode
-from scratch_api.motion import YPositionNode
-from scratch_api.motion import DirectionNode
+from ..objects import *
 
 
 class MotionTestCase(unittest.TestCase):

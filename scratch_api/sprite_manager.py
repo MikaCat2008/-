@@ -1,12 +1,12 @@
 from pygame.surface import Surface, SurfaceType
 
-from .abstractions import Blocks, SpriteType
+from .abstractions import Blocks, SpriteType, SpriteManagerType
 
 from .sprite import Sprite
 from .memory import memory
 
 
-class SpriteManager:
+class SpriteManager(SpriteManagerType):
     def create_sprite(
         self, 
         blocks: Blocks = None,

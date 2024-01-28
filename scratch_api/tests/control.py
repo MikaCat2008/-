@@ -4,20 +4,7 @@ import threading
 
 from . import tools
 
-from ..motion import ChangeXByBlock
-from ..motion import XPositionNode
-
-from ..control import WaitBlock
-
-from ..control import RepeatBlock
-from ..control import ForeverBlock
-
-from ..control import IfThenBlock
-from ..control import IfThenElseBlock
-from ..control import WaitUntilBlock
-from ..control import RepeatUntilBlock
-
-from ..operators import EqualsToNode
+from ..objects import *
 
 
 class ControlTestCase(unittest.TestCase):

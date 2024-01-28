@@ -8,11 +8,11 @@ class IfThenBlock(BlockIterator):
     condition: Boolean
     blocks: Blocks
 
-    def __init__(self, *args: tuple[Boolean, Blocks]) -> None:
+    def __init__(self, condition: Boolean, blocks: Blocks) -> None:
         super().__init__()
 
-        self.condition = args[0]
-        self.blocks = args[1]
+        self.condition = condition
+        self.blocks = blocks
 
     def execute(self) -> bool:
         return True

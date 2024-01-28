@@ -1,16 +1,12 @@
-from pygame.surface import Surface
-
 from .. import sprite as sprite_module
 from ..abstractions import NodeType, BlockType, SpriteType, Blocks
 from ..emit import emit
-from ..block import Block, StructureBlock
+from ..block import Block
 from ..memory import memory
-from ..listener import Listener
-from ..block_container import BlockContainer
 from ..sprite_manager import SpriteManager
-from ..nodes.NumberNode import NumberNode
-from ..nodes.StringNode import StringNode
-from ..nodes.BooleanNode import BooleanNode
+from ..block_container import BlockContainer
+
+from ..objects import *
 
 sprite_module.STRUCTURE_BLOCK_DELAY = 0
 sprite_manager = SpriteManager()

@@ -9,12 +9,12 @@ class RepeatBlock(BlockIterator):
     end: Number
     blocks: Blocks
 
-    def __init__(self, *args: tuple[Number, Blocks]) -> None:
+    def __init__(self, end: Number, blocks: Blocks) -> None:
         super().__init__()
 
         self.index = 0
-        self.end = args[0]
-        self.blocks = args[1]
+        self.end = end
+        self.blocks = blocks
 
     def execute(self) -> bool:
         if len(self.blocks) == 0 or int(self.end) == 1:

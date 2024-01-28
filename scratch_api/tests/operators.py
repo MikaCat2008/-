@@ -1,22 +1,7 @@
 import math
 import unittest
 
-from scratch_api.operators import AddNode
-from scratch_api.operators import SubNode
-from scratch_api.operators import MulNode
-from scratch_api.operators import DivNode
-
-from scratch_api.operators import RandomNumberNode
-
-from scratch_api.operators import LessThanNode
-from scratch_api.operators import EqualsToNode
-from scratch_api.operators import BiggerThanNode
-
-from scratch_api.operators import AndNode
-from scratch_api.operators import OrNode
-from scratch_api.operators import NotNode
-
-from scratch_api.operators import MathFuncOfNode
+from ..objects import *
 
 
 class OperatorsTestCase(unittest.TestCase):

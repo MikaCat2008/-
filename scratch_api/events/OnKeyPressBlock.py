@@ -8,15 +8,15 @@ from ..block_iterator import BlockIterator
 @Listener("key")
 class OnKeyPressBlock(BlockIterator):
     key: String
-    execute_key: str
     blocks: Blocks
+    execute_key: str
 
-    def __init__(self, *args: tuple[String, Blocks]) -> None:
+    def __init__(self, key: String, blocks: Blocks) -> None:
         super().__init__()
 
-        self.key = args[0]
+        self.key = key
+        self.blocks = blocks
         self.execute_key = ""
-        self.blocks = args[1]
 
     def execute(self, key: str) -> bool:
         if not self.execute_key == str(self.key):

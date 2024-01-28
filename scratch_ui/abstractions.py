@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractclassmethod
 
 from pygame.event import EventType
 from pygame.surface import SurfaceType
 
-from scratch_api.abstractions import GameObjectType
-from scratch_api.node import NodeType as GameNodeType
-from scratch_api.block import BlockType as GameBlockType
-from scratch_api.sprite import SpriteType as GameSpriteType
+from scratch_api.abstractions import (
+    NodeType as GameNodeType,
+    BlockType as GameBlockType,
+    SpriteType as GameSpriteType
+)
 
 
 class SlotType(ABC):
@@ -18,6 +19,10 @@ class SlotType(ABC):
 class NodeSlotType(SlotType):
     node: NodeType
     parent_node: NodeType
+
+    @abstractmethod
+    def set_node(self, node: NodeType) -> None:
+        ...
 
     @abstractmethod
     def render(self) -> SurfaceType:
@@ -30,7 +35,7 @@ class BlockSlotType(SlotType):
     game_blocks: list[GameBlockType]
 
     @abstractmethod
-    def add(self, game_block: GameBlockType) -> None:
+    def add(self, block: BlockType) -> None:
         ...
 
     @abstractmethod
@@ -60,7 +65,7 @@ class RenderableObjectType(ABC):
 
 
 class SelectableObjectType(RenderableObjectType):
-    ...
+    template: TemplateType | None
 
 
 class NodeType(SelectableObjectType):
@@ -68,13 +73,36 @@ class NodeType(SelectableObjectType):
     nodes: list[NodeType]
     slot: NodeSlotType
 
+    parent_node: NodeType | None
+    parent_block: BlockType | None
+
+    @abstractmethod
+    def init(self) -> None:
+        ...
+
+    @abstractmethod
+    def get_child(self, mx: int) -> tuple[NodeType, int]:
+        ...
+
+    @abstractmethod
+    def remove(self) -> None:
+        ...
+
+    @abstractmethod
+    def up(self, game_node: GameNodeType) -> NodeSlotType:
+        ...
+
+    @abstractclassmethod
+    def set_node_manager(cls, node_manager: NodeManagerType) -> None:
+        ...
+
 
 class BlockType(SelectableObjectType):
+    game_block: GameBlockType
     sprite: SpriteType
     slot: BlockSlotType
 
     slots: list[SlotType]
-    template: TemplateType
 
     @abstractmethod
     def init(self) -> None:
@@ -121,11 +149,11 @@ class SelectManagerType(ABC):
         ...
 
     @abstractmethod
-    def get_node(self) -> None | NodeType:
+    def get_node(self) -> NodeType | None:
         ...
 
     @abstractmethod
-    def get_block(self) -> None | BlockType:
+    def get_block(self) -> BlockType | None:
         ...
 
     @abstractmethod
@@ -146,6 +174,15 @@ class NodeManagerType(ABC):
 class BlockManagerType(ABC):
     @abstractmethod
     def create_block(self, game_block: GameBlockType) -> BlockType:
+        ...
+
+
+class SpriteManagerType(ABC):
+    sprites: list[SpriteType]
+    selected_sprite: SpriteType
+    
+    @abstractmethod
+    def create_sprite(self, image: SurfaceType) -> SpriteType:
         ...
 
 
@@ -193,7 +230,12 @@ class TemplateElementType(ABC):
 
 class TemplateType(ABC):
     width: int
+    color: tuple[int, int, int]
+    mode: str
     template_elements: list[TemplateElementType]
+
+    def get_surfaces(self) -> list[SurfaceType]:
+        ...
 
     def render(self) -> SurfaceType: ...
 
@@ -218,3 +260,21 @@ class NodeSpawnerType(SpawnerType):
 class BlockSpawnerType(SpawnerType):
     block: BlockType
     game_block: GameBlockType
+
+
+class InputFieldType(ABC):
+    @abstractmethod
+    def press(self, key: str) -> None:
+        ...
+
+
+class InputManagerType(ABC):
+    selected_field: InputFieldType
+
+    @abstractmethod
+    def update(self, selectable: NodeType) -> None:
+        ...
+
+    @abstractmethod
+    def select(self) -> None:
+        ...
