@@ -78,6 +78,15 @@ class BlocksFrame(Frame):
                 TurnLeftBlock(NumberNode(15))
             ),
             (
+                GoToXYBlock(NumberNode(0), NumberNode(0)),
+            ),
+            (
+                PenDownBlock(),
+            ),
+            (
+                ChangeValueByBlock(StringNode(""), NumberNode(0)),
+            ),
+            (
                 OnStartBlock([]),
             ),
             (
@@ -91,6 +100,9 @@ class BlocksFrame(Frame):
                 SubNode(NumberNode(0), NumberNode(0)),
                 MulNode(NumberNode(0), NumberNode(0)),
                 DivNode(NumberNode(0), NumberNode(1))
+            ),
+            (
+                MathFuncOfNode(StringNode(""), NumberNode(0)),
             )
         )
 

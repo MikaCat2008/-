@@ -24,4 +24,4 @@ class OnStartBlock(Block):
                 slot = self.slots[0],
                 indent = False
             )
-        ], (255, 100, 0))
+        ], (174, 64, 0))

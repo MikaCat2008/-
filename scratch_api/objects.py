@@ -44,6 +44,8 @@ from .pen import PenDownBlock
 from .pen import PenUpBlock
 
 # data
+from .data import SetValueToBlock
+from .data import ChangeValueByBlock
 
 # events
 from .events import OnStartBlock

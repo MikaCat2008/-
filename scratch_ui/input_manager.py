@@ -1,5 +1,5 @@
 from .abstractions import NodeType, InputFieldType, InputManagerType
-from .nodes import NumberNode, BooleanNode
+from .nodes import NumberNode, StringNode, BooleanNode
 
 from scratch_api.input_manager import input_manager as game_input_manager
 
@@ -25,6 +25,25 @@ class NumberInputField(InputFieldType):
             new_value = float(v) if "." in v else int(v)
         elif key == "-":
             new_value = -value
+
+        if new_value is not None:
+            self.node.game_node.value = new_value
+
+
+class StringInputField(InputFieldType):
+    noed: StringNode
+
+    def __init__(self, node: StringNode) -> None:
+        self.node = node
+
+    def press(self, key: str) -> None:
+        value = self.node.game_node.value
+        new_value = None
+        
+        if key == "backspace" and len(key):
+            new_value = value[:-1]
+        elif key.isprintable():
+            new_value = value + key
 
         if new_value is not None:
             self.node.game_node.value = new_value
@@ -65,6 +84,8 @@ class InputManager(InputManagerType):
     def select(self, selectable: NodeType) -> None:
         if isinstance(selectable, NumberNode):
             self.selected_field = NumberInputField(selectable)
+        elif isinstance(selectable, StringNode):
+            self.selected_field = StringInputField(selectable)
         elif isinstance(selectable, BooleanNode):
             self.selected_field = BooleanInputField(selectable)
 

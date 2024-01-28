@@ -22,7 +22,7 @@ from scratch_api.operators import AddNode
 
 WINDOW_SIZE = (1400, 750)
 
-__scratch_version__ = 0, 6
+__scratch_version__ = 0, 7
 
 
 class Window:

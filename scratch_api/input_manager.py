@@ -9,6 +9,8 @@ class InputManager(InputManagerType):
     def update(self, state: bool, scancode: int) -> None:
         if 4 <= scancode <= 29:
             symbol = chr(scancode + 61).casefold()
+        elif 4 <= scancode <= 29:
+            symbol = chr(scancode - 4 + 97)
         elif 30 <= scancode <= 39:
             if 30 <= scancode <= 38:
                 symbol = str(scancode - 29)

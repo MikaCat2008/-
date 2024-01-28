@@ -5,7 +5,7 @@ from pygame.surface import SurfaceType
 
 from ..abstractions import SpriteType, NodeSlotType, BlockSlotType
 from ..frame import Frame
-from ..nodes import NumberNode, BooleanNode
+from ..nodes import NumberNode, StringNode, BooleanNode
 from ..input_manager import input_manager
 from ..select_manager import select_manager
 from ..sprite_manager import sprite_manager
@@ -44,7 +44,7 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
 
                 if m0 and not select_manager.selected_object:
                     if isinstance(slot, NodeSlotType):
-                        if type(child) in (NumberNode, BooleanNode):
+                        if type(child) in (NumberNode, StringNode, BooleanNode):
                             input_manager.select(child)
                         else:
                             select_manager.select(child)

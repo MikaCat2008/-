@@ -15,7 +15,9 @@ class MathFuncOfNode(NumberNode):
         self.number = number
 
     def get_value(self) -> float:
+        value = self.number.get_value()
+
         if str(self.func) == "sin":
-            return math.sin(float(self.number))
+            return math.sin(math.radians(value))
         elif str(self.func) == "cos":
-            return math.cos(float(self.number))
+            return math.cos(math.radians(value))
