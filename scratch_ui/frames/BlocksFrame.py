@@ -98,6 +98,7 @@ class BlocksFrame(Frame):
             ),
             (
                 IfThenBlock(BooleanNode(False), []),
+                IfThenElseBlock(BooleanNode(False), [], [])
             ),
             (
                 AddNode(NumberNode(0), NumberNode(0)),

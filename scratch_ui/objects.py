@@ -24,6 +24,7 @@ from .events import OnStartBlock
 from .control import RepeatBlock
 
 from .control import IfThenBlock
+from .control import IfThenElseBlock
 
 # operators
 from .operators import AddNode
@@ -61,6 +62,7 @@ from scratch_api.objects import (
     RepeatBlock as RepeatGameBlock,
 
     IfThenBlock as IfThenGameBlock,
+    IfThenElseBlock as IfThenElseGameBlock,
 
     # operators
     AddNode as AddGameNode,
@@ -98,6 +100,7 @@ objects = {
     RepeatGameBlock: RepeatBlock,
 
     IfThenGameBlock: IfThenBlock,
+    IfThenElseGameBlock: IfThenElseBlock,
 
     # operators
     AddGameNode: AddNode,

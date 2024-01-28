@@ -23,14 +23,13 @@ class Template(TemplateType):
         if self.mode == "block":
             surfaces = [None] * len(self.template_elements)
 
+            y = 0
             for i, template_element in enumerate(self.template_elements):
-                if i == 0:
-                    surface = template_element.render()
-                else:
-                    surface = template_element.render(surfaces[i - 1].get_size()[1])
+                surface = template_element.render(y)
 
                 surfaces[i] = surface
                 template_element.rendered = surface
+                y += surface.get_height()
         else:
             surfaces = self.template_elements[0].get_surfaces()
 

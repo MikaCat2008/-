@@ -48,6 +48,7 @@ class Block(BlockType):
                 return template_element, tew, h + teh
 
             h += teh
+        return None, 0, 0
 
     def get_slot_by_coords(self, x: int, y: int) -> tuple[BlockSlotType, int, int]:
         template_element, w, h = self.get_template_element_by_y(y)
@@ -68,9 +69,11 @@ class Block(BlockType):
         return None, None, None
 
     def get_child(self, mx: int, my: int) -> tuple[BlockType, int, int]:
+        y = 0
         for slot in self.slots:
-            y = 25
             if isinstance(slot, BlockSlotType):
+                y += 25
+                
                 for block in slot.blocks:
                     bx, by = block.coords
                     bw, bh = block.rendered.get_size()
@@ -84,6 +87,8 @@ class Block(BlockType):
                         
                         return child, cx + indent, cy + y
                     y += bh
+
+                y += 15
 
         return self, 0, 0
 
