@@ -15,13 +15,15 @@ class TextTemplateElement(TemplateElement):
         self, 
         text: str, 
         *node_slots: tuple[NodeType | NodeSlotType, ...],
-        color = (255, 255, 255)
+        color: tuple[int, int, int] = (255, 255, 255),
+        indent: int = 1
     ) -> None:
         super().__init__()
         
         self.text = text
         self.node_slots: tuple[NodeType | NodeSlotType, ...] = node_slots
         self.color = color
+        self.indent = indent
 
     def node_render(self, i: int) -> SurfaceType:
         node_slot = self.node_slots[i]
@@ -40,7 +42,7 @@ class TextTemplateElement(TemplateElement):
         
         w = 0
         for i, text in enumerate(lines):
-            surface = text_render(text, self.color, indent=1)
+            surface = text_render(text, self.color, indent = self.indent)
             
             surfaces[i * 2] = surface
             w += surface.get_width()

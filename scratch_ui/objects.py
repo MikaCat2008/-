@@ -2,6 +2,7 @@
 from .nodes import NumberNode
 from .nodes import StringNode
 from .nodes import BooleanNode
+from .nodes import VariableNode
 
 # motion
 from .motion import MoveBlock
@@ -38,6 +39,7 @@ from scratch_api.objects import (
     NumberNode as NumberGameNode,
     StringNode as StringGameNode,
     BooleanNode as BooleanGameNode,
+    VariableNode as VariableGameNode,
 
     # motion
     MoveBlock as MoveGameBlock,
@@ -74,6 +76,7 @@ objects = {
     NumberGameNode: NumberNode,
     StringGameNode: StringNode,
     BooleanGameNode: BooleanNode,
+    VariableGameNode: VariableNode,
 
     # motion
     MoveGameBlock: MoveBlock,

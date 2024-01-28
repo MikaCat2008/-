@@ -14,8 +14,9 @@ class SpriteManager(SpriteManagerType):
         self.sprites = []
         self.selected_sprite = None
 
-    def create_sprite(self, image: SurfaceType) -> SpriteType:
+    def create_sprite(self, image: SurfaceType, variables = None) -> SpriteType:
         game_sprite = game_sprite_manager.create_sprite(
+            variable_names = variables,
             surface = image
         )
         sprite = Sprite(

@@ -29,6 +29,7 @@ class Block(BlockType):
             if isinstance(slot, NodeSlotType):
                 slot.parent_block = self
                 slot.node.game_node.parent_block = self.game_block
+                slot.node.game_node.sprite = sprite.game_sprite
 
     def init(self) -> None:
         ...

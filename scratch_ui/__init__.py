@@ -10,16 +10,6 @@ from .block_manager import block_manager
 from .input_manager import input_manager
 from .sprite_manager import sprite_manager
 
-from scratch_api.nodes import NumberNode
-
-from scratch_api.motion import MoveBlock
-
-from scratch_api.events import OnStartBlock
-
-from scratch_api.control import RepeatBlock
-
-from scratch_api.operators import AddNode
-
 WINDOW_SIZE = (1400, 750)
 
 __scratch_version__ = 0, 7
@@ -33,68 +23,8 @@ class Window:
         self.screen = screen
         self.window_frame = WindowFrame(screen, screen.get_size(), (0, 0))
 
-        sprite_manager.selected_sprite = sprite = sprite_manager.create_sprite(
-            load_image("artem.jpg").convert_alpha()
-        )
-
-        on_start_block = sprite.add_block(
-            (100, 100),
-            OnStartBlock([])
-        )
-
-        # on_start_block.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(AddNode(NumberNode(10), NumberNode(4)))
-        #     ), 0
-        # )
-        # on_start_block.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(SubNode(NumberNode(10), NumberNode(4)))
-        #     ), 0
-        # )
-        # on_start_block.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(MulNode(NumberNode(10), NumberNode(4)))
-        #     ), 0
-        # )
-        # on_start_block.add_block(
-        #     block_manager.create_block(
-        #         sprite, None, MoveBlock(DivNode(NumberNode(10), NumberNode(4)))
-        #     ), 0
-        # )
-
-        repeat_block0 = on_start_block.add_block(
-            block_manager.create_block(
-                sprite, None, RepeatBlock(AddNode(AddNode(NumberNode(20), NumberNode(5)), NumberNode(20)), [])
-                # sprite, None, RepeatBlock(NumberNode(0), [])
-            ), 0
-        )
-        repeat_block1 = repeat_block0.add_block(
-            block_manager.create_block(
-                sprite, None, RepeatBlock(NumberNode(40), [])
-            ), 1
-        )
-
-        repeat_block0.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(3))
-            ), 1
-        )
-        repeat_block0.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(4))
-            ), 1
-        )
-
-        repeat_block1.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(5))
-            ), 1
-        )
-        repeat_block1.add_block(
-            block_manager.create_block(
-                sprite, None, MoveBlock(NumberNode(6))
-            ), 1
+        sprite_manager.selected_sprite = sprite_manager.create_sprite(
+            load_image("artem.jpg").convert_alpha(), ["i"]
         )
 
     def start(self) -> None:

@@ -7,12 +7,14 @@ class Node(NodeType):
 
         self.nodes = []
         self.block = None
+        self.inited = False
 
         self.parent_node = None
         self.parent_block = None
 
     def init(self, sprite: SpriteType) -> None:
-        self.nodes = [node for _, node in self.__dict__.items() if isinstance(node, NodeType)]
+        self.inited = True
+        self.nodes = [node for k, node in self.__dict__.items() if isinstance(node, NodeType) and k != "parent_node"]
         
         for node in self.nodes:
             node.init(sprite)

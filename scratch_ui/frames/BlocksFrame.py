@@ -8,6 +8,7 @@ from ..frame import Frame
 from ..node_spawner import NodeSpawner
 from ..block_spawner import BlockSpawner
 from ..select_manager import select_manager
+from ..sprite_manager import sprite_manager
 
 from scratch_api.objects import *
 
@@ -49,7 +50,7 @@ def update_spawners(spawners: list[SpawnerType], mx: int, my: int) -> None:
         
         if x <= mx <= x + w and y <= my <= y + h:
             if m0 and not select_manager.selected_object:
-                select_manager.select(spawner.spawn())
+                select_manager.select(spawner.spawn(sprite_manager.selected_sprite))
                 select_manager.free()
 
             break
@@ -75,7 +76,7 @@ class BlocksFrame(Frame):
             (
                 MoveBlock(NumberNode(10)),
                 TurnRightBlock(NumberNode(15)),
-                TurnLeftBlock(NumberNode(15))
+                TurnLeftBlock(NumberNode(15)),
             ),
             (
                 GoToXYBlock(NumberNode(0), NumberNode(0)),
@@ -84,7 +85,10 @@ class BlocksFrame(Frame):
                 PenDownBlock(),
             ),
             (
-                ChangeValueByBlock(StringNode(""), NumberNode(0)),
+                VariableNode(StringNode("variable")),
+            ),
+            (
+                ChangeValueByBlock(StringNode("variable"), NumberNode(0)),
             ),
             (
                 OnStartBlock([]),
@@ -102,7 +106,7 @@ class BlocksFrame(Frame):
                 DivNode(NumberNode(0), NumberNode(1))
             ),
             (
-                MathFuncOfNode(StringNode(""), NumberNode(0)),
+                MathFuncOfNode(StringNode("sin"), NumberNode(0)),
             )
         )
 

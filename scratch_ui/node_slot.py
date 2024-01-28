@@ -17,6 +17,7 @@ class NodeSlot(NodeSlotType):
         prev_node = self.node
         self.node = node
         node.slot = self
+        node.game_node.sprite = prev_node.game_node.sprite
 
         if self.parent_node:
             node.parent_node = self.parent_node

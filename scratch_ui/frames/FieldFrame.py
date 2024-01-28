@@ -5,7 +5,7 @@ from pygame.surface import SurfaceType
 
 from ..abstractions import SpriteType, NodeSlotType, BlockSlotType
 from ..frame import Frame
-from ..nodes import NumberNode, StringNode, BooleanNode
+from ..nodes import NumberNode, StringNode, BooleanNode, VariableNode
 from ..input_manager import input_manager
 from ..select_manager import select_manager
 from ..sprite_manager import sprite_manager
@@ -83,7 +83,7 @@ def update_blocks_field(screen: SurfaceType, selected_sprite: SpriteType, mx: in
                             hovered_block.slot.insert_after(hovered_block, block)
                         else:
                             hovered_block.slot.insert_before(hovered_block, block)
-                elif node and hovered_node and node.prototype is hovered_node.prototype:
+                elif node and hovered_node and node.prototype in (hovered_node.prototype, VariableNode):
                     hovered_node.slot.set_node(node)
             else:
                 if block and block.is_event():

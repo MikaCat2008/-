@@ -13,7 +13,7 @@ def text_render(
     background_color: tuple[int, int, int, int] = (0, 0, 0, 0),
     indent: int = 0
 ) -> SurfaceType:
-    text = font.render(text, None, color)
+    text = font.render(str(text), None, color)
 
     w = text.get_width()
     surface = Surface((w + indent * 2, 23), SRCALPHA, 32)

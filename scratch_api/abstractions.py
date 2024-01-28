@@ -12,6 +12,8 @@ class GameObjectType(ABC):
 class NodeType(GameObjectType):
     nodes: list[NodeType]
     block: BlockType
+    inited: bool
+    
     parent_node: NodeType
 
     @abstractmethod
@@ -203,6 +205,10 @@ class BooleanNodeType(NodeType):
     @abstractmethod
     def get_value(self) -> bool:
         ...
+
+
+class VariableNodeType(NumberNodeType, StringNodeType, BooleanNodeType):
+    name: str
 
 
 Blocks = list[BlockType]

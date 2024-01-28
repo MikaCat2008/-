@@ -85,8 +85,8 @@ class OperatorsTestCase(unittest.TestCase):
         self.assertFalse(node2.get_value()) 
 
     def test_math_func_of_node(self) -> None:
-        node1 = MathFuncOfNode("sin", 45 * math.pi / 180)
-        node2 = MathFuncOfNode("cos", 45 * math.pi / 180)
+        node1 = MathFuncOfNode("sin", 45)
+        node2 = MathFuncOfNode("cos", 45)
 
         self.assertAlmostEqual(node1.get_value(), math.sin(45 * math.pi / 180))
         self.assertAlmostEqual(node2.get_value(), math.cos(45 * math.pi / 180))

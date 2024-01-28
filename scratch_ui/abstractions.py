@@ -222,6 +222,7 @@ class FrameType(ABC):
 
 class TemplateElementType(ABC):
     color: tuple[int, int, int]
+    indent: int
     rendered: SurfaceType
     template: TemplateType
 
@@ -246,7 +247,7 @@ class SpawnerType(ABC):
     coords: tuple[int, int]
     
     @abstractmethod
-    def spawn(self) -> SelectableObjectType:
+    def spawn(self, sprite: SpriteType) -> SelectableObjectType:
         ...
 
     @abstractmethod
